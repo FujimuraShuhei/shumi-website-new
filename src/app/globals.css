@@ -1,0 +1,123 @@
+/* unicode-range で分割された可変フォント。使われた文字のファイルだけを読み込む */
+@import "@fontsource-variable/noto-sans-jp/wght.css";
+@import "@fontsource-variable/inter/wght.css";
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Shumi design tokens
+   ブランド色は現サイトのティール（#069FA9）を継承。
+   文字に使う色はすべて白背景で 4.5:1 以上（本文は 7:1 以上）。
+------------------------------------------------------------------ */
+@theme {
+  --color-paper: #ffffff;
+  --color-mist: #f5f8f9;
+  --color-mint: #eef8f8;
+  --color-ink: #1d2a36;
+  --color-ink-soft: #4a5764;
+  --color-ink-mute: #6a7682;
+  --color-line: #dbe3e7;
+  --color-line-soft: #eaeff2;
+
+  --color-brand: #069fa9;
+  --color-brand-light: #3cc3c4;
+  --color-brand-deep: #0a7a83;
+  --color-brand-dark: #154245;
+  --color-brand-wash: #e2f3f4;
+  --color-night: #0d1f22;
+
+  --color-alert: #c2362f;
+  --color-ok: #1d7a4d;
+  --color-warn: #a35a00;
+
+  --font-sans: "Noto Sans JP Variable", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
+  --font-en: "Inter Variable", "Inter", "Noto Sans JP Variable", sans-serif;
+
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  html {
+    color: var(--color-ink);
+    background: var(--color-paper);
+    font-family: var(--font-sans);
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    scroll-padding-top: 96px;
+  }
+  body {
+    font-size: 1rem;
+    line-height: 1.9;
+    letter-spacing: 0.04em;
+    min-height: 100dvh;
+  }
+  h1, h2, h3, h4, .phrase {
+    /* 日本語の見出しを文節で折り返す（対応ブラウザのみ） */
+    word-break: auto-phrase;
+  }
+  h1, h2, h3, h4 {
+    font-weight: 600;
+    line-height: 1.45;
+    letter-spacing: 0.04em;
+    text-wrap: pretty;
+  }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--color-brand); color: #fff; }
+
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 2px solid var(--color-brand-deep);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  .wrap {
+    width: 100%;
+    max-width: 1280px;
+    margin-inline: auto;
+    padding-inline: 24px;
+  }
+  @media (min-width: 768px) { .wrap { padding-inline: 48px; } }
+  @media (min-width: 1280px) { .wrap { padding-inline: 64px; } }
+
+  .en {
+    font-family: var(--font-en);
+    letter-spacing: -0.02em;
+  }
+
+  .prose-shumi { max-width: 44rem; line-height: 2; }
+  .prose-shumi > * + * { margin-top: 1.4em; }
+  .prose-shumi h2 { font-size: 1.5rem; margin-top: 2.6em; padding-bottom: 0.6em; border-bottom: 1px solid var(--color-line); }
+  .prose-shumi h3 { font-size: 1.25rem; margin-top: 2.2em; padding-left: 0.8em; border-left: 3px solid var(--color-brand); }
+  .prose-shumi a { color: var(--color-brand-deep); text-decoration: underline; text-underline-offset: 4px; }
+  .prose-shumi ul { list-style: disc; padding-left: 1.4em; }
+  .prose-shumi ol { list-style: decimal; padding-left: 1.4em; }
+  .prose-shumi img { border-radius: var(--radius-lg); }
+  .prose-shumi blockquote { border-left: 3px solid var(--color-line); padding-left: 1em; color: var(--color-ink-soft); }
+  .prose-shumi table { width: 100%; border-collapse: collapse; font-size: 0.875rem; }
+  .prose-shumi th, .prose-shumi td { border: 1px solid var(--color-line); padding: 0.7em 0.9em; text-align: left; }
+  .prose-shumi th { background: var(--color-mist); }
+}
+
+/* 演出の開始前だけ隠す。JSが無効なら隠さない。万一スクリプトが動かなくても2.5秒後に表示 */
+.js [data-reveal-hidden] { visibility: hidden; animation: reveal-failsafe 0s 2.5s forwards; }
+@keyframes reveal-failsafe { to { visibility: visible; } }
+
+@keyframes scrollcue {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(300%); }
+}

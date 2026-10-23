@@ -1,0 +1,119 @@
+import type { Metadata } from "next";
+import { Triad } from "@/components/home/Sections";
+import { ContactCta, Heading, PageHero } from "@/components/ui";
+import { site } from "@/lib/site";
+
+export const metadata: Metadata = {
+  title: "しゅうみについて",
+  description: "横浜市のShumiデザイン（しゅうみ）について。理念、名前の由来、得意なデザイン、事務所概要をご紹介します。",
+};
+
+const career = [
+  ["2020年4月", "個人事業主としてWebデザインを開始"],
+  ["2021年4月", "株式会社GVIにWebディレクター兼マーケターとして入社"],
+  ["2021年7月", "Web制作スクールの講師を担当"],
+  ["2021年10月", "リニューアルを担当したサイトで、SEO経由の売上が1.1億円に"],
+  ["2022年3月", "株式会社GVIを退社"],
+  ["2022年10月", "Shumiデザインを設立"],
+];
+
+export default function CompanyPage() {
+  const c = site.company;
+  const info: [string, string][] = [
+    ["社名", c.name],
+    ...(c.founded ? [["設立", c.founded] as [string, string]] : []),
+    ...(c.representative ? [["代表者", c.representative] as [string, string]] : []),
+    ["所在地", c.address],
+    ["事業内容", "Webブランディング、ホームページ制作、デザイン制作、マーケティング支援、業務効率化アプリ・営業ツールの開発"],
+    ["営業時間", site.hours],
+    ...(c.email ? [["メール", c.email] as [string, string]] : []),
+    ...(c.phone ? [["電話", c.phone] as [string, string]] : []),
+  ];
+
+  return (
+    <>
+      <PageHero
+        crumbs={[{ label: "しゅうみについて" }]}
+        en="About us"
+        title="しゅうみについて"
+        lead="サービスの魅力を、わかりやすく、魅力的にWebで伝える。そのための設計から、日々の仕事を支える仕組みづくりまでを支援しています。"
+      />
+
+      <section aria-labelledby="philosophy-title" className="bg-paper py-28 md:py-40">
+        <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
+          <Heading en="Philosophy" id="philosophy-title" title="私たちの理念" />
+          <div className="space-y-6 text-[15px] leading-[2.2] text-ink-soft md:text-base">
+            <p>
+              Webサイトは、つくって終わりではありません。サービスの魅力が正しく伝わり、選ばれるところまで考えて支援することが、私たちの仕事だと考えています。
+            </p>
+            <p>デザインや構成にこだわり、オリジナルの写真を使うことで、サービスの魅力をより深く伝えます。</p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="name-title" className="bg-brand-dark py-28 text-paper md:py-40">
+        <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-24">
+          <div>
+            <p className="en text-sm text-brand-light">Shumi</p>
+            <h2 id="name-title" className="mt-6 text-[1.5rem] font-medium leading-[1.8] tracking-[0.12em] sm:text-[1.75rem] xl:text-[2.125rem]">
+              美しさが、ゆきとどく。
+              <br />
+              美しさが、整っている。
+            </h2>
+          </div>
+          <div className="space-y-6 text-[15px] leading-[2.2] text-paper/75 md:text-base">
+            <p>「しゅうみ」という名前には、この2つの意味を込めています。</p>
+            <p>
+              見た目のデザインだけでなく、企業のブランドの向上や信頼のために何が良いかを考え、魅力を伝えるコンテンツを検討して制作する。その姿勢は、Webサイトでも業務アプリでも変わりません。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="style-title" className="bg-paper py-28 md:py-40">
+        <div className="wrap">
+          <Heading en="Style" id="style-title" title="どんなデザインが得意？" lead="2つのテイストを得意としています。そのほかのデザインも、ご要望に応じて対応します。" />
+          <div className="mt-16">
+            <Triad
+              items={[
+                { en: "Stylish", title: "スタイリッシュ", body: "洗練された余白と構成で、信頼感と先進性を感じさせるデザイン。" },
+                { en: "Simple & gentle", title: "シンプルで優しい", body: "やわらかな色と読みやすさで、親しみと安心を感じさせるデザイン。" },
+                { en: "Area", title: "全国からご依頼いただけます", body: "オンラインでのお打ち合わせで全国に対応。横浜市・川崎市の企業様は、写真撮影などにも伺いやすいエリアです。" },
+              ]}
+            />
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="outline-title" className="bg-mist py-28 md:py-40">
+        <div className="wrap grid gap-16 lg:grid-cols-2 lg:gap-20">
+          <div>
+            <Heading en="Outline" id="outline-title" title="事務所概要" />
+            <dl className="mt-12 divide-y divide-line border-y border-line">
+              {info.map(([k, v]) => (
+                <div key={k} className="grid gap-1 py-5 sm:grid-cols-[7rem_1fr] sm:gap-6">
+                  <dt className="text-sm font-semibold">{k}</dt>
+                  <dd className="text-[15px] text-ink-soft">{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          <div>
+            <Heading en="Career" id="career-title" title={c.representative ? `代表 ${c.representative} 経歴` : "代表経歴"} />
+            <ol className="mt-12 border-l border-line">
+              {career.map(([d, t]) => (
+                <li key={d} className="relative pb-8 pl-8 last:pb-0">
+                  <span aria-hidden="true" className="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-brand" />
+                  <p className="en text-sm text-brand-deep">{d}</p>
+                  <p className="mt-1 text-[15px] leading-[1.9]">{t}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <ContactCta />
+    </>
+  );
+}
