@@ -1,4 +1,7 @@
+import { AppEfficiency } from "@/components/home/AppEfficiency";
 import { HomeStory } from "@/components/home/HomeStory";
+import { StatementBand } from "@/components/home/StatementBand";
+import { BgWords } from "@/components/motion/Marquee";
 import { Pillars, ReturnCycle } from "@/components/home/Pillars";
 import { BlogRows, FlowSteps, Triad, WorksGrid } from "@/components/home/Sections";
 import { ContactCta, Heading, TextLink } from "@/components/ui";
@@ -11,18 +14,23 @@ export default async function Home() {
   return (
     <>
       <HomeStory />
+      <StatementBand />
+      <AppEfficiency />
 
-      {/* 還元のメッセージ */}
-      <section aria-labelledby="message-title" className="bg-paper py-28 md:py-44">
-        <div className="wrap grid items-center gap-16 lg:grid-cols-[1.1fr_1fr] lg:gap-24">
+      {/* 還元のメッセージ（夜色の上に、白い面がせり上がってくる） */}
+      <section aria-labelledby="message-title" className="relative z-10 -mt-12 overflow-hidden rounded-t-[40px] bg-paper py-28 md:-mt-16 md:rounded-t-[72px] md:py-44">
+        <BgWords words="Good people, good work — " className="bottom-0 translate-y-[18%]" />
+        <div className="wrap relative grid items-center gap-16 lg:grid-cols-[1.1fr_1fr] lg:gap-24">
           <div>
-            <p className="label-en text-[13px] text-brand-deep">Message</p>
-            <h2 id="message-title" className="mt-6 text-[1.75rem] leading-[1.75] tracking-[0.05em] md:text-[2.25rem]">
+            <p aria-hidden="true" data-r="mask" className="display-en text-grad-brand text-[clamp(2.75rem,7vw,5.5rem)]">
+              Message
+            </p>
+            <h2 id="message-title" data-r="up" className="mt-8 text-[1.75rem] leading-[1.7] tracking-[0.03em] md:text-[2.5rem]">
               いい人材と、いい業務で、
               <br />
               関わった会社に還元する。
             </h2>
-            <div className="mt-10 space-y-6 text-[15px] leading-[2.2] text-ink-soft md:text-base">
+            <div data-r="up" className="mt-10 space-y-6 text-[15px] leading-[2.2] text-ink-soft md:text-base">
               <p>
                 ホームページは、つくって終わりではありません。ブランドが伝わり、いい人が集まり、その人たちが力を発揮できる。そこまで整って、はじめて会社の成果になると考えています。
               </p>
@@ -39,8 +47,9 @@ export default async function Home() {
       </section>
 
       {/* 3つの柱 */}
-      <section aria-labelledby="service-title" className="bg-mist py-28 md:py-40">
-        <div className="wrap">
+      <section aria-labelledby="service-title" className="relative overflow-hidden bg-mist py-28 md:py-40">
+        <BgWords words="Branding — Recruit — Business app — " tone="mint" className="bottom-0 translate-y-[22%]" />
+        <div className="wrap relative">
           <Heading
             en="Service"
             id="service-title"
@@ -54,8 +63,9 @@ export default async function Home() {
       </section>
 
       {/* 実績 */}
-      <section aria-labelledby="works-title" className="bg-paper py-28 md:py-40">
-        <div className="wrap">
+      <section aria-labelledby="works-title" className="relative overflow-hidden bg-paper py-28 md:py-40">
+        <BgWords words="Works — Works — " className="bottom-0 translate-y-[22%]" />
+        <div className="wrap relative">
           <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
             <Heading en="Works" id="works-title" title="制作実績" lead="建設・建築業をはじめ、さまざまな業種のホームページを制作しています。" />
             <TextLink href="/works/" className="shrink-0">
@@ -69,12 +79,13 @@ export default async function Home() {
       </section>
 
       {/* 効果 */}
-      <section aria-labelledby="effect-title" className="bg-brand-dark py-28 text-paper md:py-40">
-        <div className="wrap grid gap-16 lg:grid-cols-[1fr_1.5fr] lg:gap-24">
+      <section aria-labelledby="effect-title" className="relative overflow-hidden bg-grad-deep py-28 text-paper md:py-40">
+        <BgWords words="Effect — Results — " tone="dark" className="bottom-10" />
+        <div className="wrap relative grid gap-16 lg:grid-cols-[1fr_1.5fr] lg:gap-24">
           <Heading en="Effect" id="effect-title" title="サイト制作・アプリ導入後の効果" tone="inverse" />
           <ul className="divide-y divide-paper/15 border-y border-paper/15">
             {effects.map((e) => (
-              <li key={e.title} className="py-10">
+              <li key={e.title} data-r="up" className="py-10">
                 <p className="text-xl font-extrabold tracking-[0.04em]">{e.title}</p>
                 <p className="mt-4 text-[15px] leading-[2.1] text-paper/70">{e.body}</p>
               </li>
@@ -123,8 +134,9 @@ export default async function Home() {
       </section>
 
       {/* 制作の流れ */}
-      <section aria-labelledby="flow-title" className="bg-mist py-28 md:py-40">
-        <div className="wrap">
+      <section aria-labelledby="flow-title" className="relative overflow-hidden bg-mist py-28 md:py-40">
+        <BgWords words="Flow — Process — " tone="mint" className="bottom-0 translate-y-[22%]" />
+        <div className="wrap relative">
           <Heading en="Flow" id="flow-title" title="制作の流れ" />
           <div className="mt-16">
             <FlowSteps />

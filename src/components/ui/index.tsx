@@ -11,7 +11,7 @@ export function Arrow({ className = "" }: { className?: string }) {
 
 type Variant = "primary" | "secondary" | "light" | "ghost";
 const variants: Record<Variant, string> = {
-  primary: "bg-brand-deep text-paper hover:bg-brand-dark",
+  primary: "bg-grad-brand text-paper hover:brightness-110",
   secondary: "border border-ink/20 bg-paper text-ink hover:border-ink",
   light: "bg-paper text-ink hover:bg-mint",
   ghost: "border border-paper/30 text-paper hover:border-paper",
@@ -28,7 +28,11 @@ export function Button({ href, children, variant = "primary", className = "" }: 
       <span
         aria-hidden="true"
         className={`grid h-12 w-12 place-items-center rounded-full transition-transform duration-300 group-hover:translate-x-0.5 ${
-          variant === "primary" || variant === "ghost" ? "bg-paper/15" : variant === "light" ? "bg-brand-wash text-brand-deep" : "bg-mist"
+          variant === "primary" || variant === "ghost"
+            ? "bg-paper/15"
+            : variant === "light"
+              ? "bg-brand-wash text-brand-deep"
+              : "bg-mist transition-colors group-hover:bg-grad-brand group-hover:text-paper"
         }`}
       >
         <Arrow />
@@ -37,14 +41,12 @@ export function Button({ href, children, variant = "primary", className = "" }: 
   );
 }
 
+/** 「〜を見る」などの遷移も、すべて丸いボタンで統一する（白地用の細枠ボタン） */
 export function TextLink({ href, children, className = "" }: { href: string; children: ReactNode; className?: string }) {
   return (
-    <Link href={href} className={`group inline-flex min-h-11 items-center gap-3 text-[15px] font-bold text-brand-deep ${className}`}>
-      <span className="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-0.5 transition-[background-size] duration-500 group-hover:bg-[length:100%_1px]">
-        {children}
-      </span>
-      <Arrow className="transition-transform duration-300 group-hover:translate-x-1" />
-    </Link>
+    <Button href={href} variant="secondary" className={`!h-14 !gap-6 !pl-7 [&>span]:!h-10 [&>span]:!w-10 ${className}`}>
+      {children}
+    </Button>
   );
 }
 
@@ -74,13 +76,13 @@ export function Heading({
   const inverse = tone === "inverse";
   return (
     <div className={`${align === "center" ? "mx-auto text-center" : ""} max-w-3xl ${className}`}>
-      <p aria-hidden="true" className={`display-en text-[clamp(2.75rem,7vw,5.5rem)] ${inverse ? "text-brand-light" : "text-brand"}`}>
+      <p aria-hidden="true" data-r="mask" className={`display-en text-[clamp(2.75rem,7vw,5.5rem)] ${inverse ? "text-grad-light" : "text-grad-brand"}`}>
         {en}
       </p>
-      <Tag id={id} className={`mt-6 text-[1.375rem] leading-[1.55] tracking-[0.06em] md:text-[1.75rem] ${inverse ? "text-paper" : "text-ink"}`}>
+      <Tag id={id} data-r="up" className={`mt-6 text-[1.375rem] leading-[1.55] tracking-[0.06em] md:text-[1.75rem] ${inverse ? "text-paper" : "text-ink"}`}>
         {title}
       </Tag>
-      {lead && <p className={`mt-6 text-[15px] leading-[2.1] md:text-base ${inverse ? "text-paper/75" : "text-ink-soft"}`}>{lead}</p>}
+      {lead && <p data-r="up" className={`mt-6 text-[15px] leading-[2.1] md:text-base ${inverse ? "text-paper/75" : "text-ink-soft"}`}>{lead}</p>}
     </div>
   );
 }
@@ -104,7 +106,7 @@ export function PageHero({
       <Bands className="pointer-events-none absolute -right-40 -top-24 hidden h-[520px] w-[620px] opacity-90 md:block" />
       <div className="wrap relative pb-20 pt-10 md:pb-28 md:pt-14">
         <Breadcrumb crumbs={crumbs} />
-        <p aria-hidden="true" className="display-en mt-16 text-[clamp(3.25rem,10vw,8rem)] text-brand md:mt-24">
+        <p aria-hidden="true" className="display-en text-grad-brand mt-16 text-[clamp(3.25rem,10vw,8rem)] md:mt-24">
           {en}
         </p>
         <h1 className="mt-8 max-w-4xl text-[1.75rem] leading-[1.5] tracking-[0.04em] md:text-[2.5rem]">{title}</h1>
@@ -173,7 +175,7 @@ export function ContactCta() {
   return (
     <section aria-label="資料請求とお問い合わせ" className="bg-paper py-24 md:py-32">
       <div className="wrap grid gap-6 lg:grid-cols-2">
-        <Link href="/document/" className="group relative overflow-hidden rounded-[24px] bg-mint p-10 transition-colors hover:bg-brand-wash md:p-14">
+        <Link href="/document/" data-r="up" className="group relative overflow-hidden rounded-[24px] bg-grad-mint p-10 transition-colors hover:bg-brand-wash md:p-14">
           <p className="label-en text-[13px] text-brand-deep">Document</p>
           <p className="mt-4 text-[1.75rem] font-black leading-relaxed tracking-[0.06em]">お役立ち資料</p>
           <p className="mt-4 max-w-md text-[15px] leading-[2] text-ink-soft">成功事例や詳しい料金プラン、お悩みの解決方法をまとめた資料を無料でお配りしています。</p>
@@ -184,7 +186,7 @@ export function ContactCta() {
             </span>
           </span>
         </Link>
-        <Link href="/contact/" className="group relative overflow-hidden rounded-[24px] bg-brand-dark p-10 text-paper transition-colors hover:bg-night md:p-14">
+        <Link href="/contact/" data-r="up" className="group relative overflow-hidden rounded-[24px] bg-grad-deep p-10 text-paper transition-colors hover:brightness-110 md:p-14">
           <Bands className="pointer-events-none absolute -bottom-40 -right-40 h-[420px] w-[500px] opacity-50" />
           <p className="label-en relative text-[13px] text-brand-light">Contact</p>
           <p className="relative mt-4 text-[1.75rem] font-black leading-relaxed tracking-[0.06em]">お問い合わせ</p>

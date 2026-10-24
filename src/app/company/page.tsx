@@ -51,7 +51,7 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      <section aria-labelledby="name-title" className="bg-brand-dark py-28 text-paper md:py-40">
+      <section aria-labelledby="name-title" className="bg-grad-deep py-28 text-paper md:py-40">
         <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-24">
           <div>
             <p className="label-en text-[13px] text-brand-light">Shumi</p>

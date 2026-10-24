@@ -46,14 +46,14 @@ function Intro({ as: Tag = "h1" }: { as?: "h1" | "p" }) {
         <span aria-hidden="true" className="h-px w-8 bg-brand-light" />
         横浜市のブランディング・ホームページ制作
       </p>
-      <Tag className="mt-6 text-[2.5rem] font-black leading-[1.3] tracking-[0.02em] text-paper sm:text-[3rem] xl:text-[3.75rem]">
+      <Tag className="mt-6 text-[2.5rem] font-black leading-[1.3] tracking-[0.02em] text-paper sm:text-[3rem] lg:mt-[2.6vh] lg:text-[min(3.75rem,6.2vh)]">
         いい人と、
         <br />
         いい仕事が、
         <br />
         集まる会社へ。
       </Tag>
-      <p className="mt-6 max-w-[30rem] text-[15px] leading-[2.05] text-paper/70">
+      <p className="mt-6 max-w-[30rem] text-[15px] leading-[2.05] text-paper/70 lg:mt-[2.6vh]">
         ブランディング、採用サイト、業務アプリ。Shumiは、関わった会社に「成果」として還元することを約束します。
       </p>
     </>
@@ -186,7 +186,7 @@ export function HomeStory() {
   );
 
   return (
-    <section ref={root} data-header-dark aria-label="Shumiについて" className={`relative overflow-x-clip bg-night ${mode === "static" ? "" : "lg:h-[400vh]"}`}>
+    <section ref={root} data-header-dark aria-label="Shumiについて" className={`relative overflow-x-clip bg-grad-night ${mode === "static" ? "" : "lg:h-[400vh]"}`}>
       {/* 背景の光とブランドの帯 */}
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className={`absolute inset-0 overflow-hidden ${mode === "static" ? "" : "lg:sticky lg:h-svh"}`}>
@@ -204,33 +204,33 @@ export function HomeStory() {
       <div
         className={`${mode === "static" ? "hidden" : "hidden lg:flex"} sticky top-20 h-[calc(100svh-80px)] items-center overflow-hidden xl:top-[88px] xl:h-[calc(100svh-88px)]`}
       >
-          <div className="wrap grid w-full grid-cols-[minmax(0,5fr)_minmax(0,7fr)] items-center gap-10">
+          <div className="wrap grid w-full grid-cols-[minmax(0,5fr)_minmax(0,7fr)] items-center gap-10 pb-[10vh] pt-[4vh]">
             <div>
               <div data-in>
                 <Intro as={desktop ? "h1" : "p"} />
               </div>
-              <div data-in className="relative mt-10 h-[11.5rem]">
+              <div data-in className="relative mt-[4.5vh] h-[min(11rem,20vh)] [@media(max-height:820px)]:h-[5.25rem]">
                 {chapters.map((c, i) => (
                   <div key={c.en} data-chapter className="absolute inset-0" aria-hidden={active !== i}>
                     <p className="label-en text-[13px] text-brand-light">
                       {String(i + 1).padStart(2, "0")} / 03　{c.en}
                     </p>
                     <h2 className="mt-3 text-[1.375rem] leading-[1.6] tracking-[0.06em] text-paper">{c.title}</h2>
-                    <p className="mt-3 max-w-[28rem] text-[14px] leading-[2] text-paper/65">{c.body}</p>
+                    <p className="mt-2 max-w-[28rem] text-[14px] leading-[1.95] text-paper/65 [@media(max-height:820px)]:hidden">{c.body}</p>
                   </div>
                 ))}
               </div>
-              <div data-in aria-hidden="true" className="mt-4 grid max-w-[28rem] grid-cols-3 gap-3">
+              <div data-in aria-hidden="true" className="mt-[1.5vh] grid max-w-[28rem] grid-cols-3 gap-3">
                 {chapters.map((c, i) => (
                   <div key={c.en}>
                     <div className="h-[3px] overflow-hidden rounded-full bg-paper/15">
-                      <div data-fill={i} className="h-full rounded-full bg-brand-light" />
+                      <div data-fill={i} className="h-full rounded-full bg-[linear-gradient(90deg,#3cc3c4,#6ab8e2)]" />
                     </div>
                     <p className={`mt-2 text-[11px] tracking-[0.08em] transition-colors ${active === i ? "text-paper" : "text-paper/45"}`}>{c.label}</p>
                   </div>
                 ))}
               </div>
-              <div data-in className="mt-9">
+              <div data-in className="mt-[4.5vh]">
                 <Ctas />
               </div>
             </div>

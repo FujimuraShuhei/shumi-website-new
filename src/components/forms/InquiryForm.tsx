@@ -197,7 +197,7 @@ export function InquiryForm({ kind, defaultTopic }: { kind: "contact" | "documen
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex h-16 w-full items-center justify-center rounded-full bg-brand-deep px-14 text-[15px] font-bold tracking-[0.08em] text-paper transition-colors hover:bg-brand-dark disabled:cursor-wait disabled:opacity-70 sm:w-auto"
+          className="inline-flex h-16 w-full items-center justify-center rounded-full bg-grad-brand px-14 text-[15px] font-bold tracking-[0.08em] text-paper transition-colors hover:brightness-110 disabled:cursor-wait disabled:opacity-70 sm:w-auto"
         >
           {pending ? "送信しています…" : kind === "contact" ? "この内容で相談する" : "資料を請求する"}
         </button>

@@ -97,7 +97,7 @@ export default function AppPage() {
         </div>
       </section>
 
-      <section aria-labelledby="quality-title" className="bg-brand-dark py-28 text-paper md:py-40">
+      <section aria-labelledby="quality-title" className="bg-grad-deep py-28 text-paper md:py-40">
         <div className="wrap">
           <Heading en="Quality" id="quality-title" title="安全に、見やすく、触りやすく。" tone="inverse" lead="社内で毎日使うものだからこそ、この3つを最初の設計から作り込みます。" />
           <div className="mt-16 text-ink">

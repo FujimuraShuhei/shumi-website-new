@@ -41,8 +41,9 @@ export function Pillars() {
       {pillars.map((p) => (
         <li
           key={p.en}
+          data-r="up"
           className={`relative flex flex-col overflow-hidden rounded-[28px] p-8 md:p-10 ${
-            p.featured ? "bg-brand-dark text-paper lg:-my-6 lg:py-16" : "bg-paper ring-1 ring-line-soft"
+            p.featured ? "bg-grad-deep text-paper lg:-my-6 lg:py-16" : "bg-paper ring-1 ring-line-soft"
           }`}
         >
           {p.featured && (
@@ -61,7 +62,7 @@ export function Pillars() {
                   {l.label}
                   <span
                     className={`grid h-9 w-9 shrink-0 place-items-center rounded-full transition-colors duration-300 ${
-                      p.featured ? "bg-paper/10 group-hover:bg-paper group-hover:text-ink" : "bg-mist group-hover:bg-brand-deep group-hover:text-paper"
+                      p.featured ? "bg-paper/10 group-hover:bg-paper group-hover:text-ink" : "bg-mist group-hover:bg-grad-brand group-hover:text-paper"
                     }`}
                   >
                     <Arrow />
@@ -76,7 +77,7 @@ export function Pillars() {
   );
 }
 
-/** ブランド → 採用 → 業務 → 会社への還元、の循環図 */
+/** ブランド → 採用 → 業務 → 会社への還元、の循環図（スクロールで描かれ、光がリングを回り続ける） */
 export function ReturnCycle() {
   const nodes = [
     { x: 200, y: 48, t: "ブランドで", s: "選ばれる" },
@@ -84,42 +85,58 @@ export function ReturnCycle() {
     { x: 200, y: 352, t: "業務アプリで", s: "力を発揮する" },
     { x: 48, y: 200, t: "会社に", s: "成果が還元される" },
   ];
+  const arcs = [
+    "M262 62 A152 152 0 0 1 338 138",
+    "M338 262 A152 152 0 0 1 262 338",
+    "M138 338 A152 152 0 0 1 62 262",
+    "M62 138 A152 152 0 0 1 138 62",
+  ];
   return (
-    <figure className="mx-auto w-full max-w-[420px]">
-      <svg viewBox="0 0 400 400" className="w-full" role="img" aria-labelledby="cycle-title">
+    <figure data-cycle className="mx-auto w-full max-w-[440px]">
+      <svg viewBox="0 0 400 400" className="w-full overflow-visible" role="img" aria-labelledby="cycle-title">
         <title id="cycle-title">ブランドで選ばれ、採用でいい人が集まり、業務アプリで力を発揮し、会社に成果が還元される循環</title>
         <defs>
           <linearGradient id="cycle-g" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0" stopColor="#3cc3c4" />
-            <stop offset="1" stopColor="#0a7a83" />
+            <stop offset="1" stopColor="#0b7596" />
+          </linearGradient>
+          <linearGradient id="cycle-core" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="#12393c" />
+            <stop offset="0.6" stopColor="#154245" />
+            <stop offset="1" stopColor="#153f57" />
+          </linearGradient>
+          <linearGradient id="cycle-spin" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stopColor="#3cc3c4" stopOpacity="0" />
+            <stop offset="1" stopColor="#3cc3c4" stopOpacity="0.9" />
           </linearGradient>
           <marker id="cycle-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
             <path d="M0 0 L10 5 L0 10z" fill="#0a7a83" />
           </marker>
         </defs>
         <circle cx="200" cy="200" r="152" fill="none" stroke="#e2f3f4" strokeWidth="18" />
-        {[
-          "M262 62 A152 152 0 0 1 338 138",
-          "M338 262 A152 152 0 0 1 262 338",
-          "M138 338 A152 152 0 0 1 62 262",
-          "M62 138 A152 152 0 0 1 138 62",
-        ].map((d) => (
-          <path key={d} d={d} fill="none" stroke="url(#cycle-g)" strokeWidth="2" markerEnd="url(#cycle-arrow)" />
+        {/* リングを回る光 */}
+        <g data-cycle-spin opacity="0">
+          <path d="M200 48 A152 152 0 0 1 352 200" fill="none" stroke="url(#cycle-spin)" strokeWidth="18" strokeLinecap="round" opacity="0.55" />
+        </g>
+        {arcs.map((d) => (
+          <path key={d} data-cycle-arc d={d} fill="none" stroke="url(#cycle-g)" strokeWidth="2.5" markerEnd="url(#cycle-arrow)" />
         ))}
-        <circle cx="200" cy="200" r="74" fill="#154245" />
-        <text x="200" y="192" textAnchor="middle" fill="#ffffff" fontSize="14" fontWeight="500" letterSpacing="2">
-          関わった会社の
-        </text>
-        <text x="200" y="216" textAnchor="middle" fill="#3cc3c4" fontSize="16" fontWeight="600" letterSpacing="2">
-          成長
-        </text>
+        <g data-cycle-core>
+          <circle cx="200" cy="200" r="76" fill="url(#cycle-core)" />
+          <text x="200" y="192" textAnchor="middle" fill="#ffffff" fontSize="14" fontWeight="800" letterSpacing="1.5">
+            関わった会社の
+          </text>
+          <text x="200" y="220" textAnchor="middle" fill="#3cc3c4" fontSize="20" fontWeight="900" letterSpacing="2">
+            成長
+          </text>
+        </g>
         {nodes.map((n) => (
-          <g key={n.t}>
-            <circle cx={n.x} cy={n.y} r="44" fill="#ffffff" stroke="#dbe3e7" />
-            <text x={n.x} y={n.y - 4} textAnchor="middle" fill="#4a5764" fontSize="10.5" letterSpacing="1">
+          <g key={n.t} data-cycle-node>
+            <circle cx={n.x} cy={n.y} r="46" fill="#ffffff" stroke="#dbe3e7" />
+            <text x={n.x} y={n.y - 5} textAnchor="middle" fill="#4a5764" fontSize="10.5" fontWeight="700" letterSpacing="1">
               {n.t}
             </text>
-            <text x={n.x} y={n.y + 13} textAnchor="middle" fill="#1d2a36" fontSize={n.s.length > 6 ? 9.5 : 11.5} fontWeight="600" letterSpacing="0.5">
+            <text x={n.x} y={n.y + 13} textAnchor="middle" fill="#1d2a36" fontSize={n.s.length > 6 ? 10 : 12.5} fontWeight="900" letterSpacing="0.5">
               {n.s}
             </text>
           </g>

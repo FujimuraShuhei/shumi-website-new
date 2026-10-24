@@ -69,7 +69,7 @@ export default function PlanPage() {
           <Heading en="Website" id="plans-title" title="新規ホームページ制作" />
           <ul className="mt-16 grid gap-6 lg:grid-cols-2">
             {plans.map((p) => (
-              <li key={p.name} className={`rounded-[28px] p-8 md:p-12 ${p.featured ? "bg-brand-dark text-paper" : "border border-line bg-paper"}`}>
+              <li key={p.name} className={`rounded-[28px] p-8 md:p-12 ${p.featured ? "bg-grad-deep text-paper" : "border border-line bg-paper"}`}>
                 <p className={`label-en text-[13px] ${p.featured ? "text-brand-light" : "text-brand-deep"}`}>{p.en}</p>
                 <h3 className="mt-3 text-2xl tracking-[0.05em]">{p.name}</h3>
                 <p className={`mt-3 text-[15px] ${p.featured ? "text-paper/75" : "text-ink-soft"}`}>{p.target}</p>
@@ -123,7 +123,7 @@ export default function PlanPage() {
         </div>
       </section>
 
-      <section aria-labelledby="app-plan-title" className="bg-night py-28 text-paper md:py-40">
+      <section aria-labelledby="app-plan-title" className="bg-grad-night py-28 text-paper md:py-40">
         <div className="wrap">
           <Heading
             en="Business app"
@@ -134,7 +134,7 @@ export default function PlanPage() {
           />
           <ol className="mt-16 grid gap-px overflow-hidden rounded-2xl bg-paper/10 md:grid-cols-4">
             {appPlan.map((a, i) => (
-              <li key={a.title} className="bg-night p-8">
+              <li key={a.title} className="bg-night/60 p-8">
                 <p className="label-en text-[13px] text-brand-light">Step {String(i + 1).padStart(2, "0")}</p>
                 <p className="mt-5 text-lg font-extrabold tracking-[0.04em]">{a.title}</p>
                 <p className="mt-3 text-sm leading-[2] text-paper/70">{a.body}</p>
