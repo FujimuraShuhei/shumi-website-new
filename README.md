@@ -5,7 +5,7 @@
 
 - Next.js 16（App Router）+ TypeScript
 - Tailwind CSS v4（色・文字のトークンは `src/app/globals.css` の `@theme`）
-- フォント：Noto Sans JP（本文・見出し）、Inter（英字）
+- フォント：Noto Sans JP（本文・見出しは Black）、Inter Tight（英字見出し）、Inter（数字・日付）
 - GSAP（トップの3章スクロールと、自動で操作される3つのモック）
 - microCMS（ブログ・制作実績）
 - Resend（問い合わせメール送信）→ Gmail で受信、Cloudflare Turnstile（スパム対策）

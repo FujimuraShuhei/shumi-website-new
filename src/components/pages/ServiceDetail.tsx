@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FlowSteps, Triad, WorksGrid } from "@/components/home/Sections";
 import { MockShowcase } from "@/components/mocks/MockShowcase";
-import { Arrow, Button, ContactCta, Heading, PageHero } from "@/components/ui";
+import { Button, ContactCta, Heading, PageHero, TextLink } from "@/components/ui";
 import { getWorks } from "@/lib/microcms";
 import type { ServicePage } from "@/lib/service-pages";
 import { assurances } from "@/lib/site";
@@ -69,7 +69,7 @@ export async function ServiceDetail({ page }: { page: ServicePage }) {
       )}
 
       {page.extra && (
-        <section aria-labelledby="extra-title" className="bg-brand-dark py-28 text-paper md:py-40">
+        <section aria-labelledby="extra-title" className="bg-grad-deep py-28 text-paper md:py-40">
           <div className="wrap grid gap-16 lg:grid-cols-[1fr_1.5fr] lg:gap-24">
             <Heading en="Design" id="extra-title" title={page.extra.title} tone="inverse" />
             <ul className="divide-y divide-paper/15 border-y border-paper/15">
@@ -114,7 +114,7 @@ export async function ServiceDetail({ page }: { page: ServicePage }) {
       </section>
 
       {page.appIdeas && (
-        <section aria-labelledby="app-title" className="bg-night py-24 text-paper md:py-32">
+        <section aria-labelledby="app-title" className="bg-grad-night py-24 text-paper md:py-32">
           <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-24">
             <div>
               <p className="label-en text-[13px] text-brand-light">Business app</p>
@@ -149,10 +149,7 @@ export async function ServiceDetail({ page }: { page: ServicePage }) {
           <div className="wrap">
             <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
               <Heading en="Works" id="works-title" title="制作実績" />
-              <Link href="/works/" className="group inline-flex min-h-11 items-center gap-3 text-[15px] font-bold text-brand-deep">
-                制作実績をすべて見る
-                <Arrow className="transition-transform group-hover:translate-x-1" />
-              </Link>
+              <TextLink href="/works/">制作実績をすべて見る</TextLink>
             </div>
             <div className="mt-16">
               <WorksGrid works={works} />

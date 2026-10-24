@@ -143,7 +143,7 @@ export function Header() {
           </Link>
           <Link
             href="/contact/"
-            className="hidden h-11 items-center whitespace-nowrap rounded-full bg-brand-deep px-6 text-[13px] font-bold tracking-[0.06em] text-paper transition-colors hover:bg-brand-dark sm:inline-flex"
+            className="hidden h-11 items-center whitespace-nowrap rounded-full bg-grad-brand px-6 text-[13px] font-bold tracking-[0.06em] text-paper transition-colors hover:brightness-110 sm:inline-flex"
           >
             お問い合わせ
           </Link>
@@ -197,7 +197,7 @@ export function Header() {
             ))}
           </ul>
           <div className="mt-8 grid gap-3">
-            <Link href="/contact/" className="flex h-14 items-center justify-center rounded-full bg-brand-deep font-bold text-paper">
+            <Link href="/contact/" className="flex h-14 items-center justify-center rounded-full bg-grad-brand font-bold text-paper">
               お問い合わせ
             </Link>
             <Link href="/document/" className="flex h-14 items-center justify-center rounded-full border border-line font-bold">
@@ -215,9 +215,11 @@ function MegaMenu({ item }: { item: NavItem }) {
     <div className="wrap grid grid-cols-[16rem_1fr] gap-12 py-10">
       <div>
         <p className="text-xl font-extrabold">{item.label}</p>
-        <Link href={item.href} className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-brand-deep hover:underline hover:underline-offset-4">
+        <Link href={item.href} className="mt-5 inline-flex h-11 items-center gap-3 rounded-full border border-ink/15 pl-5 pr-1.5 text-sm font-bold transition-colors hover:border-ink">
           一覧を見る
-          <Arrow />
+          <span className="grid h-8 w-8 place-items-center rounded-full bg-mist">
+            <Arrow />
+          </span>
         </Link>
       </div>
       <ul className="grid grid-cols-2 gap-x-10 gap-y-2">

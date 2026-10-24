@@ -90,7 +90,7 @@ export default async function EntryPage({ params }: Props) {
                 href={w.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-16 items-center justify-center rounded-full bg-brand-deep px-10 text-[15px] font-bold text-paper hover:bg-brand-dark"
+                className="inline-flex h-16 items-center justify-center rounded-full bg-grad-brand px-10 text-[15px] font-bold text-paper hover:brightness-110"
               >
                 公開中のサイトを見る（新しいタブ）
               </a>

@@ -1,7 +1,7 @@
 /* unicode-range で分割された可変フォント。使われた文字のファイルだけを読み込む */
 @import "@fontsource-variable/noto-sans-jp/wght.css";
 @import "@fontsource-variable/inter/wght.css";
-@import "@fontsource-variable/archivo/wdth.css";
+@import "@fontsource-variable/inter-tight/wght.css";
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------
@@ -32,7 +32,7 @@
 
   --font-sans: "Noto Sans JP Variable", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
   --font-en: "Inter Variable", "Inter", "Noto Sans JP Variable", sans-serif;
-  --font-display: "Archivo Variable", "Archivo", "Noto Sans JP Variable", sans-serif;
+  --font-display: "Inter Tight Variable", "Inter Tight", "Inter Variable", "Noto Sans JP Variable", sans-serif;
 
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -104,21 +104,21 @@
     letter-spacing: -0.01em;
   }
 
-  /* 大きな英字見出し：Archivo を太く・やや幅広に */
+  /* 大きな英字見出し：Inter Tight の ExtraBold を詰めて */
   .display-en {
     font-family: var(--font-display);
     font-weight: 800;
-    font-stretch: 112%;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.045em;
     line-height: 0.92;
+    /* グラデーション文字のとき、下に出る字形（p・y）が切れないように */
+    padding-bottom: 0.08em;
   }
 
   /* 小さな英字ラベル（Branding / Step 01 など） */
   .label-en {
     font-family: var(--font-display);
     font-weight: 700;
-    font-stretch: 108%;
-    letter-spacing: 0.01em;
+    letter-spacing: 0;
   }
 
   .prose-shumi { max-width: 44rem; line-height: 2; }
@@ -142,4 +142,45 @@
 @keyframes scrollcue {
   0% { transform: translateY(-100%); }
   100% { transform: translateY(300%); }
+}
+
+/* ------------------------------------------------------------------
+   ブランドのグラデーション
+   色そのものは変えず、ティールに少しだけ青みを重ねて奥行きを出す
+------------------------------------------------------------------ */
+@utility bg-grad-brand {
+  background-color: #0a7a83;
+  background-image: linear-gradient(118deg, #0a7a83 0%, #0b8a95 48%, #0b7596 100%);
+}
+@utility bg-grad-deep {
+  background-color: #154245;
+  background-image: linear-gradient(135deg, #12393c 0%, #154245 40%, #124a58 75%, #153f57 100%);
+}
+@utility bg-grad-night {
+  background-color: #0d1f22;
+  background-image:
+    radial-gradient(80% 60% at 85% 15%, rgba(6, 159, 169, 0.22), transparent 60%),
+    radial-gradient(70% 60% at 10% 100%, rgba(11, 117, 150, 0.18), transparent 60%),
+    linear-gradient(180deg, #0d1f22 0%, #0c2026 100%);
+}
+@utility bg-grad-mint {
+  background-color: #eef8f8;
+  background-image: linear-gradient(135deg, #eef8f8 0%, #e6f5f6 50%, #e5f1f8 100%);
+}
+@utility text-grad-brand {
+  background-image: linear-gradient(100deg, #069fa9 0%, #0796a8 45%, #0b7fae 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+@utility text-grad-light {
+  background-image: linear-gradient(100deg, #3cc3c4 0%, #49c4d0 50%, #6ab8e2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@keyframes gridmove {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 56px 56px, 56px 56px; }
 }

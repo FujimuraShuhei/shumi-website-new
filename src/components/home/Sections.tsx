@@ -9,14 +9,14 @@ export function ServiceRows({ items }: { items: { href: string; label: string; e
   return (
     <ul className="border-t border-line">
       {items.map((s) => (
-        <li key={s.href} className="border-b border-line">
+        <li key={s.href} data-r="up" className="border-b border-line">
           <Link href={s.href} className="group grid items-center gap-3 px-2 py-8 transition-colors duration-300 hover:bg-mint md:grid-cols-[12rem_1fr_auto] md:gap-10 md:px-6 md:py-10">
             <span className="label-en text-[13px] text-brand-deep">{s.en}</span>
             <span>
               <span className="block text-lg font-extrabold tracking-[0.04em] md:text-xl">{s.label}</span>
               {s.desc && <span className="mt-2 block text-sm leading-[2] text-ink-soft">{s.desc}</span>}
             </span>
-            <span aria-hidden="true" className="hidden h-12 w-12 place-items-center rounded-full border border-line text-ink transition-all duration-300 group-hover:border-brand-deep group-hover:bg-brand-deep group-hover:text-paper md:grid">
+            <span aria-hidden="true" className="hidden h-12 w-12 place-items-center rounded-full border border-line text-ink transition-all duration-300 group-hover:border-brand-deep group-hover:bg-grad-brand group-hover:text-paper md:grid">
               <Arrow />
             </span>
           </Link>
@@ -61,7 +61,7 @@ export function WorksGrid({ works }: { works: Work[] }) {
   return (
     <ul className="grid gap-x-8 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
       {works.map((w) => (
-        <li key={w.id}>
+        <li key={w.id} data-r="up">
           <Link href={`/${w.id}/`} className="group block">
             <div className="relative aspect-[16/10] overflow-hidden rounded-2xl bg-mint">
               <WorkThumb work={w} />
@@ -85,15 +85,20 @@ export function WorksGrid({ works }: { works: Work[] }) {
 
 export function FlowSteps() {
   return (
+    <div className="relative">
+    <div aria-hidden="true" className="mb-6 hidden h-[3px] overflow-hidden rounded-full bg-line-soft md:block">
+      <div data-r-scrub className="h-full w-full rounded-full bg-[linear-gradient(90deg,#3cc3c4,#0a7a83,#0b7596)]" />
+    </div>
     <ol className="grid gap-px overflow-hidden rounded-2xl bg-line-soft md:grid-cols-5">
       {flow.map((f, i) => (
-        <li key={f.title} className="relative bg-paper p-8">
+        <li key={f.title} data-r="up" className="relative bg-paper p-8">
           <p className="label-en text-[13px] text-brand-deep">Step {String(i + 1).padStart(2, "0")}</p>
           <p className="mt-6 text-lg font-extrabold tracking-[0.04em]">{f.title}</p>
           <p className="mt-3 text-sm leading-[2] text-ink-soft">{f.body}</p>
         </li>
       ))}
     </ol>
+    </div>
   );
 }
 
@@ -101,7 +106,7 @@ export function BlogRows({ posts }: { posts: Column[] }) {
   return (
     <ul className="border-t border-line">
       {posts.map((p) => (
-        <li key={p.id} className="border-b border-line">
+        <li key={p.id} data-r="up" className="border-b border-line">
           <Link href={`/${p.id}/`} className="group grid gap-2 py-7 transition-colors md:grid-cols-[8rem_10rem_1fr_auto] md:items-center md:gap-8">
             <time dateTime={p.publishedAt} className="en text-sm text-ink-mute">
               {formatDot(p.publishedAt)}
@@ -121,7 +126,7 @@ export function Triad({ items, tone = "default" }: { items: { en?: string; title
   return (
     <ul className={`grid md:grid-cols-3 ${tone === "panel" ? "gap-px overflow-hidden rounded-2xl bg-line-soft" : "gap-12 md:gap-10"}`}>
       {items.map((it) => (
-        <li key={it.title} className={tone === "panel" ? "bg-paper p-8 md:p-10" : "border-t border-ink pt-8"}>
+        <li key={it.title} data-r="up" className={tone === "panel" ? "bg-paper p-8 md:p-10" : "border-t border-ink pt-8"}>
           {it.en && <p className="label-en text-[13px] text-brand-deep">{it.en}</p>}
           <p className="mt-4 text-lg font-extrabold tracking-[0.04em]">{it.title}</p>
           <p className="mt-4 text-[15px] leading-[2.05] text-ink-soft">{it.body}</p>
