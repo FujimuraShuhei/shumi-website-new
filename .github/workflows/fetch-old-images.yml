@@ -1,0 +1,38 @@
+# 一時的なワークフロー：現サイト（shumiofficial.com）の制作実績画像を取得してこのブランチにコミットする
+name: fetch old site images
+on:
+  push:
+    branches: [tmp/fetch-old-works-images]
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: download
+        run: |
+          mkdir -p old-images
+          python3 - <<'PY'
+          import urllib.request, urllib.parse, os
+          urls = open('old-images.txt', encoding='utf-8').read().split()
+          for i, u in enumerate(urls):
+              p = urllib.parse.urlsplit(u.replace('http://', 'https://'))
+              enc = urllib.parse.urlunsplit((p.scheme, p.netloc, urllib.parse.quote(p.path), '', ''))
+              name = f"{i:02d}" + os.path.splitext(p.path)[1]
+              try:
+                  req = urllib.request.Request(enc, headers={'User-Agent': 'Mozilla/5.0'})
+                  data = urllib.request.urlopen(req, timeout=60).read()
+                  open(f'old-images/{name}', 'wb').write(data)
+                  print('ok', name, len(data), u)
+              except Exception as e:
+                  print('NG', name, u, e)
+          PY
+          ls -la old-images
+      - name: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add old-images
+          git commit -m "現サイトの制作実績画像を取得" || echo nothing
+          git push
