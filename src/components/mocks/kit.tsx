@@ -45,7 +45,8 @@ export function useMockLoop(
       build(tl, q);
       tlRef.current = tl;
       if (reduce) tl.progress(1).pause();
-      else tl.progress(0).pause();
+      // 入れ替わった瞬間に空の画面が見えないよう、組み上がった状態から始める
+      else tl.time(Math.min(2.4, tl.duration() * 0.3)).pause();
       return () => {
         tl.kill();
         tlRef.current = null;

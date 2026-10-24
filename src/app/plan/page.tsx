@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Button, ContactCta, Heading, PageHero } from "@/components/ui";
-import { commonFeatures } from "@/lib/site";
+import { IncludedGrid } from "@/components/home/Deck";
+import { Icon, IconBadge, type IconName } from "@/components/ui/icons";
 
 export const metadata: Metadata = {
   title: "制作プラン",
@@ -36,22 +37,22 @@ const plans = [
 ];
 
 const options = [
-  ["バナー制作", "1枚 1万円〜"],
-  ["Instagram投稿画像の作成", "1枚 2,000円〜"],
-  ["名刺デザイン", "1種 2万円〜"],
-  ["写真の編集・加工", "1枚 2,000円〜"],
-  ["予約機能", "5万円〜"],
-  ["ホームページのアイキャッチ画像作成", "1枚 1万円〜"],
-  ["会社パンフレット", "4ページ 9万円〜／6ページ 12万円〜"],
-  ["資料作成", "10ページ 5万円"],
-  ["広告運用", "月額 5万円〜"],
+  ["バナー制作", "1枚 1万円〜", "image"],
+  ["Instagram投稿画像の作成", "1枚 2,000円〜", "mobile"],
+  ["名刺デザイン", "1種 2万円〜", "handshake"],
+  ["写真の編集・加工", "1枚 2,000円〜", "camera"],
+  ["予約機能", "5万円〜", "clock"],
+  ["ホームページのアイキャッチ画像作成", "1枚 1万円〜", "layout"],
+  ["会社パンフレット", "4ページ 9万円〜／6ページ 12万円〜", "doc"],
+  ["資料作成", "10ページ 5万円", "chart"],
+  ["広告運用", "月額 5万円〜", "up"],
 ];
 
-const appPlan = [
-  { title: "ご相談・業務の見学", body: "いま困っている業務と、仕事の流れを伺います。" },
-  { title: "試作画面の作成", body: "本番の前に触れる試作を作り、現場の方に操作していただきます。" },
-  { title: "お見積り", body: "画面と機能の数、使う人数、ほかのサービスとの連携をもとにお見積りします。" },
-  { title: "開発・導入・保守", body: "開発後は説明会を行い、公開後の改善とセキュリティの更新も継続します。" },
+const appPlan: { icon: IconName; title: string; body: string }[] = [
+  { icon: "chat", title: "ご相談・業務の見学", body: "困っている業務と流れを伺う" },
+  { icon: "tap", title: "試作画面の作成", body: "触れる試作で、現場が確認" },
+  { icon: "chart", title: "お見積り", body: "画面・人数・連携から算出" },
+  { icon: "shield", title: "開発・導入・保守", body: "説明会と、改善・更新を継続" },
 ];
 
 export default function PlanPage() {
@@ -66,11 +67,14 @@ export default function PlanPage() {
 
       <section aria-labelledby="plans-title" className="bg-paper py-28 md:py-40">
         <div className="wrap">
-          <Heading en="Website" id="plans-title" title="新規ホームページ制作" />
+          <Heading num="01" en="Website" id="plans-title" title="ホームページ制作は、2つのプラン。" />
           <ul className="mt-16 grid gap-6 lg:grid-cols-2">
             {plans.map((p) => (
-              <li key={p.name} className={`rounded-[28px] p-8 md:p-12 ${p.featured ? "bg-grad-deep text-paper" : "border border-line bg-paper"}`}>
-                <p className={`label-en text-[13px] ${p.featured ? "text-brand-light" : "text-brand-deep"}`}>{p.en}</p>
+              <li key={p.name} data-r="pop" className={`rounded-[28px] p-8 md:p-12 ${p.featured ? "bg-grad-deep text-paper" : "border border-line bg-paper"}`}>
+                <div className="flex items-center justify-between">
+                  <p className={`label-en text-[13px] ${p.featured ? "text-brand-light" : "text-brand-deep"}`}>{p.en}</p>
+                  {p.featured && <span className="inline-flex h-8 items-center gap-1.5 rounded-full bg-brand-light px-3 text-[12px] font-bold text-night"><Icon name="up" className="h-4 w-4" strokeWidth={2.2} />集客を徹底</span>}
+                </div>
                 <h3 className="mt-3 text-2xl tracking-[0.05em]">{p.name}</h3>
                 <p className={`mt-3 text-[15px] ${p.featured ? "text-paper/75" : "text-ink-soft"}`}>{p.target}</p>
                 <p className={`mt-8 text-sm ${p.featured ? "text-paper/75" : "text-ink-soft"}`}>共通の内容（下記）に加えて</p>
@@ -93,30 +97,25 @@ export default function PlanPage() {
       </section>
 
       <section aria-labelledby="common-title" className="bg-mist py-28 md:py-40">
-        <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.6fr] lg:gap-20">
-          <Heading en="Common" id="common-title" title="すべてのプランに含まれる内容" />
-          <ul className="grid gap-3 sm:grid-cols-2">
-            {commonFeatures.map((f) => (
-              <li key={f} className="flex items-center gap-4 rounded-2xl bg-paper px-6 py-5 font-bold">
-                <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" className="shrink-0 text-brand-deep">
-                  <circle cx="10" cy="10" r="9" fill="currentColor" opacity="0.12" />
-                  <path d="M6 10.2l2.6 2.6L14 7.4" fill="none" stroke="currentColor" strokeWidth="1.6" />
-                </svg>
-                {f}
-              </li>
-            ))}
-          </ul>
+        <div className="wrap">
+          <Heading num="02" en="Common" id="common-title" title="必要なものは、最初から全部入り。" />
+          <div className="mt-16">
+            <IncludedGrid />
+          </div>
         </div>
       </section>
 
       <section aria-labelledby="option-title" className="bg-paper py-28 md:py-40">
         <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.6fr] lg:gap-20">
-          <Heading en="Option" id="option-title" title="オプション" lead="料金の目安です。内容に合わせてお見積りします。" />
-          <dl className="divide-y divide-line border-y border-line">
-            {options.map(([k, v]) => (
-              <div key={k} className="flex flex-col justify-between gap-1 py-5 sm:flex-row sm:items-baseline sm:gap-8">
-                <dt className="font-bold">{k}</dt>
-                <dd className="text-[15px] text-ink-soft">{v}</dd>
+          <Heading num="03" en="Option" id="option-title" title="オプション" lead="料金の目安です。内容に合わせてお見積りします。" />
+          <dl className="grid gap-3 sm:grid-cols-2">
+            {options.map(([k, v, icon]) => (
+              <div key={k} data-r="pop" className="flex items-center gap-4 rounded-[20px] bg-mist p-5">
+                <IconBadge name={icon as IconName} size="sm" />
+                <div>
+                  <dt className="text-[14px] font-bold leading-snug">{k}</dt>
+                  <dd className="label-en mt-1 text-[13px] text-brand-deep">{v}</dd>
+                </div>
               </div>
             ))}
           </dl>
@@ -126,18 +125,22 @@ export default function PlanPage() {
       <section aria-labelledby="app-plan-title" className="bg-grad-night py-28 text-paper md:py-40">
         <div className="wrap">
           <Heading
+            num="04"
             en="Business app"
             id="app-plan-title"
-            title="業務アプリ開発の進め方と費用"
+            title="業務アプリは、伺ってからお見積り。"
             tone="inverse"
-            lead="業務アプリと営業ツールは、作るものによって費用が大きく変わるため、ご相談の内容を伺ってからお見積りします。お見積りは無料です。"
+            lead="作るものによって費用が変わるため、無料でお見積りします。"
           />
-          <ol className="mt-16 grid gap-px overflow-hidden rounded-2xl bg-paper/10 md:grid-cols-4">
+          <ol className="mt-16 grid gap-3 md:grid-cols-4">
             {appPlan.map((a, i) => (
-              <li key={a.title} className="bg-night/60 p-8">
-                <p className="label-en text-[13px] text-brand-light">Step {String(i + 1).padStart(2, "0")}</p>
-                <p className="mt-5 text-lg font-extrabold tracking-[0.04em]">{a.title}</p>
-                <p className="mt-3 text-sm leading-[2] text-paper/70">{a.body}</p>
+              <li key={a.title} data-r="pop" className="rounded-[24px] bg-paper/[0.06] p-7 ring-1 ring-paper/12">
+                <div className="flex items-center justify-between">
+                  <IconBadge name={a.icon} tone="dark" />
+                  <span className="label-en text-[12px] text-brand-light">Step {String(i + 1).padStart(2, "0")}</span>
+                </div>
+                <p className="mt-6 text-lg font-black tracking-[0.02em]">{a.title}</p>
+                <p className="mt-2 text-[13.5px] leading-[1.85] text-paper/70">{a.body}</p>
               </li>
             ))}
           </ol>

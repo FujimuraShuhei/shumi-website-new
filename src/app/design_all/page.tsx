@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { WorksGrid } from "@/components/home/Sections";
 import { Button, ContactCta, Heading, PageHero } from "@/components/ui";
+import { PointCards } from "@/components/ui/deck";
 import { getWorks } from "@/lib/microcms";
 
 export const metadata: Metadata = {
@@ -9,12 +10,12 @@ export const metadata: Metadata = {
 };
 
 const items = [
-  { en: "Banner", title: "バナー・広告画像", body: "Web広告やサイト内のキャンペーンに使うバナーを制作します。" },
-  { en: "SNS", title: "Instagram投稿画像", body: "ブランドの世界観をそろえた、続けやすい投稿テンプレートと画像を制作します。" },
-  { en: "Business card", title: "名刺", body: "会社の印象を手渡しで伝える、ロゴや配色と統一した名刺をデザインします。" },
-  { en: "Pamphlet", title: "会社パンフレット", body: "営業や採用の場で使える、4ページ・6ページの会社案内を制作します。" },
-  { en: "Document", title: "提案資料・営業資料", body: "伝えたいことが一目で伝わる、構成から整えた資料を制作します。" },
-  { en: "Photo", title: "写真の編集・加工", body: "お手持ちの写真を、サイトや印刷物で映える仕上がりに整えます。" },
+  { icon: "image" as const, en: "Banner", title: "バナー・広告画像", body: "Web広告やサイト内のキャンペーンに使うバナーを制作します。" },
+  { icon: "mobile" as const, en: "SNS", title: "Instagram投稿画像", body: "ブランドの世界観をそろえた、続けやすい投稿テンプレートと画像を制作します。" },
+  { icon: "handshake" as const, en: "Business card", title: "名刺", body: "会社の印象を手渡しで伝える、ロゴや配色と統一した名刺をデザインします。" },
+  { icon: "doc" as const, en: "Pamphlet", title: "会社パンフレット", body: "営業や採用の場で使える、4ページ・6ページの会社案内を制作します。" },
+  { icon: "chart" as const, en: "Document", title: "提案資料・営業資料", body: "伝えたいことが一目で伝わる、構成から整えた資料を制作します。" },
+  { icon: "camera" as const, en: "Photo", title: "写真の編集・加工", body: "お手持ちの写真を、サイトや印刷物で映える仕上がりに整えます。" },
 ];
 
 export default async function DesignPage() {
@@ -36,22 +37,16 @@ export default async function DesignPage() {
 
       <section aria-labelledby="items-title" className="bg-paper py-28 md:py-40">
         <div className="wrap">
-          <Heading en="Lineup" id="items-title" title="制作できるもの" />
-          <ul className="mt-16 grid gap-px overflow-hidden rounded-2xl bg-line-soft sm:grid-cols-2 lg:grid-cols-3">
-            {items.map((i) => (
-              <li key={i.title} className="bg-paper p-8 md:p-10">
-                <p className="label-en text-[13px] text-brand-deep">{i.en}</p>
-                <p className="mt-4 text-lg font-extrabold tracking-[0.04em]">{i.title}</p>
-                <p className="mt-3 text-[15px] leading-[2.05] text-ink-soft">{i.body}</p>
-              </li>
-            ))}
-          </ul>
+          <Heading num="01" en="Lineup" id="items-title" title="Webも紙も、一貫したデザインで。" />
+          <div className="mt-16">
+            <PointCards items={items} />
+          </div>
         </div>
       </section>
 
       <section aria-labelledby="works-title" className="bg-mist py-28 md:py-40">
         <div className="wrap">
-          <Heading en="Works" id="works-title" title="制作実績" />
+          <Heading num="02" en="Works" id="works-title" title="制作実績" />
           <div className="mt-16">
             <WorksGrid works={works} />
           </div>

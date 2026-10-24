@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Triad } from "@/components/home/Sections";
+import { PointCards, StepChips } from "@/components/ui/deck";
+import { IconBadge } from "@/components/ui/icons";
 import { ContactCta, Heading, PageHero } from "@/components/ui";
 import { site } from "@/lib/site";
 
@@ -40,13 +41,10 @@ export default function CompanyPage() {
       />
 
       <section aria-labelledby="philosophy-title" className="bg-paper py-28 md:py-40">
-        <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
-          <Heading en="Philosophy" id="philosophy-title" title="私たちの理念" />
-          <div className="space-y-6 text-[15px] leading-[2.2] text-ink-soft md:text-base">
-            <p>
-              Webサイトは、つくって終わりではありません。サービスの魅力が正しく伝わり、選ばれるところまで考えて支援することが、私たちの仕事だと考えています。
-            </p>
-            <p>デザインや構成にこだわり、オリジナルの写真を使うことで、サービスの魅力をより深く伝えます。</p>
+        <div className="wrap">
+          <Heading num="01" en="Philosophy" id="philosophy-title" title="つくって終わり、にしない。" lead="魅力が正しく伝わり、選ばれるところまで支援します。" />
+          <div className="mt-14">
+            <StepChips steps={["魅力を見つける", "設計とデザイン", "正しく伝わる", "選ばれる・成果になる"]} />
           </div>
         </div>
       </section>
@@ -54,31 +52,40 @@ export default function CompanyPage() {
       <section aria-labelledby="name-title" className="bg-grad-deep py-28 text-paper md:py-40">
         <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-24">
           <div>
-            <p className="label-en text-[13px] text-brand-light">Shumi</p>
+            <p data-r="pop" className="label-en inline-flex h-8 items-center rounded-full bg-paper/10 px-3 text-[12px] text-brand-light">02 · Name</p>
             <h2 id="name-title" className="mt-6 text-[1.5rem] leading-[1.8] tracking-[0.06em] sm:text-[1.75rem] xl:text-[2.125rem]">
               美しさが、ゆきとどく。
               <br />
               美しさが、整っている。
             </h2>
           </div>
-          <div className="space-y-6 text-[15px] leading-[2.2] text-paper/75 md:text-base">
-            <p>「しゅうみ」という名前には、この2つの意味を込めています。</p>
-            <p>
-              見た目のデザインだけでなく、企業のブランドの向上や信頼のために何が良いかを考え、魅力を伝えるコンテンツを検討して制作する。その姿勢は、Webサイトでも業務アプリでも変わりません。
-            </p>
+          <div>
+            <ul className="grid gap-3 sm:grid-cols-2">
+              {[
+                { icon: "eye" as const, k: "ゆきとどく", b: "細部まで、気配りのある設計" },
+                { icon: "layout" as const, k: "整っている", b: "見やすく、迷わない情報設計" },
+              ].map((m) => (
+                <li key={m.k} data-r="pop" className="rounded-[24px] bg-paper/[0.06] p-7 ring-1 ring-paper/12">
+                  <IconBadge name={m.icon} tone="dark" />
+                  <p className="mt-6 text-[1.5rem] font-black">{m.k}</p>
+                  <p className="mt-2 text-[14px] text-paper/70">{m.b}</p>
+                </li>
+              ))}
+            </ul>
+            <p data-r="up" className="mt-6 text-[14px] leading-[2] text-paper/70">「しゅうみ」の名前に込めた2つの意味。Webサイトでも業務アプリでも変わらない姿勢です。</p>
           </div>
         </div>
       </section>
 
       <section aria-labelledby="style-title" className="bg-paper py-28 md:py-40">
         <div className="wrap">
-          <Heading en="Style" id="style-title" title="どんなデザインが得意？" lead="2つのテイストを得意としています。そのほかのデザインも、ご要望に応じて対応します。" />
+          <Heading num="03" en="Style" id="style-title" title="得意なテイストは、2つ。" lead="そのほかのデザインも、ご要望に応じて。" />
           <div className="mt-16">
-            <Triad
+            <PointCards
               items={[
-                { en: "Stylish", title: "スタイリッシュ", body: "洗練された余白と構成で、信頼感と先進性を感じさせるデザイン。" },
-                { en: "Simple & gentle", title: "シンプルで優しい", body: "やわらかな色と読みやすさで、親しみと安心を感じさせるデザイン。" },
-                { en: "Area", title: "全国からご依頼いただけます", body: "オンラインでのお打ち合わせで全国に対応。横浜市・川崎市の企業様は、写真撮影などにも伺いやすいエリアです。" },
+                { icon: "brand", en: "Stylish", title: "スタイリッシュ", body: "余白と構成で、信頼感と先進性を。" },
+                { icon: "eye", en: "Simple & gentle", title: "シンプルで優しい", body: "やわらかな色と読みやすさで、安心を。" },
+                { icon: "globe", en: "Area", title: "全国から、オンラインで", body: "横浜市・川崎市は撮影にも伺えます。" },
               ]}
             />
           </div>
@@ -88,7 +95,7 @@ export default function CompanyPage() {
       <section aria-labelledby="outline-title" className="bg-mist py-28 md:py-40">
         <div className="wrap grid gap-16 lg:grid-cols-2 lg:gap-20">
           <div>
-            <Heading en="Outline" id="outline-title" title="事務所概要" />
+            <Heading num="04" en="Outline" id="outline-title" title="事務所概要" />
             <dl className="mt-12 divide-y divide-line border-y border-line">
               {info.map(([k, v]) => (
                 <div key={k} className="grid gap-1 py-5 sm:grid-cols-[7rem_1fr] sm:gap-6">
@@ -99,10 +106,10 @@ export default function CompanyPage() {
             </dl>
           </div>
           <div>
-            <Heading en="Career" id="career-title" title={c.representative ? `代表 ${c.representative} 経歴` : "代表経歴"} />
+            <Heading num="05" en="Career" id="career-title" title={c.representative ? `代表 ${c.representative} 経歴` : "代表経歴"} />
             <ol className="mt-12 border-l border-line">
               {career.map(([d, t]) => (
-                <li key={d} className="relative pb-8 pl-8 last:pb-0">
+                <li key={d} data-r="pop" className="relative pb-8 pl-8 last:pb-0">
                   <span aria-hidden="true" className="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-brand" />
                   <p className="label-en text-[13px] text-brand-deep">{d}</p>
                   <p className="mt-1 text-[15px] leading-[1.9]">{t}</p>

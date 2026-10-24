@@ -1,12 +1,13 @@
 import { AppEfficiency } from "@/components/home/AppEfficiency";
+import { EffectTiles, FlowTimeline, IncludedGrid, MethodChain, RecruitJourney, ServiceChain } from "@/components/home/Deck";
 import { HomeStory } from "@/components/home/HomeStory";
+import { ReturnCycle } from "@/components/home/Pillars";
+import { BlogRows, WorksGrid } from "@/components/home/Sections";
 import { StatementBand } from "@/components/home/StatementBand";
-import { BgWords } from "@/components/motion/Marquee";
-import { Pillars, ReturnCycle } from "@/components/home/Pillars";
-import { BlogRows, FlowSteps, Triad, WorksGrid } from "@/components/home/Sections";
 import { ContactCta, Heading, TextLink } from "@/components/ui";
+import { Icon } from "@/components/ui/icons";
 import { getColumns, getWorks } from "@/lib/microcms";
-import { assurances, commonFeatures, effects, qualities, strengths } from "@/lib/site";
+import { flow } from "@/lib/site";
 
 export default async function Home() {
   const [works, posts] = await Promise.all([getWorks({ limit: 6 }), getColumns({ limit: 3 })]);
@@ -17,27 +18,31 @@ export default async function Home() {
       <StatementBand />
       <AppEfficiency />
 
-      {/* 還元のメッセージ（夜色の上に、白い面がせり上がってくる） */}
-      <section aria-labelledby="message-title" className="relative z-10 -mt-12 overflow-hidden rounded-t-[40px] bg-paper py-28 md:-mt-16 md:rounded-t-[72px] md:py-44">
-        <BgWords words="Good people, good work — " className="bottom-0 translate-y-[18%]" />
-        <div className="wrap relative grid items-center gap-16 lg:grid-cols-[1.1fr_1fr] lg:gap-24">
+      {/* 02 還元（夜色の上に、白い面がせり上がってくる） */}
+      <section aria-labelledby="message-title" className="relative z-10 -mt-12 rounded-t-[40px] bg-paper py-28 md:-mt-16 md:rounded-t-[72px] md:py-40">
+        <div className="wrap grid items-center gap-16 lg:grid-cols-[1fr_1fr] lg:gap-20">
           <div>
-            <p aria-hidden="true" data-r="mask" className="display-en text-grad-brand text-[clamp(2.75rem,7vw,5.5rem)]">
-              Message
-            </p>
-            <h2 id="message-title" data-r="up" className="mt-8 text-[1.75rem] leading-[1.7] tracking-[0.03em] md:text-[2.5rem]">
-              いい人材と、いい業務で、
-              <br />
-              関わった会社に還元する。
-            </h2>
-            <div data-r="up" className="mt-10 space-y-6 text-[15px] leading-[2.2] text-ink-soft md:text-base">
-              <p>
-                ホームページは、つくって終わりではありません。ブランドが伝わり、いい人が集まり、その人たちが力を発揮できる。そこまで整って、はじめて会社の成果になると考えています。
-              </p>
-              <p>
-                Shumi（しゅうみ）は「美しさがゆきとどく」という名前のとおり、外から見えるブランドも、内側の採用と業務も、ひとつのチームで整えます。
-              </p>
-            </div>
+            <Heading
+              num="02"
+              en="Message"
+              id="message-title"
+              title={
+                <>
+                  いい人材と、いい業務で、
+                  <br />
+                  関わった会社に還元する。
+                </>
+              }
+              lead="サイトをつくって終わりにしない。ブランド、採用、業務まで整えて、はじめて成果になると考えています。"
+            />
+            <ul className="mt-10 flex flex-wrap gap-2">
+              {["ブランドで選ばれる", "採用で人が集まる", "アプリで力を発揮する"].map((t) => (
+                <li key={t} data-r="pop" className="inline-flex h-10 items-center gap-2 rounded-full bg-mist px-4 text-[13px] font-bold">
+                  <Icon name="check" className="h-4 w-4 text-brand-deep" strokeWidth={2.4} />
+                  {t}
+                </li>
+              ))}
+            </ul>
             <TextLink href="/company/" className="mt-10">
               しゅうみについて
             </TextLink>
@@ -46,28 +51,39 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 3つの柱 */}
-      <section aria-labelledby="service-title" className="relative overflow-hidden bg-mist py-28 md:py-40">
-        <BgWords words="Branding — Recruit — Business app — " tone="mint" className="bottom-0 translate-y-[22%]" />
-        <div className="wrap relative">
-          <Heading
-            en="Service"
-            id="service-title"
-            title="サービス内容"
-            lead="ブランディング、採用、業務効率化。会社の成長に必要な3つを、まとめてお任せいただけます。"
-          />
-          <div className="mt-20">
-            <Pillars />
+      {/* 03 サービス */}
+      <section aria-labelledby="service-title" className="bg-mist py-28 md:py-40">
+        <div className="wrap">
+          <Heading num="03" en="Service" id="service-title" title="会社の成長に必要な3つを、まとめて。" lead="ブランディング、採用、業務効率化。どこからでも始められます。" />
+          <div className="mt-24">
+            <ServiceChain />
           </div>
         </div>
       </section>
 
-      {/* 実績 */}
-      <section aria-labelledby="works-title" className="relative overflow-hidden bg-paper py-28 md:py-40">
-        <BgWords words="Works — Works — " className="bottom-0 translate-y-[22%]" />
-        <div className="wrap relative">
+      {/* 04 採用 */}
+      <section aria-labelledby="recruit-title" className="bg-paper py-28 md:py-40">
+        <div className="wrap">
+          <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end">
+            <Heading num="04" en="Recruit" id="recruit-title" title="応募の前に、求職者は会社を調べる。" />
+            <div data-r="up" className="lg:pb-2">
+              <p className="text-[15px] leading-[2] text-ink-soft md:text-base">その「確かめる」場所が、採用サイト。働く人と仕事のリアルを届けて、納得して応募してもらいます。</p>
+              <TextLink href="/website/recruit_website/" className="mt-6">
+                採用サイト制作を見る
+              </TextLink>
+            </div>
+          </div>
+          <div className="mt-20">
+            <RecruitJourney />
+          </div>
+        </div>
+      </section>
+
+      {/* 05 実績 */}
+      <section aria-labelledby="works-title" className="bg-mist py-28 md:py-40">
+        <div className="wrap">
           <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-            <Heading en="Works" id="works-title" title="制作実績" lead="建設・建築業をはじめ、さまざまな業種のホームページを制作しています。" />
+            <Heading num="05" en="Works" id="works-title" title="制作実績" lead="建設・建築業をはじめ、さまざまな業種で。" />
             <TextLink href="/works/" className="shrink-0">
               制作実績をすべて見る
             </TextLink>
@@ -78,77 +94,56 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 効果 */}
-      <section aria-labelledby="effect-title" className="relative overflow-hidden bg-grad-deep py-28 text-paper md:py-40">
-        <BgWords words="Effect — Results — " tone="dark" className="bottom-10" />
-        <div className="wrap relative grid gap-16 lg:grid-cols-[1fr_1.5fr] lg:gap-24">
-          <Heading en="Effect" id="effect-title" title="サイト制作・アプリ導入後の効果" tone="inverse" />
-          <ul className="divide-y divide-paper/15 border-y border-paper/15">
-            {effects.map((e) => (
-              <li key={e.title} data-r="up" className="py-10">
-                <p className="text-xl font-extrabold tracking-[0.04em]">{e.title}</p>
-                <p className="mt-4 text-[15px] leading-[2.1] text-paper/70">{e.body}</p>
-              </li>
-            ))}
-          </ul>
+      {/* 06 効果 */}
+      <section aria-labelledby="effect-title" className="bg-grad-deep py-28 text-paper md:py-40">
+        <div className="wrap">
+          <Heading num="06" en="Effect" id="effect-title" title="導入後に、変わること。" tone="inverse" />
+          <div className="mt-16">
+            <EffectTiles />
+          </div>
         </div>
       </section>
 
-      {/* ものづくり */}
+      {/* 07 ものづくり */}
       <section aria-labelledby="about-title" className="bg-paper py-28 md:py-40">
         <div className="wrap">
-          <Heading en="About" id="about-title" title="Shumiのものづくり" lead="サービスの魅力と企業のブランド力を最大限に引き出すために、作り始める前の準備を大切にしています。" />
-          <div className="mt-20">
-            <Triad items={strengths} />
-          </div>
-          <div className="mt-24 rounded-[28px] bg-mint p-8 md:p-14">
-            <p className="text-[13px] font-bold tracking-[0.1em] text-brand-deep">すべての制作物に共通する3つの基準</p>
-            <div className="mt-10">
-              <Triad items={qualities} tone="panel" />
-            </div>
+          <Heading num="07" en="Method" id="about-title" title="作る前の準備を、いちばん大切に。" />
+          <div className="mt-16">
+            <MethodChain />
           </div>
         </div>
       </section>
 
-      {/* 安心のサービス */}
-      <section aria-labelledby="assurance-title" className="border-t border-line-soft bg-paper py-28 md:py-40">
+      {/* 08 安心と含まれるもの */}
+      <section aria-labelledby="assurance-title" className="bg-mist py-28 md:py-40">
         <div className="wrap">
-          <Heading en="Assurance" id="assurance-title" title="Shumiの安心のサービス" />
+          <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+            <Heading num="08" en="Assurance" id="assurance-title" title="必要なものは、最初から全部入り。" />
+            <TextLink href="/plan/" className="shrink-0">
+              制作プランを見る
+            </TextLink>
+          </div>
           <div className="mt-16">
-            <Triad items={assurances} />
+            <IncludedGrid />
           </div>
-          <div className="mt-20 grid gap-10 border-t border-line pt-12 lg:grid-cols-[16rem_1fr]">
-            <p className="text-[15px] font-bold tracking-[0.06em]">すべてのプランに含まれる内容</p>
-            <ul className="flex flex-wrap gap-3">
-              {commonFeatures.map((f) => (
-                <li key={f} className="rounded-full border border-line px-5 py-2.5 text-sm">
-                  {f}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <TextLink href="/plan/" className="mt-10">
-            制作プランを見る
-          </TextLink>
         </div>
       </section>
 
-      {/* 制作の流れ */}
-      <section aria-labelledby="flow-title" className="relative overflow-hidden bg-mist py-28 md:py-40">
-        <BgWords words="Flow — Process — " tone="mint" className="bottom-0 translate-y-[22%]" />
-        <div className="wrap relative">
-          <Heading en="Flow" id="flow-title" title="制作の流れ" />
-          <div className="mt-16">
-            <FlowSteps />
+      {/* 09 流れ */}
+      <section aria-labelledby="flow-title" className="bg-paper py-28 md:py-40">
+        <div className="wrap">
+          <Heading num="09" en="Flow" id="flow-title" title="ご相談から公開まで、5ステップ。" />
+          <div className="mt-20">
+            <FlowTimeline steps={flow} />
           </div>
         </div>
       </section>
 
       {/* ブログ */}
-      <section aria-labelledby="blog-title" className="bg-paper py-28 md:py-36">
+      <section aria-labelledby="blog-title" className="border-t border-line-soft bg-paper py-28 md:py-36">
         <div className="wrap grid gap-12 lg:grid-cols-[1fr_2.2fr] lg:gap-20">
           <div>
-            <Heading en="Blog" id="blog-title" title="ブログ" lead="ホームページと採用、業務改善に役立つノウハウをお届けします。" />
+            <Heading en="Blog" id="blog-title" title="ブログ" lead="ホームページと採用、業務改善のノウハウ。" />
             <TextLink href="/blog/" className="mt-8">
               ブログをすべて見る
             </TextLink>

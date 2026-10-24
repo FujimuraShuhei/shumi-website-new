@@ -60,6 +60,22 @@ function Intro({ as: Tag = "h1" }: { as?: "h1" | "p" }) {
   );
 }
 
+/** 背景の光とブランドの帯（画面に固定され、スクロールしても動かない） */
+function HeroBackdrop() {
+  return (
+    <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
+      <div className="absolute -right-[12%] -top-[20%] h-[80vmax] w-[80vmax] rounded-full bg-[radial-gradient(closest-side,rgba(6,159,169,0.26),transparent)]" />
+      <div className="absolute -bottom-[40%] -left-[15%] h-[70vmax] w-[70vmax] rounded-full bg-[radial-gradient(closest-side,rgba(11,117,150,0.2),transparent)]" />
+      <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 h-full w-full opacity-[0.07]">
+        <g transform="rotate(-40 500 300)" fill="#3cc3c4">
+          <rect x="200" y="250" width="900" height="70" rx="35" />
+          <rect x="420" y="360" width="600" height="26" rx="13" />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
 function Ctas() {
   return (
     <div className="flex flex-col gap-3 sm:flex-row">
@@ -130,9 +146,10 @@ export function HomeStory() {
       const mocks = q("[data-stage-mock]");
       const texts = q("[data-chapter]");
 
-      const front = { xPercent: 0, yPercent: 0, scale: 1, rotateY: 0, opacity: 1, filter: "blur(0px)" };
-      const back = { xPercent: -20, yPercent: -9, scale: 0.8, rotateY: 16, opacity: 0.16, filter: "blur(1.5px)" };
-      const enter = { xPercent: 22, yPercent: 6, scale: 0.94, rotateY: -10, opacity: 0, filter: "blur(0px)" };
+      // 背景は動かさず、右側の画面だけが上下にすっと入れ替わる
+      const front = { yPercent: 0, scale: 1, opacity: 1 };
+      const leave = { yPercent: -8, scale: 0.97, opacity: 0 };
+      const enter = { yPercent: 10, scale: 0.98, opacity: 0 };
 
       gsap.set(mocks[0], front);
       gsap.set([mocks[1], mocks[2]], enter);
@@ -165,46 +182,30 @@ export function HomeStory() {
 
       tl.to({}, { duration: 0.8 })
         // 1 → 2
-        .to(mocks[0], { ...back, duration: 1 })
-        .to(mocks[1], { ...front, duration: 1, ease: "power3.out" }, "<0.1")
+        .to(mocks[0], { ...leave, duration: 0.7, ease: "power2.in" })
+        .to(mocks[1], { ...front, duration: 0.9, ease: "power3.out" }, "<0.45")
         .to(texts[0], { opacity: 0, y: -30, duration: 0.5 }, "<")
         .to(texts[1], { opacity: 1, y: 0, duration: 0.5 }, "<0.45")
         .to(q("[data-fill='1']"), { scaleX: 1, duration: 1 }, "<-0.45")
-        .to(q("[data-glow]"), { xPercent: -30, yPercent: 20, duration: 1 }, "<")
         .to({}, { duration: 1 })
         // 2 → 3
-        .to(mocks[0], { opacity: 0, duration: 0.6 })
-        .to(mocks[1], { ...back, duration: 1 }, "<")
-        .to(mocks[2], { ...front, duration: 1, ease: "power3.out" }, "<0.1")
+        .to(mocks[1], { ...leave, duration: 0.7, ease: "power2.in" })
+        .to(mocks[2], { ...front, duration: 0.9, ease: "power3.out" }, "<0.45")
         .to(texts[1], { opacity: 0, y: -30, duration: 0.5 }, "<")
         .to(texts[2], { opacity: 1, y: 0, duration: 0.5 }, "<0.45")
         .to(q("[data-fill='2']"), { scaleX: 1, duration: 1 }, "<-0.45")
-        .to(q("[data-glow]"), { xPercent: 10, yPercent: -10, duration: 1 }, "<")
         .to({}, { duration: 0.9 });
     },
     { scope: root, dependencies: [desktop], revertOnUpdate: true },
   );
 
   return (
-    <section ref={root} data-header-dark aria-label="Shumiについて" className={`relative overflow-x-clip bg-grad-night ${mode === "static" ? "" : "lg:h-[400vh]"}`}>
-      {/* 背景の光とブランドの帯 */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className={`absolute inset-0 overflow-hidden ${mode === "static" ? "" : "lg:sticky lg:h-svh"}`}>
-          <div data-glow className="absolute -right-[10%] top-[10%] h-[70vmax] w-[70vmax] rounded-full bg-[radial-gradient(closest-side,rgba(6,159,169,0.28),transparent)]" />
-          <div className="absolute -bottom-[30%] -left-[10%] h-[60vmax] w-[60vmax] rounded-full bg-[radial-gradient(closest-side,rgba(21,66,69,0.7),transparent)]" />
-          <svg viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 h-full w-full opacity-[0.07]">
-            <g transform="rotate(-40 500 300)" fill="#3cc3c4">
-              <rect x="200" y="250" width="900" height="70" rx="35" />
-              <rect x="420" y="360" width="600" height="26" rx="13" />
-            </g>
-          </svg>
-        </div>
-      </div>
-
+    <section ref={root} data-header-dark aria-label="Shumiについて" className={`relative overflow-x-clip bg-[#0d1f22] ${mode === "static" ? "" : "lg:h-[400vh]"}`}>
       <div
         className={`${mode === "static" ? "hidden" : "hidden lg:flex"} sticky top-20 h-[calc(100svh-80px)] items-center overflow-hidden xl:top-[88px] xl:h-[calc(100svh-88px)]`}
       >
-          <div className="wrap grid w-full grid-cols-[minmax(0,5fr)_minmax(0,7fr)] items-center gap-10 pb-[10vh] pt-[4vh]">
+          <HeroBackdrop />
+          <div className="wrap relative grid w-full grid-cols-[minmax(0,5fr)_minmax(0,7fr)] items-center gap-10 pb-[10vh] pt-[4vh]">
             <div>
               <div data-in>
                 <Intro as={desktop ? "h1" : "p"} />
@@ -249,7 +250,8 @@ export function HomeStory() {
           </div>
       </div>
 
-      <div className={`${mode === "static" ? "" : "lg:hidden"} relative`}>
+      <div className={`${mode === "static" ? "" : "lg:hidden"} relative overflow-hidden`}>
+        <HeroBackdrop />
         <div className="wrap relative pb-24 pt-16 md:pb-32 md:pt-24">
           <Intro as={desktop ? "p" : "h1"} />
           <div className="mt-10">
