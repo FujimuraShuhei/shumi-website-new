@@ -184,3 +184,16 @@
   from { background-position: 0 0, 0 0; }
   to { background-position: 56px 56px, 56px 56px; }
 }
+
+/* 下層ページの最初の表示：上から順に、ふわっと現れる */
+@keyframes hero-in {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hero-in > * { animation: hero-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both; }
+  .hero-in > *:nth-child(2) { animation-delay: 0.08s; }
+  .hero-in > *:nth-child(3) { animation-delay: 0.16s; }
+  .hero-in > *:nth-child(4) { animation-delay: 0.24s; }
+  .hero-in > *:nth-child(n + 5) { animation-delay: 0.32s; }
+}

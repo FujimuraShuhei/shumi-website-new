@@ -4,30 +4,19 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useRef } from "react";
-import { BgWords } from "@/components/motion/Marquee";
 import { Button } from "@/components/ui";
+import { IconBadge, type IconName } from "@/components/ui/icons";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 
 const inputs = ["紙の日報", "Excelの工程表", "FAX・発注書", "電話メモ", "スマホの写真"];
 const outputs = ["ダッシュボード", "自動で集計", "写真台帳", "チームで共有"];
 
-const features = [
-  {
-    en: "Zero re-typing",
-    title: "転記と確認の電話をなくす",
-    body: "現場で入力した内容が、そのまま事務所の一覧に。打ち直しも「あれどうなった？」の電話も要りません。",
-  },
-  {
-    en: "Mobile first",
-    title: "現場から、その場で報告",
-    body: "日報も写真もスマホから。手袋をしたままでも押せる、大きなボタンと少ない入力で作ります。",
-  },
-  {
-    en: "Real-time",
-    title: "数字が、いつでもそろっている",
-    body: "工程、人数、期日、写真。会社の今が一つの画面にそろうから、判断と次の手が早くなります。",
-  },
+const features: { icon: IconName; en: string; title: string; body: string }[] = [
+  { icon: "sync", en: "Zero re-typing", title: "転記ゼロ", body: "入力はその場で1回だけ" },
+  { icon: "mobile", en: "Mobile first", title: "現場から報告", body: "日報も写真もスマホで" },
+  { icon: "chart", en: "Real-time", title: "いつでも最新", body: "会社の今が一画面に" },
+  { icon: "lock", en: "Secure", title: "安全に共有", body: "権限ごとに見える範囲を" },
 ];
 
 type Layout = "h" | "v";
@@ -186,14 +175,6 @@ export function AppEfficiency() {
             .to(d("[data-fd-packets]"), { opacity: 1, duration: 0.6 }, "<");
         });
 
-        gsap.from(q("[data-fe]"), {
-          opacity: 0,
-          y: 40,
-          duration: 0.9,
-          stagger: 0.12,
-          ease: "power3.out",
-          scrollTrigger: { trigger: q("[data-fe-wrap]")[0], start: "top 80%", once: true },
-        });
       });
     },
     { scope: root },
@@ -207,23 +188,26 @@ export function AppEfficiency() {
         className="pointer-events-none absolute inset-0 animate-[gridmove_14s_linear_infinite] bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] bg-[size:56px_56px] [mask-image:radial-gradient(70%_70%_at_50%_45%,#000,transparent)]"
       />
       <div aria-hidden="true" className="pointer-events-none absolute left-1/2 top-[35%] h-[60vmax] w-[60vmax] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(11,117,150,0.25),transparent)]" />
-      <BgWords words="Efficiency — Automation — Real-time — " tone="dark" className="bottom-6" />
 
       <div className="wrap relative">
         <div className="grid gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-end">
           <div>
-            <p aria-hidden="true" className="display-en text-grad-light text-[clamp(2.75rem,7vw,5.5rem)]">
+            <p aria-hidden="true" data-r="pop" className="mb-5 flex items-center gap-3">
+              <span className="label-en grid h-9 min-w-9 place-items-center rounded-full bg-paper/10 px-2 text-[13px] text-brand-light ring-1 ring-paper/20">01</span>
+              <span className="h-px w-10 bg-paper/25" />
+            </p>
+            <p aria-hidden="true" data-r="mask" className="display-en text-grad-light text-[clamp(2.75rem,7vw,5.5rem)]">
               Business app
             </p>
-            <h2 id="efficiency-title" className="mt-6 text-[1.75rem] leading-[1.5] tracking-[0.03em] md:text-[2.75rem]">
+            <h2 id="efficiency-title" data-r="up" className="mt-6 text-[1.75rem] leading-[1.5] tracking-[0.03em] md:text-[2.75rem]">
               散らかった仕事を、
               <br />
               ひとつのアプリに。
             </h2>
           </div>
           <div>
-            <p className="text-[15px] leading-[2.1] text-paper/75 md:text-base">
-              紙の日報、担当者ごとのExcel、FAXと電話。バラバラに流れていた情報を、業務アプリに集めて、自動でそろえます。採用で集まった大切な人材が、本来の仕事に力を注げる会社へ。
+            <p data-r="up" className="text-[15px] leading-[2.05] text-paper/75 md:text-base">
+              紙・Excel・FAX・電話。バラバラの情報を業務アプリに集めて、自動でそろえます。
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button href="/app/" variant="light">
@@ -245,12 +229,13 @@ export function AppEfficiency() {
           </div>
         </div>
 
-        <ul data-fe-wrap className="mt-20 grid gap-px overflow-hidden rounded-[28px] bg-paper/10 md:mt-28 md:grid-cols-3">
+        <ul className="mt-20 grid grid-cols-2 gap-3 md:mt-28 md:gap-4 lg:grid-cols-4">
           {features.map((f) => (
-            <li key={f.en} data-fe className="bg-[#0f262c] p-8 md:p-10">
-              <p className="label-en text-[13px] text-brand-light">{f.en}</p>
-              <h3 className="mt-4 text-xl leading-[1.6] tracking-[0.03em]">{f.title}</h3>
-              <p className="mt-4 text-[15px] leading-[2.05] text-paper/70">{f.body}</p>
+            <li key={f.en} data-r="pop" className="rounded-[24px] bg-paper/[0.05] p-5 ring-1 ring-paper/12 md:p-7">
+              <IconBadge name={f.icon} tone="dark" />
+              <p className="label-en mt-6 text-[11px] text-brand-light md:mt-7 md:text-[12px]">{f.en}</p>
+              <h3 className="mt-1 text-[1.125rem] leading-[1.4] tracking-[0.02em] md:text-[1.5rem]">{f.title}</h3>
+              <p className="mt-2 text-[12.5px] leading-[1.7] text-paper/70 md:text-[14px]">{f.body}</p>
             </li>
           ))}
         </ul>

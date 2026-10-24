@@ -1,13 +1,19 @@
 import Link from "next/link";
-import { FlowSteps, Triad, WorksGrid } from "@/components/home/Sections";
+import { FlowTimeline, IncludedGrid } from "@/components/home/Deck";
+import { WorksGrid } from "@/components/home/Sections";
 import { MockShowcase } from "@/components/mocks/MockShowcase";
 import { Button, ContactCta, Heading, PageHero, TextLink } from "@/components/ui";
 import { getWorks } from "@/lib/microcms";
 import type { ServicePage } from "@/lib/service-pages";
-import { assurances } from "@/lib/site";
+import { CaseTiles, IdeaTiles, PointCards, StepChips } from "@/components/ui/deck";
+import { Icon } from "@/components/ui/icons";
+import { flow } from "@/lib/site";
 
 export async function ServiceDetail({ page }: { page: ServicePage }) {
   const works = (await getWorks()).filter((w) => !page.worksIndustry || w.industry.includes(page.worksIndustry)).slice(0, 3);
+  // 見出しの番号（表示されるセクションだけ順に振る）
+  let n = 0;
+  const next = () => String(++n).padStart(2, "0");
 
   return (
     <>
@@ -29,24 +35,28 @@ export async function ServiceDetail({ page }: { page: ServicePage }) {
 
       {page.intro && (
         <section aria-labelledby="intro-title" className="bg-paper py-28 md:py-40">
-          <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
-            <h2 id="intro-title" className="text-[1.625rem] leading-[1.8] tracking-[0.05em] md:text-[2rem]">
-              {page.intro.title}
-            </h2>
-            <div className="space-y-6 text-[15px] leading-[2.2] text-ink-soft md:text-base">
-              {page.intro.body.map((b) => (
-                <p key={b}>{b}</p>
+          <div className="wrap grid items-center gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-20">
+            <Heading num={next()} en="Why" id="intro-title" title={page.intro.title} />
+            <ol className="relative grid gap-4">
+              <span aria-hidden="true" className="absolute bottom-10 left-[39px] top-10 w-px bg-line" />
+              {page.intro.body.map((b, i) => (
+                <li key={b} data-r="pop" className="relative flex items-start gap-5 rounded-[24px] bg-mist p-6">
+                  <span className={`label-en grid h-8 w-8 shrink-0 place-items-center rounded-full text-[12px] ${i === page.intro!.body.length - 1 ? "bg-grad-brand text-paper" : "bg-paper text-brand-deep ring-1 ring-line"}`}>
+                    {i === page.intro!.body.length - 1 ? <Icon name="check" className="h-4 w-4" strokeWidth={2.4} /> : String(i + 1).padStart(2, "0")}
+                  </span>
+                  <p className="text-[15px] font-bold leading-[1.95]">{b}</p>
+                </li>
               ))}
-            </div>
+            </ol>
           </div>
         </section>
       )}
 
       <section aria-labelledby="points-title" className={`${page.intro ? "bg-mist" : "bg-paper"} py-28 md:py-40`}>
         <div className="wrap">
-          <Heading en="Strength" id="points-title" title={page.pointsTitle} />
+          <Heading num={next()} en="Strength" id="points-title" title={page.pointsTitle} />
           <div className="mt-16">
-            <Triad items={page.points} />
+            <PointCards items={page.points} tone={page.intro ? "panel" : "light"} />
           </div>
         </div>
       </section>
@@ -54,61 +64,36 @@ export async function ServiceDetail({ page }: { page: ServicePage }) {
       {page.cases && (
         <section aria-labelledby="cases-title" className={`${page.intro ? "bg-paper" : "bg-mist"} py-28 md:py-40`}>
           <div className="wrap">
-            <Heading en="Case" id="cases-title" title={page.casesTitle} />
-            <ul className={`mt-16 grid gap-px overflow-hidden rounded-2xl bg-line-soft md:grid-cols-2 ${page.cases.length > 4 ? "lg:grid-cols-3" : ""}`}>
-              {page.cases.map((c) => (
-                <li key={c.title} className="bg-paper p-8 md:p-10">
-                  <span aria-hidden="true" className="block h-1 w-8 rounded-full bg-brand" />
-                  <p className="mt-6 text-lg font-extrabold tracking-[0.04em]">{c.title}</p>
-                  <p className="mt-3 text-[15px] leading-[2.05] text-ink-soft">{c.body}</p>
-                </li>
-              ))}
-            </ul>
+            <Heading num={next()} en="Case" id="cases-title" title={page.casesTitle} />
+            <div className="mt-16">
+              <CaseTiles items={page.cases} />
+            </div>
           </div>
         </section>
       )}
 
       {page.extra && (
         <section aria-labelledby="extra-title" className="bg-grad-deep py-28 text-paper md:py-40">
-          <div className="wrap grid gap-16 lg:grid-cols-[1fr_1.5fr] lg:gap-24">
-            <Heading en="Design" id="extra-title" title={page.extra.title} tone="inverse" />
-            <ul className="divide-y divide-paper/15 border-y border-paper/15">
-              {page.extra.items.map((e) => (
-                <li key={e.title} className="py-10">
-                  <p className="text-xl font-extrabold tracking-[0.04em]">{e.title}</p>
-                  <p className="mt-4 text-[15px] leading-[2.1] text-paper/70">{e.body}</p>
-                </li>
-              ))}
-            </ul>
+          <div className="wrap grid gap-16">
+            <Heading num={next()} en="Design" id="extra-title" title={page.extra.title} tone="inverse" />
+            <PointCards items={page.extra.items} tone="dark" />
           </div>
         </section>
       )}
 
       <section aria-labelledby="flow-title" className="bg-paper py-28 md:py-40">
         <div className="wrap">
-          <Heading en="Flow" id="flow-title" title="制作の流れ" />
-          <div className="mt-16">
-            {page.flow ? (
-              <ol className="grid gap-px overflow-hidden rounded-2xl bg-line-soft sm:grid-cols-2 lg:grid-cols-3">
-                {page.flow.map((f, i) => (
-                  <li key={f} className="flex items-baseline gap-5 bg-paper px-8 py-7">
-                    <span className="label-en text-[13px] text-brand-deep">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="font-bold tracking-[0.06em]">{f}</span>
-                  </li>
-                ))}
-              </ol>
-            ) : (
-              <FlowSteps />
-            )}
+          <Heading num={next()} en="Flow" id="flow-title" title={page.flow ? `公開まで、${page.flow.length}ステップ。` : "ご相談から公開まで、5ステップ。"} />
+          <div className="mt-16">{page.flow ? <StepChips steps={page.flow} /> : <FlowTimeline steps={flow} />}
           </div>
         </div>
       </section>
 
       <section aria-labelledby="assure-title" className="bg-mist py-28 md:py-40">
         <div className="wrap">
-          <Heading en="Assurance" id="assure-title" title="安心の3つのサービス付き" />
+          <Heading num={next()} en="Assurance" id="assure-title" title="必要なものは、最初から全部入り。" />
           <div className="mt-16">
-            <Triad items={assurances} tone="panel" />
+            <IncludedGrid />
           </div>
         </div>
       </section>
@@ -133,13 +118,7 @@ export async function ServiceDetail({ page }: { page: ServicePage }) {
                 </Button>
               </div>
             </div>
-            <ul className="grid gap-3 sm:grid-cols-2">
-              {page.appIdeas.map((a) => (
-                <li key={a} className="rounded-2xl border border-paper/15 p-6 text-[15px] font-bold leading-relaxed tracking-[0.06em]">
-                  {a}
-                </li>
-              ))}
-            </ul>
+            <IdeaTiles items={page.appIdeas} tone="dark" />
           </div>
         </section>
       )}
@@ -148,7 +127,7 @@ export async function ServiceDetail({ page }: { page: ServicePage }) {
         <section aria-labelledby="works-title" className="bg-paper py-28 md:py-40">
           <div className="wrap">
             <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
-              <Heading en="Works" id="works-title" title="制作実績" />
+              <Heading num={next()} en="Works" id="works-title" title="制作実績" />
               <TextLink href="/works/">制作実績をすべて見る</TextLink>
             </div>
             <div className="mt-16">

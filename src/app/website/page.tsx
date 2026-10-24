@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { FlowSteps, ServiceRows } from "@/components/home/Sections";
+import { FlowTimeline } from "@/components/home/Deck";
+import { ServiceRows } from "@/components/home/Sections";
 import { Button, ContactCta, Heading, PageHero } from "@/components/ui";
-import { appServices, websiteServices } from "@/lib/site";
+import { appServices, flow, websiteServices } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "サイト制作内容",
@@ -19,7 +20,7 @@ export default function WebsitePage() {
       />
       <section aria-labelledby="list-title" className="bg-paper py-28 md:py-40">
         <div className="wrap">
-          <Heading en="Service" id="list-title" title="Shumiのサイト制作について" />
+          <Heading num="01" en="Service" id="list-title" title="目的に合わせて、4つのサイト制作。" />
           <div className="mt-16">
             <ServiceRows items={websiteServices} />
           </div>
@@ -29,10 +30,11 @@ export default function WebsitePage() {
         <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.6fr] lg:gap-20">
           <div>
             <Heading
+              num="02"
               en="Business app"
               id="app-title"
-              title="業務アプリ開発もはじめました"
-              lead="Webサイトで集めたお客様を、社内でどう迎えるか。日報や案件管理、営業の顧客管理など、社内の仕事を軽くするアプリも開発しています。"
+              title="社内の仕事も、アプリで軽く。"
+              lead="日報・案件管理・営業の顧客管理まで。"
             />
             <Button href="/app/demo/" variant="secondary" className="mt-10">
               デモを触る
@@ -45,9 +47,9 @@ export default function WebsitePage() {
       </section>
       <section aria-labelledby="flow-title" className="bg-paper py-28 md:py-40">
         <div className="wrap">
-          <Heading en="Flow" id="flow-title" title="制作の流れ" />
-          <div className="mt-16">
-            <FlowSteps />
+          <Heading num="03" en="Flow" id="flow-title" title="ご相談から公開まで、5ステップ。" />
+          <div className="mt-20">
+            <FlowTimeline steps={flow} />
           </div>
         </div>
       </section>

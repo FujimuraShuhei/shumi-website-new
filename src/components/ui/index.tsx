@@ -51,14 +51,15 @@ export function TextLink({ href, children, className = "" }: { href: string; chi
 }
 
 /**
- * セクション見出し（現サイトの「英字＋日本語」の形を継承）
- * 英字は大きく細く、日本語の見出しは落ち着いた大きさに。
+ * セクション見出し（資料のスライド見出しの形）
+ * 章番号 → 太い英字 → 日本語の一言（大きく）→ 補足（一文）
  */
 export function Heading({
   en,
   title,
   lead,
   id,
+  num,
   align = "left",
   tone = "default",
   as: Tag = "h2",
@@ -68,6 +69,8 @@ export function Heading({
   title: ReactNode;
   lead?: ReactNode;
   id?: string;
+  /** 章番号（例：「02」） */
+  num?: string;
   align?: "left" | "center";
   tone?: "default" | "inverse";
   as?: "h1" | "h2";
@@ -76,13 +79,19 @@ export function Heading({
   const inverse = tone === "inverse";
   return (
     <div className={`${align === "center" ? "mx-auto text-center" : ""} max-w-3xl ${className}`}>
+      {num && (
+        <p aria-hidden="true" data-r="pop" className={`mb-5 flex items-center gap-3 ${align === "center" ? "justify-center" : ""}`}>
+          <span className={`label-en grid h-9 min-w-9 place-items-center rounded-full px-2 text-[13px] ${inverse ? "bg-paper/10 text-brand-light ring-1 ring-paper/20" : "bg-grad-brand text-paper"}`}>{num}</span>
+          <span className={`h-px w-10 ${inverse ? "bg-paper/25" : "bg-ink/20"}`} />
+        </p>
+      )}
       <p aria-hidden="true" data-r="mask" className={`display-en text-[clamp(2.75rem,7vw,5.5rem)] ${inverse ? "text-grad-light" : "text-grad-brand"}`}>
         {en}
       </p>
-      <Tag id={id} data-r="up" className={`mt-6 text-[1.375rem] leading-[1.55] tracking-[0.06em] md:text-[1.75rem] ${inverse ? "text-paper" : "text-ink"}`}>
+      <Tag id={id} data-r="up" className={`mt-6 text-[1.5rem] leading-[1.5] tracking-[0.03em] md:text-[2rem] ${inverse ? "text-paper" : "text-ink"}`}>
         {title}
       </Tag>
-      {lead && <p data-r="up" className={`mt-6 text-[15px] leading-[2.1] md:text-base ${inverse ? "text-paper/75" : "text-ink-soft"}`}>{lead}</p>}
+      {lead && <p data-r="up" className={`mt-5 text-[15px] leading-[2] md:text-base ${inverse ? "text-paper/75" : "text-ink-soft"}`}>{lead}</p>}
     </div>
   );
 }
@@ -104,7 +113,7 @@ export function PageHero({
   return (
     <section className="relative overflow-hidden border-b border-line-soft bg-paper">
       <Bands className="pointer-events-none absolute -right-40 -top-24 hidden h-[520px] w-[620px] opacity-90 md:block" />
-      <div className="wrap relative pb-20 pt-10 md:pb-28 md:pt-14">
+      <div className="hero-in wrap relative pb-20 pt-10 md:pb-28 md:pt-14">
         <Breadcrumb crumbs={crumbs} />
         <p aria-hidden="true" className="display-en text-grad-brand mt-16 text-[clamp(3.25rem,10vw,8rem)] md:mt-24">
           {en}
