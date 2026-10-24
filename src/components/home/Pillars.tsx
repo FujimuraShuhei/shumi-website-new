@@ -46,18 +46,18 @@ export function Pillars() {
           }`}
         >
           {p.featured && (
-            <span className="absolute right-6 top-6 rounded-full bg-brand-light px-3 py-1 text-[11px] font-medium tracking-[0.06em] text-night md:right-8 md:top-8">
+            <span className="absolute right-6 top-6 rounded-full bg-brand-light px-3 py-1 text-[11px] font-bold tracking-[0.06em] text-night md:right-8 md:top-8">
               特に効果を実感いただいています
             </span>
           )}
-          <p className={`en text-sm ${p.featured ? "text-brand-light" : "text-brand-deep"}`}>{p.en}</p>
-          <h3 className="mt-4 text-[13px] font-medium tracking-[0.1em] opacity-70">{p.title}</h3>
-          <p className="phrase mt-3 text-[1.25rem] font-medium leading-[1.65] tracking-[0.06em] xl:text-[1.375rem]">{p.catch}</p>
+          <p className={`label-en text-[13px] ${p.featured ? "text-brand-light" : "text-brand-deep"}`}>{p.en}</p>
+          <h3 className="mt-4 text-[13px] font-bold tracking-[0.08em] opacity-70">{p.title}</h3>
+          <p className="phrase mt-3 text-[1.375rem] font-black leading-[1.6] tracking-[0.03em] xl:text-[1.5rem]">{p.catch}</p>
           <p className={`mt-5 text-[15px] leading-[2.05] ${p.featured ? "text-paper/75" : "text-ink-soft"}`}>{p.body}</p>
           <ul className={`mt-auto divide-y pt-10 ${p.featured ? "divide-paper/15" : "divide-line-soft"}`}>
             {p.links.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="group flex min-h-14 items-center justify-between gap-4 text-[15px] font-medium">
+                <Link href={l.href} className="group flex min-h-14 items-center justify-between gap-4 text-[15px] font-bold">
                   {l.label}
                   <span
                     className={`grid h-9 w-9 shrink-0 place-items-center rounded-full transition-colors duration-300 ${

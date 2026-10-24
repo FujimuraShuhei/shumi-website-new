@@ -25,15 +25,15 @@ export default function DocumentPage() {
       <div className="bg-paper py-24 md:py-32">
         <div className="wrap grid gap-20 lg:grid-cols-[22rem_1fr] lg:gap-24">
           <section aria-labelledby="docs-title">
-            <h2 id="docs-title" className="text-base font-semibold tracking-[0.06em]">
+            <h2 id="docs-title" className="text-base tracking-[0.06em]">
               お送りできる資料
             </h2>
             <ul className="mt-6 space-y-4">
               {docs.map((d) => (
                 <li key={d.title} className="overflow-hidden rounded-[20px] border border-line-soft">
                   <div aria-hidden="true" className="relative aspect-[16/9] bg-[linear-gradient(135deg,#154245,#0a7a83)] p-5">
-                    <p className="en text-[11px] text-paper/70">{d.en}</p>
-                    <p className="mt-2 text-sm font-semibold leading-relaxed text-paper">{d.title}</p>
+                    <p className="label-en text-[11px] text-paper/70">{d.en}</p>
+                    <p className="mt-2 text-sm font-bold leading-relaxed text-paper">{d.title}</p>
                     <svg viewBox="0 0 200 120" className="absolute -bottom-6 -right-10 h-24 opacity-60">
                       <g transform="rotate(-45 100 60)">
                         <rect x="40" y="40" width="200" height="22" rx="11" fill="#3cc3c4" />

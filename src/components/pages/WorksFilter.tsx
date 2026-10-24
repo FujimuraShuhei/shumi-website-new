@@ -20,7 +20,7 @@ export function WorksFilter({ works }: { works: Work[] }) {
             type="button"
             aria-pressed={cat === o}
             onClick={() => setCat(o)}
-            className="h-11 rounded-full border border-line px-6 text-sm font-medium text-ink-soft transition-colors hover:border-ink aria-pressed:border-brand-deep aria-pressed:bg-brand-deep aria-pressed:text-paper"
+            className="h-11 rounded-full border border-line px-6 text-sm font-bold text-ink-soft transition-colors hover:border-ink aria-pressed:border-brand-deep aria-pressed:bg-brand-deep aria-pressed:text-paper"
           >
             {o === "all" ? "すべて" : workCategoryLabel[o]}
           </button>

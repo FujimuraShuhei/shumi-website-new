@@ -57,13 +57,13 @@ export default async function EntryPage({ params }: Props) {
               <Breadcrumb crumbs={[{ href: "/works/", label: "HP制作実績" }, { label: w.client }]} />
               <div className="mt-16 flex flex-wrap gap-x-4 gap-y-1 text-sm md:mt-20">
                 {w.category.map((c) => (
-                  <span key={c} className="font-medium text-brand-deep">
+                  <span key={c} className="font-bold text-brand-deep">
                     {workCategoryLabel[c]}
                   </span>
                 ))}
                 <span className="text-ink-mute">{w.industry}</span>
               </div>
-              <h1 className="mt-4 text-[1.75rem] font-semibold leading-[1.6] tracking-[0.08em] md:text-[2.5rem]">{w.client}</h1>
+              <h1 className="mt-4 text-[1.75rem] leading-[1.6] tracking-[0.05em] md:text-[2.5rem]">{w.client}</h1>
               <p className="mt-2 text-lg text-ink-soft">{w.title}</p>
               <p className="mt-8 max-w-2xl text-[15px] leading-[2.1] text-ink-soft md:text-base">{w.summary}</p>
             </div>
@@ -77,7 +77,7 @@ export default async function EntryPage({ params }: Props) {
             <dl className="wrap mt-20 grid gap-12 md:grid-cols-3">
               {sections.map((s) => (
                 <div key={s.title} className="border-t border-ink pt-8">
-                  <dt className="font-semibold tracking-[0.06em]">{s.title}</dt>
+                  <dt className="font-bold tracking-[0.06em]">{s.title}</dt>
                   <dd className="mt-4 whitespace-pre-line text-[15px] leading-[2.1] text-ink-soft">{s.body}</dd>
                 </div>
               ))}
@@ -90,7 +90,7 @@ export default async function EntryPage({ params }: Props) {
                 href={w.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex h-16 items-center justify-center rounded-full bg-brand-deep px-10 text-[15px] font-medium text-paper hover:bg-brand-dark"
+                className="inline-flex h-16 items-center justify-center rounded-full bg-brand-deep px-10 text-[15px] font-bold text-paper hover:bg-brand-dark"
               >
                 公開中のサイトを見る（新しいタブ）
               </a>
@@ -117,9 +117,9 @@ export default async function EntryPage({ params }: Props) {
                 {formatDot(p.publishedAt)}
               </time>
               {p.revisedAt && p.revisedAt !== p.publishedAt && <span className="en text-ink-mute">更新 {formatDot(p.revisedAt)}</span>}
-              {p.category && <span className="font-medium text-brand-deep">{p.category}</span>}
+              {p.category && <span className="font-bold text-brand-deep">{p.category}</span>}
             </div>
-            <h1 className="mt-5 text-[1.625rem] font-semibold leading-[1.7] tracking-[0.06em] md:text-[2.25rem]">{p.title}</h1>
+            <h1 className="mt-5 text-[1.625rem] leading-[1.7] tracking-[0.06em] md:text-[2.25rem]">{p.title}</h1>
           </div>
         </header>
         {p.eyecatch && (

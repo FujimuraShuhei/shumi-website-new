@@ -30,7 +30,7 @@ export async function ServiceDetail({ page }: { page: ServicePage }) {
       {page.intro && (
         <section aria-labelledby="intro-title" className="bg-paper py-28 md:py-40">
           <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
-            <h2 id="intro-title" className="text-[1.625rem] font-medium leading-[1.8] tracking-[0.1em] md:text-[2rem]">
+            <h2 id="intro-title" className="text-[1.625rem] leading-[1.8] tracking-[0.05em] md:text-[2rem]">
               {page.intro.title}
             </h2>
             <div className="space-y-6 text-[15px] leading-[2.2] text-ink-soft md:text-base">
@@ -59,7 +59,7 @@ export async function ServiceDetail({ page }: { page: ServicePage }) {
               {page.cases.map((c) => (
                 <li key={c.title} className="bg-paper p-8 md:p-10">
                   <span aria-hidden="true" className="block h-1 w-8 rounded-full bg-brand" />
-                  <p className="mt-6 text-lg font-semibold tracking-[0.06em]">{c.title}</p>
+                  <p className="mt-6 text-lg font-extrabold tracking-[0.04em]">{c.title}</p>
                   <p className="mt-3 text-[15px] leading-[2.05] text-ink-soft">{c.body}</p>
                 </li>
               ))}
@@ -75,7 +75,7 @@ export async function ServiceDetail({ page }: { page: ServicePage }) {
             <ul className="divide-y divide-paper/15 border-y border-paper/15">
               {page.extra.items.map((e) => (
                 <li key={e.title} className="py-10">
-                  <p className="text-xl font-medium tracking-[0.08em]">{e.title}</p>
+                  <p className="text-xl font-extrabold tracking-[0.04em]">{e.title}</p>
                   <p className="mt-4 text-[15px] leading-[2.1] text-paper/70">{e.body}</p>
                 </li>
               ))}
@@ -92,8 +92,8 @@ export async function ServiceDetail({ page }: { page: ServicePage }) {
               <ol className="grid gap-px overflow-hidden rounded-2xl bg-line-soft sm:grid-cols-2 lg:grid-cols-3">
                 {page.flow.map((f, i) => (
                   <li key={f} className="flex items-baseline gap-5 bg-paper px-8 py-7">
-                    <span className="en text-sm font-medium text-brand-deep">{String(i + 1).padStart(2, "0")}</span>
-                    <span className="font-semibold tracking-[0.06em]">{f}</span>
+                    <span className="label-en text-[13px] text-brand-deep">{String(i + 1).padStart(2, "0")}</span>
+                    <span className="font-bold tracking-[0.06em]">{f}</span>
                   </li>
                 ))}
               </ol>
@@ -117,8 +117,8 @@ export async function ServiceDetail({ page }: { page: ServicePage }) {
         <section aria-labelledby="app-title" className="bg-night py-24 text-paper md:py-32">
           <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-24">
             <div>
-              <p className="en text-sm text-brand-light">Business app</p>
-              <h2 id="app-title" className="mt-5 text-2xl font-medium leading-[1.7] tracking-[0.08em] md:text-[1.75rem]">
+              <p className="label-en text-[13px] text-brand-light">Business app</p>
+              <h2 id="app-title" className="mt-5 text-2xl leading-[1.7] tracking-[0.05em] md:text-[1.75rem]">
                 サイトと一緒に、
                 <br />
                 社内の業務もアプリで軽く。
@@ -135,7 +135,7 @@ export async function ServiceDetail({ page }: { page: ServicePage }) {
             </div>
             <ul className="grid gap-3 sm:grid-cols-2">
               {page.appIdeas.map((a) => (
-                <li key={a} className="rounded-2xl border border-paper/15 p-6 text-[15px] font-medium leading-relaxed tracking-[0.06em]">
+                <li key={a} className="rounded-2xl border border-paper/15 p-6 text-[15px] font-bold leading-relaxed tracking-[0.06em]">
                   {a}
                 </li>
               ))}
@@ -149,7 +149,7 @@ export async function ServiceDetail({ page }: { page: ServicePage }) {
           <div className="wrap">
             <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
               <Heading en="Works" id="works-title" title="制作実績" />
-              <Link href="/works/" className="group inline-flex min-h-11 items-center gap-3 text-[15px] font-medium text-brand-deep">
+              <Link href="/works/" className="group inline-flex min-h-11 items-center gap-3 text-[15px] font-bold text-brand-deep">
                 制作実績をすべて見る
                 <Arrow className="transition-transform group-hover:translate-x-1" />
               </Link>

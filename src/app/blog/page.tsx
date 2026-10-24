@@ -25,7 +25,7 @@ export default async function BlogPage() {
                     <Image src={`${p.eyecatch.url}?w=900&fm=webp`} alt="" fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
                   ) : (
                     <div aria-hidden="true" className="absolute inset-0 grid place-items-center bg-[linear-gradient(135deg,#eef8f8,#e2f3f4)] p-8">
-                      <span className="text-center text-sm font-semibold leading-[1.8] tracking-[0.06em] text-brand-dark">{p.title}</span>
+                      <span className="text-center text-sm font-bold leading-[1.8] tracking-[0.06em] text-brand-dark">{p.title}</span>
                     </div>
                   )}
                 </div>
@@ -33,9 +33,9 @@ export default async function BlogPage() {
                   <time dateTime={p.publishedAt} className="en text-ink-mute">
                     {formatDot(p.publishedAt)}
                   </time>
-                  {p.category && <span className="font-medium text-brand-deep">{p.category}</span>}
+                  {p.category && <span className="font-bold text-brand-deep">{p.category}</span>}
                 </div>
-                <h2 className="mt-3 text-base font-semibold leading-[1.8] tracking-[0.04em] transition-colors group-hover:text-brand-deep">{p.title}</h2>
+                <h2 className="mt-3 text-base font-bold leading-[1.8] tracking-[0.04em] transition-colors group-hover:text-brand-deep">{p.title}</h2>
               </Link>
             </li>
           ))}

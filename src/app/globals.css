@@ -1,6 +1,7 @@
 /* unicode-range で分割された可変フォント。使われた文字のファイルだけを読み込む */
 @import "@fontsource-variable/noto-sans-jp/wght.css";
 @import "@fontsource-variable/inter/wght.css";
+@import "@fontsource-variable/archivo/wdth.css";
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------
@@ -31,6 +32,7 @@
 
   --font-sans: "Noto Sans JP Variable", "Noto Sans JP", "Hiragino Sans", "Hiragino Kaku Gothic ProN", sans-serif;
   --font-en: "Inter Variable", "Inter", "Noto Sans JP Variable", sans-serif;
+  --font-display: "Archivo Variable", "Archivo", "Noto Sans JP Variable", sans-serif;
 
   --radius-sm: 4px;
   --radius-md: 8px;
@@ -59,12 +61,14 @@
     /* 日本語の見出しを文節で折り返す（対応ブラウザのみ） */
     word-break: auto-phrase;
   }
+  /* 見出しは Noto Sans JP の Black（900）。h3 以下は ExtraBold */
   h1, h2, h3, h4 {
-    font-weight: 600;
+    font-weight: 900;
     line-height: 1.45;
     letter-spacing: 0.04em;
     text-wrap: pretty;
   }
+  h3, h4 { font-weight: 800; }
   p { text-wrap: pretty; }
   ::selection { background: var(--color-brand); color: #fff; }
 
@@ -94,9 +98,27 @@
   @media (min-width: 768px) { .wrap { padding-inline: 48px; } }
   @media (min-width: 1280px) { .wrap { padding-inline: 64px; } }
 
+  /* 数字や日付などの小さな英数字（UI用） */
   .en {
     font-family: var(--font-en);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
+  }
+
+  /* 大きな英字見出し：Archivo を太く・やや幅広に */
+  .display-en {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-stretch: 112%;
+    letter-spacing: -0.03em;
+    line-height: 0.92;
+  }
+
+  /* 小さな英字ラベル（Branding / Step 01 など） */
+  .label-en {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-stretch: 108%;
+    letter-spacing: 0.01em;
   }
 
   .prose-shumi { max-width: 44rem; line-height: 2; }

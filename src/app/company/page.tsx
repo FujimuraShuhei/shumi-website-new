@@ -54,8 +54,8 @@ export default function CompanyPage() {
       <section aria-labelledby="name-title" className="bg-brand-dark py-28 text-paper md:py-40">
         <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:items-center lg:gap-24">
           <div>
-            <p className="en text-sm text-brand-light">Shumi</p>
-            <h2 id="name-title" className="mt-6 text-[1.5rem] font-medium leading-[1.8] tracking-[0.12em] sm:text-[1.75rem] xl:text-[2.125rem]">
+            <p className="label-en text-[13px] text-brand-light">Shumi</p>
+            <h2 id="name-title" className="mt-6 text-[1.5rem] leading-[1.8] tracking-[0.06em] sm:text-[1.75rem] xl:text-[2.125rem]">
               美しさが、ゆきとどく。
               <br />
               美しさが、整っている。
@@ -92,7 +92,7 @@ export default function CompanyPage() {
             <dl className="mt-12 divide-y divide-line border-y border-line">
               {info.map(([k, v]) => (
                 <div key={k} className="grid gap-1 py-5 sm:grid-cols-[7rem_1fr] sm:gap-6">
-                  <dt className="text-sm font-semibold">{k}</dt>
+                  <dt className="text-sm font-bold">{k}</dt>
                   <dd className="text-[15px] text-ink-soft">{v}</dd>
                 </div>
               ))}
@@ -104,7 +104,7 @@ export default function CompanyPage() {
               {career.map(([d, t]) => (
                 <li key={d} className="relative pb-8 pl-8 last:pb-0">
                   <span aria-hidden="true" className="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-brand" />
-                  <p className="en text-sm text-brand-deep">{d}</p>
+                  <p className="label-en text-[13px] text-brand-deep">{d}</p>
                   <p className="mt-1 text-[15px] leading-[1.9]">{t}</p>
                 </li>
               ))}

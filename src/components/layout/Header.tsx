@@ -109,7 +109,7 @@ export function Header() {
                     aria-expanded={openMenu === item.href}
                     aria-controls={`${menuId}-panel`}
                     onClick={() => setOpenMenu((v) => (v === item.href ? null : item.href))}
-                    className={`flex h-11 items-center gap-1.5 whitespace-nowrap rounded px-3 text-[13.5px] font-medium tracking-[0.06em] transition-colors hover:text-brand-deep ${
+                    className={`flex h-11 items-center gap-1.5 whitespace-nowrap rounded px-3 text-[13.5px] font-bold tracking-[0.06em] transition-colors hover:text-brand-deep ${
                       isCurrent(item.href) ? "text-brand-deep group-data-[dark]/h:text-brand-light" : "text-ink group-data-[dark]/h:text-paper/85 group-data-[dark]/h:hover:text-paper"
                     }`}
                   >
@@ -124,7 +124,7 @@ export function Header() {
                   <Link
                     href={item.href}
                     aria-current={isCurrent(item.href) ? "page" : undefined}
-                    className="flex h-11 items-center whitespace-nowrap rounded px-3 text-[13.5px] font-medium tracking-[0.06em] text-ink transition-colors hover:text-brand-deep aria-[current=page]:text-brand-deep group-data-[dark]/h:text-paper/85 group-data-[dark]/h:hover:text-paper"
+                    className="flex h-11 items-center whitespace-nowrap rounded px-3 text-[13.5px] font-bold tracking-[0.06em] text-ink transition-colors hover:text-brand-deep aria-[current=page]:text-brand-deep group-data-[dark]/h:text-paper/85 group-data-[dark]/h:hover:text-paper"
                   >
                     {item.label}
                   </Link>
@@ -137,13 +137,13 @@ export function Header() {
         <div className="flex items-center gap-2">
           <Link
             href="/document/"
-            className="hidden h-11 items-center whitespace-nowrap rounded-full border border-line px-5 text-[13px] font-medium tracking-[0.06em] transition-colors hover:border-ink group-data-[dark]/h:border-paper/25 group-data-[dark]/h:hover:border-paper sm:inline-flex xl:hidden min-[1400px]:inline-flex"
+            className="hidden h-11 items-center whitespace-nowrap rounded-full border border-line px-5 text-[13px] font-bold tracking-[0.06em] transition-colors hover:border-ink group-data-[dark]/h:border-paper/25 group-data-[dark]/h:hover:border-paper sm:inline-flex xl:hidden min-[1400px]:inline-flex"
           >
             資料ダウンロード
           </Link>
           <Link
             href="/contact/"
-            className="hidden h-11 items-center whitespace-nowrap rounded-full bg-brand-deep px-6 text-[13px] font-medium tracking-[0.06em] text-paper transition-colors hover:bg-brand-dark sm:inline-flex"
+            className="hidden h-11 items-center whitespace-nowrap rounded-full bg-brand-deep px-6 text-[13px] font-bold tracking-[0.06em] text-paper transition-colors hover:bg-brand-dark sm:inline-flex"
           >
             お問い合わせ
           </Link>
@@ -179,7 +179,7 @@ export function Header() {
           <ul className="divide-y divide-line-soft">
             {nav.map((item) => (
               <li key={item.href} className="py-2">
-                <Link href={item.href} className="flex min-h-14 items-center text-lg font-medium">
+                <Link href={item.href} className="flex min-h-14 items-center text-lg font-extrabold">
                   {item.label}
                 </Link>
                 {item.children && (
@@ -197,10 +197,10 @@ export function Header() {
             ))}
           </ul>
           <div className="mt-8 grid gap-3">
-            <Link href="/contact/" className="flex h-14 items-center justify-center rounded-full bg-brand-deep font-medium text-paper">
+            <Link href="/contact/" className="flex h-14 items-center justify-center rounded-full bg-brand-deep font-bold text-paper">
               お問い合わせ
             </Link>
-            <Link href="/document/" className="flex h-14 items-center justify-center rounded-full border border-line font-medium">
+            <Link href="/document/" className="flex h-14 items-center justify-center rounded-full border border-line font-bold">
               資料ダウンロード
             </Link>
           </div>
@@ -214,8 +214,8 @@ function MegaMenu({ item }: { item: NavItem }) {
   return (
     <div className="wrap grid grid-cols-[16rem_1fr] gap-12 py-10">
       <div>
-        <p className="text-xl font-semibold">{item.label}</p>
-        <Link href={item.href} className="mt-4 inline-flex items-center gap-2 text-sm font-medium text-brand-deep hover:underline hover:underline-offset-4">
+        <p className="text-xl font-extrabold">{item.label}</p>
+        <Link href={item.href} className="mt-4 inline-flex items-center gap-2 text-sm font-bold text-brand-deep hover:underline hover:underline-offset-4">
           一覧を見る
           <Arrow />
         </Link>
@@ -225,8 +225,8 @@ function MegaMenu({ item }: { item: NavItem }) {
           <li key={c.href}>
             <Link href={c.href} className="group flex items-start justify-between gap-6 rounded-lg p-4 transition-colors hover:bg-mist">
               <span>
-                <span className="en block text-xs font-medium text-brand-deep">{c.en}</span>
-                <span className="mt-1 block font-semibold">{c.label}</span>
+                <span className="label-en block text-xs text-brand-deep">{c.en}</span>
+                <span className="mt-1 block font-bold">{c.label}</span>
                 <span className="mt-1 block text-[13px] leading-relaxed text-ink-mute">{c.desc}</span>
               </span>
               <span className="mt-6 text-ink-mute transition-transform group-hover:translate-x-1 group-hover:text-brand-deep">
