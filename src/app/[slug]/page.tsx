@@ -29,7 +29,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const hit = await find(slug);
   if (!hit) return {};
-  if (hit.type === "work") return { title: `${hit.work.client} ${hit.work.title}`, description: hit.work.summary };
+  if (hit.type === "work") {
+    const t = hit.work.thumbnail;
+    return {
+      title: `${hit.work.client} ${hit.work.title}`,
+      description: hit.work.summary,
+      openGraph: t ? { images: [t.url.startsWith("/") ? t.url : `${t.url}?w=1200&h=630&fit=crop`] } : undefined,
+    };
+  }
   return {
     title: hit.post.title,
     description: hit.post.excerpt,
@@ -82,6 +89,41 @@ export default async function EntryPage({ params }: Props) {
                 </div>
               ))}
             </dl>
+          )}
+          {w.gallery && w.gallery.length > 0 && (
+            <section aria-label="制作したサイトの画像" className="wrap mt-24">
+              <p className="label-en text-[13px] text-brand-deep">Gallery</p>
+              <ul className={`mt-6 grid gap-6 ${w.gallery.length > 1 ? "md:grid-cols-2" : ""}`}>
+                {w.gallery.map((g, i) => {
+                  const tall = (g.height ?? 0) / (g.width ?? 1) > 1.3;
+                  const src = g.url.startsWith("/") ? g.url : `${g.url}?w=1600&fm=webp`;
+                  return (
+                    <li key={g.url} data-r="pop" className={!tall && w.gallery!.length > 1 && i === 0 ? "md:col-span-2" : ""}>
+                      {tall ? (
+                        // 縦に長いページ全体の画像は、枠の中でゆっくりスクロールして見せる
+                        <div className="group relative aspect-[4/5] overflow-hidden rounded-[24px] bg-mist ring-1 ring-line-soft [container-type:size]">
+                          <Image
+                            src={src}
+                            alt={`${w.client}のサイト（ページ全体）`}
+                            width={g.width ?? 1200}
+                            height={g.height ?? 2400}
+                            sizes="(min-width: 768px) 50vw, 100vw"
+                            className="absolute inset-x-0 top-0 h-auto w-full transition-transform duration-[6000ms] ease-in-out group-hover:translate-y-[calc(-100%+100cqh)]"
+                          />
+                          <span className="pointer-events-none absolute bottom-4 right-4 rounded-full bg-night/80 px-3 py-1.5 text-[12px] font-bold text-paper transition-opacity group-hover:opacity-0">
+                            カーソルを乗せるとスクロール
+                          </span>
+                        </div>
+                      ) : (
+                        <div className="overflow-hidden rounded-[24px] bg-mist ring-1 ring-line-soft">
+                          <Image src={src} alt={`${w.client}のサイト`} width={g.width ?? 1600} height={g.height ?? 1000} sizes="(min-width: 1280px) 1152px, 100vw" className="h-auto w-full" />
+                        </div>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </section>
           )}
           {w.body && <div className="prose-shumi wrap mt-20 !max-w-[52rem]" dangerouslySetInnerHTML={{ __html: w.body }} />}
           <div className="wrap mt-20 flex flex-col gap-3 pb-28 sm:flex-row md:pb-36">

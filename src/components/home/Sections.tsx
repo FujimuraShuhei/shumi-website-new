@@ -34,7 +34,7 @@ export function WorkThumb({ work, sizes = "(min-width: 1024px) 33vw, 100vw", pri
   if (work.thumbnail) {
     return (
       <Image
-        src={`${work.thumbnail.url}?w=1200&fm=webp`}
+        src={work.thumbnail.url.startsWith("/") ? work.thumbnail.url : `${work.thumbnail.url}?w=1200&fm=webp`}
         alt=""
         fill
         sizes={sizes}
