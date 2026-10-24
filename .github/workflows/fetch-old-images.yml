@@ -14,19 +14,34 @@ jobs:
         run: |
           mkdir -p old-images
           python3 - <<'PY'
-          import urllib.request, urllib.parse, os
+          import urllib.request, urllib.parse, os, json
           urls = open('old-images.txt', encoding='utf-8').read().split()
+          log = []
+          def get(u, t):
+              req = urllib.request.Request(u, headers={'User-Agent': 'Mozilla/5.0'})
+              return urllib.request.urlopen(req, timeout=t).read()
           for i, u in enumerate(urls):
               p = urllib.parse.urlsplit(u.replace('http://', 'https://'))
-              enc = urllib.parse.urlunsplit((p.scheme, p.netloc, urllib.parse.quote(p.path), '', ''))
+              path = urllib.parse.quote(p.path)
               name = f"{i:02d}" + os.path.splitext(p.path)[1]
-              try:
-                  req = urllib.request.Request(enc, headers={'User-Agent': 'Mozilla/5.0'})
-                  data = urllib.request.urlopen(req, timeout=60).read()
-                  open(f'old-images/{name}', 'wb').write(data)
-                  print('ok', name, len(data), u)
-              except Exception as e:
-                  print('NG', name, u, e)
+              cands = [
+                  ('direct', f'https://shumiofficial.com{path}', 8),
+                  ('archive', f'https://web.archive.org/web/2025id_/https://shumiofficial.com{path}', 40),
+                  ('archive-http', f'https://web.archive.org/web/2025id_/http://shumiofficial.com{path}', 40),
+              ]
+              done = False
+              for how, cu, t in cands:
+                  try:
+                      data = get(cu, t)
+                      if len(data) < 2000 or data[:15].lower().startswith(b'<!doctype') or data[:5].lower() == b'<html':
+                          raise Exception(f'not an image ({len(data)} bytes)')
+                      open(f'old-images/{name}', 'wb').write(data)
+                      log.append(f'ok {how} {name} {len(data)} {u}'); done = True; break
+                  except Exception as e:
+                      log.append(f'  fail {how} {name} {e}')
+              if not done: log.append(f'NG {name} {u}')
+          open('old-images/log.txt', 'w', encoding='utf-8').write('\n'.join(log))
+          print('\n'.join(log))
           PY
           ls -la old-images
       - name: commit
