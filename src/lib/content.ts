@@ -17,6 +17,8 @@ export type Work = {
   solution?: string;
   result?: string;
   thumbnail?: CmsImage;
+  /** 詳細ページに並べる画像（任意・複数） */
+  gallery?: CmsImage[];
   url?: string;
   body?: string;
   publishedAt?: string;
