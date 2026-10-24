@@ -39,8 +39,8 @@ function ExampleGrid({ items }: { items: typeof appExamples }) {
     <ul className="grid gap-px overflow-hidden rounded-2xl bg-line-soft md:grid-cols-2">
       {items.map((e) => (
         <li key={e.title} className="bg-paper p-8 md:p-10">
-          <p className="en text-sm text-brand-deep">{e.en}</p>
-          <p className="mt-4 text-lg font-semibold tracking-[0.06em]">{e.title}</p>
+          <p className="label-en text-[13px] text-brand-deep">{e.en}</p>
+          <p className="mt-4 text-lg font-extrabold tracking-[0.04em]">{e.title}</p>
           <p className="mt-3 text-[15px] leading-[2.05] text-ink-soft">{e.body}</p>
         </li>
       ))}
@@ -112,8 +112,8 @@ export default function AppPage() {
           <ol className="mt-16 grid gap-px overflow-hidden rounded-2xl bg-line-soft md:grid-cols-5">
             {steps.map((s, i) => (
               <li key={s.title} className="bg-paper p-8">
-                <p className="en text-sm font-medium text-brand-deep">Step {String(i + 1).padStart(2, "0")}</p>
-                <p className="mt-6 text-lg font-semibold tracking-[0.06em]">{s.title}</p>
+                <p className="label-en text-[13px] text-brand-deep">Step {String(i + 1).padStart(2, "0")}</p>
+                <p className="mt-6 text-lg font-extrabold tracking-[0.04em]">{s.title}</p>
                 <p className="mt-3 text-sm leading-[2] text-ink-soft">{s.body}</p>
               </li>
             ))}

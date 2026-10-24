@@ -40,7 +40,7 @@ export function InquiryForm({ kind, defaultTopic }: { kind: "contact" | "documen
           <circle cx="36" cy="36" r="34" fill="var(--color-brand-deep)" />
           <path d="M22 37l9 9 19-19" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
-        <h2 ref={doneRef} tabIndex={-1} className="mt-8 text-2xl font-semibold tracking-[0.06em] md:text-[1.75rem]">
+        <h2 ref={doneRef} tabIndex={-1} className="mt-8 text-2xl tracking-[0.06em] md:text-[1.75rem]">
           {kind === "contact" ? "お問い合わせを受け付けました" : "資料請求を受け付けました"}
         </h2>
         <p className="mt-4 max-w-xl leading-relaxed text-ink-soft">
@@ -49,7 +49,7 @@ export function InquiryForm({ kind, defaultTopic }: { kind: "contact" | "documen
             : "ご入力のメールアドレスに、受付のお知らせを自動でお送りしました。1営業日以内に資料をメールでお送りします。"}
         </p>
         <p className="mt-3 text-sm text-ink-mute">メールが届かない場合は、迷惑メールのフォルダもご確認ください。</p>
-        <Link href="/" className="mt-10 inline-flex h-14 items-center rounded-full border border-ink/20 bg-paper px-8 font-medium hover:border-ink">
+        <Link href="/" className="mt-10 inline-flex h-14 items-center rounded-full border border-ink/20 bg-paper px-8 font-bold hover:border-ink">
           トップページに戻る
         </Link>
       </div>
@@ -80,7 +80,7 @@ export function InquiryForm({ kind, defaultTopic }: { kind: "contact" | "documen
 
         {state.status === "error" && (
           <div ref={summaryRef} tabIndex={-1} role="alert" className="rounded-2xl border border-alert/40 bg-[#fdf1f0] p-6">
-            <p className="font-semibold text-alert">{state.message}</p>
+            <p className="font-bold text-alert">{state.message}</p>
             {Object.keys(err).length > 0 && (
               <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">
                 {Object.entries(err).map(([k, m]) => (
@@ -101,7 +101,7 @@ export function InquiryForm({ kind, defaultTopic }: { kind: "contact" | "documen
               {topics.map((t) => (
                 <label key={t} className="flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border border-line bg-paper px-5 transition-colors hover:border-ink-mute has-checked:border-brand-deep has-checked:bg-mint">
                   <input type="radio" name="topic" value={t} required defaultChecked={(val("topic") ?? defaultTopic ?? topics[0]) === t} className="h-5 w-5 accent-[#0a7a83]" />
-                  <span className="text-[15px] font-medium">{t}</span>
+                  <span className="text-[15px] font-bold">{t}</span>
                 </label>
               ))}
             </div>
@@ -118,7 +118,7 @@ export function InquiryForm({ kind, defaultTopic }: { kind: "contact" | "documen
                     defaultChecked={Array.isArray(v.documents) ? v.documents.includes(d) : true}
                     className="h-5 w-5 accent-[#0a7a83]"
                   />
-                  <span className="text-[15px] font-medium">{d}</span>
+                  <span className="text-[15px] font-bold">{d}</span>
                 </label>
               ))}
             </div>
@@ -183,13 +183,13 @@ export function InquiryForm({ kind, defaultTopic }: { kind: "contact" | "documen
           <label className="flex min-h-12 cursor-pointer items-start gap-3">
             <input type="checkbox" name="privacy" required defaultChecked={val("privacy") === "on"} className="mt-1 h-5 w-5 shrink-0 accent-[#0a7a83]" aria-invalid={err.privacy ? true : undefined} />
             <span>
-              <Link href="/privacy" target="_blank" className="font-medium text-brand-deep underline underline-offset-4">
+              <Link href="/privacy" target="_blank" className="font-bold text-brand-deep underline underline-offset-4">
                 プライバシーポリシー（新しいタブ）
               </Link>
               に同意する <Required />
             </span>
           </label>
-          {err.privacy && <p className="mt-1 text-sm font-medium text-alert">{err.privacy}</p>}
+          {err.privacy && <p className="mt-1 text-sm font-bold text-alert">{err.privacy}</p>}
         </div>
 
         {siteKey && <Turnstile siteKey={siteKey} />}
@@ -197,7 +197,7 @@ export function InquiryForm({ kind, defaultTopic }: { kind: "contact" | "documen
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex h-16 w-full items-center justify-center rounded-full bg-brand-deep px-14 text-[15px] font-medium tracking-[0.08em] text-paper transition-colors hover:bg-brand-dark disabled:cursor-wait disabled:opacity-70 sm:w-auto"
+          className="inline-flex h-16 w-full items-center justify-center rounded-full bg-brand-deep px-14 text-[15px] font-bold tracking-[0.08em] text-paper transition-colors hover:bg-brand-dark disabled:cursor-wait disabled:opacity-70 sm:w-auto"
         >
           {pending ? "送信しています…" : kind === "contact" ? "この内容で相談する" : "資料を請求する"}
         </button>
@@ -242,7 +242,7 @@ const invalid = (error: string | undefined, id: string) =>
   error ? { "aria-invalid": true as const, "aria-describedby": `${id}-error` } : {};
 
 function Required() {
-  return <span className="ml-2 rounded-full bg-brand-wash px-2 py-0.5 align-middle text-[11px] font-medium text-brand-deep">必須</span>;
+  return <span className="ml-2 rounded-full bg-brand-wash px-2 py-0.5 align-middle text-[11px] font-bold text-brand-deep">必須</span>;
 }
 
 function Field({
@@ -266,14 +266,14 @@ function Field({
   const Wrapper = as;
   return (
     <Wrapper id={as === "fieldset" ? id : undefined}>
-      <Label {...(as === "div" ? { htmlFor: id } : {})} className="mb-3 block text-[15px] font-semibold tracking-[0.04em]">
+      <Label {...(as === "div" ? { htmlFor: id } : {})} className="mb-3 block text-[15px] font-bold tracking-[0.04em]">
         {label}
         {required && <Required />}
       </Label>
       {hint && <p className="mb-2 text-sm text-ink-mute">{hint}</p>}
       {children}
       {error && (
-        <p id={`${id}-error`} className="mt-2 text-sm font-medium text-alert">
+        <p id={`${id}-error`} className="mt-2 text-sm font-bold text-alert">
           {error}
         </p>
       )}

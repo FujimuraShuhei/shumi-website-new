@@ -31,13 +31,13 @@ export default function ContactPage() {
           </section>
           <aside className="space-y-10">
             <div className="rounded-[24px] bg-mist p-8">
-              <h2 className="text-base font-semibold tracking-[0.06em]">ご依頼から制作までの流れ</h2>
+              <h2 className="text-base tracking-[0.06em]">ご依頼から制作までの流れ</h2>
               <ol className="mt-6 space-y-6">
                 {steps.map((s, i) => (
                   <li key={s.title} className="flex gap-4">
-                    <span className="en grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand-deep text-xs font-medium text-paper">{i + 1}</span>
+                    <span className="label-en grid h-8 w-8 shrink-0 place-items-center rounded-full bg-brand-deep text-xs text-paper">{i + 1}</span>
                     <span>
-                      <span className="block text-[15px] font-semibold">{s.title}</span>
+                      <span className="block text-[15px] font-bold">{s.title}</span>
                       <span className="mt-1 block text-sm leading-[1.9] text-ink-soft">{s.body}</span>
                     </span>
                   </li>

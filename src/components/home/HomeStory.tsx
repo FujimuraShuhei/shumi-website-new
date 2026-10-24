@@ -42,11 +42,11 @@ function Mock({ index, active }: { index: number; active: boolean }) {
 function Intro({ as: Tag = "h1" }: { as?: "h1" | "p" }) {
   return (
     <>
-      <p className="flex items-center gap-4 text-[12px] font-medium tracking-[0.14em] text-brand-light">
+      <p className="flex items-center gap-4 text-[12px] font-bold tracking-[0.14em] text-brand-light">
         <span aria-hidden="true" className="h-px w-8 bg-brand-light" />
         横浜市のブランディング・ホームページ制作
       </p>
-      <Tag className="mt-6 text-[2.25rem] font-medium leading-[1.4] tracking-[0.06em] text-paper sm:text-[2.75rem] xl:text-[3.25rem]">
+      <Tag className="mt-6 text-[2.5rem] font-black leading-[1.3] tracking-[0.02em] text-paper sm:text-[3rem] xl:text-[3.75rem]">
         いい人と、
         <br />
         いい仕事が、
@@ -79,10 +79,10 @@ function StaticChapter({ index, children }: { index: number; children: ReactNode
   const c = chapters[index];
   return (
     <div ref={ref} className="border-t border-paper/10 pt-12">
-      <p className="en text-sm text-brand-light">
+      <p className="label-en text-[13px] text-brand-light">
         {String(index + 1).padStart(2, "0")} — {c.en}
       </p>
-      <h2 className="mt-3 text-xl font-medium leading-[1.7] tracking-[0.06em] text-paper sm:text-2xl">{c.title}</h2>
+      <h2 className="mt-3 text-xl leading-[1.7] tracking-[0.06em] text-paper sm:text-2xl">{c.title}</h2>
       <p className="mt-4 max-w-xl text-[15px] leading-[2.05] text-paper/70">{c.body}</p>
       <div className="mt-8">
         <MockScaler>
@@ -212,10 +212,10 @@ export function HomeStory() {
               <div data-in className="relative mt-10 h-[11.5rem]">
                 {chapters.map((c, i) => (
                   <div key={c.en} data-chapter className="absolute inset-0" aria-hidden={active !== i}>
-                    <p className="en text-[13px] text-brand-light">
+                    <p className="label-en text-[13px] text-brand-light">
                       {String(i + 1).padStart(2, "0")} / 03　{c.en}
                     </p>
-                    <h2 className="mt-3 text-[1.375rem] font-medium leading-[1.6] tracking-[0.06em] text-paper">{c.title}</h2>
+                    <h2 className="mt-3 text-[1.375rem] leading-[1.6] tracking-[0.06em] text-paper">{c.title}</h2>
                     <p className="mt-3 max-w-[28rem] text-[14px] leading-[2] text-paper/65">{c.body}</p>
                   </div>
                 ))}

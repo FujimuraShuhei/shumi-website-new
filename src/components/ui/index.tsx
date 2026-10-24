@@ -22,7 +22,7 @@ export function Button({ href, children, variant = "primary", className = "" }: 
   return (
     <Link
       href={href}
-      className={`group inline-flex h-16 items-center justify-between gap-8 whitespace-nowrap rounded-full pl-8 pr-2 text-[15px] font-medium tracking-[0.06em] transition-colors ${variants[variant]} ${className}`}
+      className={`group inline-flex h-16 items-center justify-between gap-8 whitespace-nowrap rounded-full pl-8 pr-2 text-[15px] font-bold tracking-[0.06em] transition-colors ${variants[variant]} ${className}`}
     >
       {children}
       <span
@@ -39,7 +39,7 @@ export function Button({ href, children, variant = "primary", className = "" }: 
 
 export function TextLink({ href, children, className = "" }: { href: string; children: ReactNode; className?: string }) {
   return (
-    <Link href={href} className={`group inline-flex min-h-11 items-center gap-3 text-[15px] font-medium text-brand-deep ${className}`}>
+    <Link href={href} className={`group inline-flex min-h-11 items-center gap-3 text-[15px] font-bold text-brand-deep ${className}`}>
       <span className="bg-[linear-gradient(currentColor,currentColor)] bg-[length:0%_1px] bg-left-bottom bg-no-repeat pb-0.5 transition-[background-size] duration-500 group-hover:bg-[length:100%_1px]">
         {children}
       </span>
@@ -74,10 +74,10 @@ export function Heading({
   const inverse = tone === "inverse";
   return (
     <div className={`${align === "center" ? "mx-auto text-center" : ""} max-w-3xl ${className}`}>
-      <p aria-hidden="true" className={`en text-[3.25rem] font-light leading-none md:text-[5rem] ${inverse ? "text-brand-light" : "text-brand"}`}>
+      <p aria-hidden="true" className={`display-en text-[clamp(2.75rem,7vw,5.5rem)] ${inverse ? "text-brand-light" : "text-brand"}`}>
         {en}
       </p>
-      <Tag id={id} className={`mt-5 text-lg font-semibold tracking-[0.1em] md:text-xl ${inverse ? "text-paper" : "text-ink"}`}>
+      <Tag id={id} className={`mt-6 text-[1.375rem] leading-[1.55] tracking-[0.06em] md:text-[1.75rem] ${inverse ? "text-paper" : "text-ink"}`}>
         {title}
       </Tag>
       {lead && <p className={`mt-6 text-[15px] leading-[2.1] md:text-base ${inverse ? "text-paper/75" : "text-ink-soft"}`}>{lead}</p>}
@@ -104,10 +104,10 @@ export function PageHero({
       <Bands className="pointer-events-none absolute -right-40 -top-24 hidden h-[520px] w-[620px] opacity-90 md:block" />
       <div className="wrap relative pb-20 pt-10 md:pb-28 md:pt-14">
         <Breadcrumb crumbs={crumbs} />
-        <p aria-hidden="true" className="en mt-16 text-[3.5rem] font-light leading-none text-brand md:mt-24 md:text-[6rem]">
+        <p aria-hidden="true" className="display-en mt-16 text-[clamp(3.25rem,10vw,8rem)] text-brand md:mt-24">
           {en}
         </p>
-        <h1 className="mt-6 max-w-3xl text-2xl font-semibold leading-[1.6] tracking-[0.08em] md:text-[2rem]">{title}</h1>
+        <h1 className="mt-8 max-w-4xl text-[1.75rem] leading-[1.5] tracking-[0.04em] md:text-[2.5rem]">{title}</h1>
         {lead && <p className="mt-8 max-w-2xl text-[15px] leading-[2.1] text-ink-soft md:text-base">{lead}</p>}
         {children}
       </div>
@@ -174,10 +174,10 @@ export function ContactCta() {
     <section aria-label="資料請求とお問い合わせ" className="bg-paper py-24 md:py-32">
       <div className="wrap grid gap-6 lg:grid-cols-2">
         <Link href="/document/" className="group relative overflow-hidden rounded-[24px] bg-mint p-10 transition-colors hover:bg-brand-wash md:p-14">
-          <p className="en text-sm font-medium text-brand-deep">Document</p>
-          <p className="mt-4 text-2xl font-semibold leading-relaxed tracking-[0.08em]">お役立ち資料</p>
+          <p className="label-en text-[13px] text-brand-deep">Document</p>
+          <p className="mt-4 text-[1.75rem] font-black leading-relaxed tracking-[0.06em]">お役立ち資料</p>
           <p className="mt-4 max-w-md text-[15px] leading-[2] text-ink-soft">成功事例や詳しい料金プラン、お悩みの解決方法をまとめた資料を無料でお配りしています。</p>
-          <span className="mt-10 inline-flex items-center gap-3 text-[15px] font-medium text-brand-deep">
+          <span className="mt-10 inline-flex items-center gap-3 text-[15px] font-bold text-brand-deep">
             資料をダウンロードする
             <span className="grid h-12 w-12 place-items-center rounded-full bg-paper transition-transform duration-300 group-hover:translate-x-1">
               <Arrow />
@@ -186,12 +186,12 @@ export function ContactCta() {
         </Link>
         <Link href="/contact/" className="group relative overflow-hidden rounded-[24px] bg-brand-dark p-10 text-paper transition-colors hover:bg-night md:p-14">
           <Bands className="pointer-events-none absolute -bottom-40 -right-40 h-[420px] w-[500px] opacity-50" />
-          <p className="en relative text-sm font-medium text-brand-light">Contact</p>
-          <p className="relative mt-4 text-2xl font-semibold leading-relaxed tracking-[0.08em]">お問い合わせ</p>
+          <p className="label-en relative text-[13px] text-brand-light">Contact</p>
+          <p className="relative mt-4 text-[1.75rem] font-black leading-relaxed tracking-[0.06em]">お問い合わせ</p>
           <p className="relative mt-4 max-w-md text-[15px] leading-[2] text-paper/75">
             サイト制作・リニューアル、業務アプリのご相談はこちらから。無料でお見積りいたします。
           </p>
-          <span className="relative mt-10 inline-flex items-center gap-3 text-[15px] font-medium">
+          <span className="relative mt-10 inline-flex items-center gap-3 text-[15px] font-bold">
             無料で相談する
             <span className="grid h-12 w-12 place-items-center rounded-full bg-paper/15 transition-transform duration-300 group-hover:translate-x-1">
               <Arrow />
@@ -206,7 +206,7 @@ export function ContactCta() {
 export function Pill({ children, tone = "line" }: { children: ReactNode; tone?: "line" | "brand" }) {
   return (
     <span
-      className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium tracking-[0.06em] ${
+      className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-bold tracking-[0.06em] ${
         tone === "brand" ? "bg-brand-wash text-brand-deep" : "border border-line text-ink-soft"
       }`}
     >

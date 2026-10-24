@@ -70,15 +70,15 @@ export default function PlanPage() {
           <ul className="mt-16 grid gap-6 lg:grid-cols-2">
             {plans.map((p) => (
               <li key={p.name} className={`rounded-[28px] p-8 md:p-12 ${p.featured ? "bg-brand-dark text-paper" : "border border-line bg-paper"}`}>
-                <p className={`en text-sm ${p.featured ? "text-brand-light" : "text-brand-deep"}`}>{p.en}</p>
-                <h3 className="mt-3 text-2xl font-semibold tracking-[0.08em]">{p.name}</h3>
+                <p className={`label-en text-[13px] ${p.featured ? "text-brand-light" : "text-brand-deep"}`}>{p.en}</p>
+                <h3 className="mt-3 text-2xl tracking-[0.05em]">{p.name}</h3>
                 <p className={`mt-3 text-[15px] ${p.featured ? "text-paper/75" : "text-ink-soft"}`}>{p.target}</p>
                 <p className={`mt-8 text-sm ${p.featured ? "text-paper/75" : "text-ink-soft"}`}>共通の内容（下記）に加えて</p>
                 <dl className={`mt-3 divide-y border-y ${p.featured ? "divide-paper/15 border-paper/15" : "divide-line border-line"}`}>
                   {p.items.map(([k, v]) => (
                     <div key={k} className="grid gap-1 py-4 sm:grid-cols-[8rem_1fr] sm:gap-6">
                       <dt className={`text-sm ${p.featured ? "text-paper/70" : "text-ink-mute"}`}>{k}</dt>
-                      <dd className="font-medium">{v}</dd>
+                      <dd className="font-bold">{v}</dd>
                     </div>
                   ))}
                 </dl>
@@ -97,7 +97,7 @@ export default function PlanPage() {
           <Heading en="Common" id="common-title" title="すべてのプランに含まれる内容" />
           <ul className="grid gap-3 sm:grid-cols-2">
             {commonFeatures.map((f) => (
-              <li key={f} className="flex items-center gap-4 rounded-2xl bg-paper px-6 py-5 font-medium">
+              <li key={f} className="flex items-center gap-4 rounded-2xl bg-paper px-6 py-5 font-bold">
                 <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" className="shrink-0 text-brand-deep">
                   <circle cx="10" cy="10" r="9" fill="currentColor" opacity="0.12" />
                   <path d="M6 10.2l2.6 2.6L14 7.4" fill="none" stroke="currentColor" strokeWidth="1.6" />
@@ -115,7 +115,7 @@ export default function PlanPage() {
           <dl className="divide-y divide-line border-y border-line">
             {options.map(([k, v]) => (
               <div key={k} className="flex flex-col justify-between gap-1 py-5 sm:flex-row sm:items-baseline sm:gap-8">
-                <dt className="font-medium">{k}</dt>
+                <dt className="font-bold">{k}</dt>
                 <dd className="text-[15px] text-ink-soft">{v}</dd>
               </div>
             ))}
@@ -135,8 +135,8 @@ export default function PlanPage() {
           <ol className="mt-16 grid gap-px overflow-hidden rounded-2xl bg-paper/10 md:grid-cols-4">
             {appPlan.map((a, i) => (
               <li key={a.title} className="bg-night p-8">
-                <p className="en text-sm text-brand-light">Step {String(i + 1).padStart(2, "0")}</p>
-                <p className="mt-5 text-lg font-medium tracking-[0.06em]">{a.title}</p>
+                <p className="label-en text-[13px] text-brand-light">Step {String(i + 1).padStart(2, "0")}</p>
+                <p className="mt-5 text-lg font-extrabold tracking-[0.04em]">{a.title}</p>
                 <p className="mt-3 text-sm leading-[2] text-paper/70">{a.body}</p>
               </li>
             ))}

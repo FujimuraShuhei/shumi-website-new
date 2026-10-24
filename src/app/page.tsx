@@ -16,8 +16,8 @@ export default async function Home() {
       <section aria-labelledby="message-title" className="bg-paper py-28 md:py-44">
         <div className="wrap grid items-center gap-16 lg:grid-cols-[1.1fr_1fr] lg:gap-24">
           <div>
-            <p className="en text-sm text-brand-deep">Message</p>
-            <h2 id="message-title" className="mt-6 text-[1.75rem] font-medium leading-[1.75] tracking-[0.1em] md:text-[2.25rem]">
+            <p className="label-en text-[13px] text-brand-deep">Message</p>
+            <h2 id="message-title" className="mt-6 text-[1.75rem] leading-[1.75] tracking-[0.05em] md:text-[2.25rem]">
               いい人材と、いい業務で、
               <br />
               関わった会社に還元する。
@@ -75,7 +75,7 @@ export default async function Home() {
           <ul className="divide-y divide-paper/15 border-y border-paper/15">
             {effects.map((e) => (
               <li key={e.title} className="py-10">
-                <p className="text-xl font-medium tracking-[0.08em]">{e.title}</p>
+                <p className="text-xl font-extrabold tracking-[0.04em]">{e.title}</p>
                 <p className="mt-4 text-[15px] leading-[2.1] text-paper/70">{e.body}</p>
               </li>
             ))}
@@ -91,7 +91,7 @@ export default async function Home() {
             <Triad items={strengths} />
           </div>
           <div className="mt-24 rounded-[28px] bg-mint p-8 md:p-14">
-            <p className="text-[13px] font-medium tracking-[0.1em] text-brand-deep">すべての制作物に共通する3つの基準</p>
+            <p className="text-[13px] font-bold tracking-[0.1em] text-brand-deep">すべての制作物に共通する3つの基準</p>
             <div className="mt-10">
               <Triad items={qualities} tone="panel" />
             </div>
@@ -107,7 +107,7 @@ export default async function Home() {
             <Triad items={assurances} />
           </div>
           <div className="mt-20 grid gap-10 border-t border-line pt-12 lg:grid-cols-[16rem_1fr]">
-            <p className="text-[15px] font-semibold tracking-[0.06em]">すべてのプランに含まれる内容</p>
+            <p className="text-[15px] font-bold tracking-[0.06em]">すべてのプランに含まれる内容</p>
             <ul className="flex flex-wrap gap-3">
               {commonFeatures.map((f) => (
                 <li key={f} className="rounded-full border border-line px-5 py-2.5 text-sm">

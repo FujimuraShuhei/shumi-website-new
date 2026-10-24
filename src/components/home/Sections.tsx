@@ -11,9 +11,9 @@ export function ServiceRows({ items }: { items: { href: string; label: string; e
       {items.map((s) => (
         <li key={s.href} className="border-b border-line">
           <Link href={s.href} className="group grid items-center gap-3 px-2 py-8 transition-colors duration-300 hover:bg-mint md:grid-cols-[12rem_1fr_auto] md:gap-10 md:px-6 md:py-10">
-            <span className="en text-sm text-brand-deep">{s.en}</span>
+            <span className="label-en text-[13px] text-brand-deep">{s.en}</span>
             <span>
-              <span className="block text-lg font-semibold tracking-[0.08em] md:text-xl">{s.label}</span>
+              <span className="block text-lg font-extrabold tracking-[0.04em] md:text-xl">{s.label}</span>
               {s.desc && <span className="mt-2 block text-sm leading-[2] text-ink-soft">{s.desc}</span>}
             </span>
             <span aria-hidden="true" className="hidden h-12 w-12 place-items-center rounded-full border border-line text-ink transition-all duration-300 group-hover:border-brand-deep group-hover:bg-brand-deep group-hover:text-paper md:grid">
@@ -52,7 +52,7 @@ export function WorkThumb({ work, sizes = "(min-width: 1024px) 33vw, 100vw", pri
           <rect x="60" y="160" width="300" height="28" rx="14" fill="#ffffff" />
         </g>
       </svg>
-      <span className="absolute bottom-5 left-6 text-sm font-semibold tracking-[0.08em] text-brand-dark">{work.client.replace(/様$/, "")}</span>
+      <span className="absolute bottom-5 left-6 text-sm font-bold tracking-[0.08em] text-brand-dark">{work.client.replace(/様$/, "")}</span>
     </div>
   );
 }
@@ -68,13 +68,13 @@ export function WorksGrid({ works }: { works: Work[] }) {
             </div>
             <div className="mt-5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-ink-mute">
               {w.category.map((c) => (
-                <span key={c} className="font-medium text-brand-deep">
+                <span key={c} className="font-bold text-brand-deep">
                   {workCategoryLabel[c]}
                 </span>
               ))}
               <span>{w.industry}</span>
             </div>
-            <p className="mt-2 text-lg font-semibold tracking-[0.06em]">{w.client}</p>
+            <p className="mt-2 text-lg font-extrabold tracking-[0.04em]">{w.client}</p>
             <p className="mt-1 text-sm text-ink-soft">{w.title}</p>
           </Link>
         </li>
@@ -88,8 +88,8 @@ export function FlowSteps() {
     <ol className="grid gap-px overflow-hidden rounded-2xl bg-line-soft md:grid-cols-5">
       {flow.map((f, i) => (
         <li key={f.title} className="relative bg-paper p-8">
-          <p className="en text-sm font-medium text-brand-deep">Step {String(i + 1).padStart(2, "0")}</p>
-          <p className="mt-6 text-lg font-semibold tracking-[0.06em]">{f.title}</p>
+          <p className="label-en text-[13px] text-brand-deep">Step {String(i + 1).padStart(2, "0")}</p>
+          <p className="mt-6 text-lg font-extrabold tracking-[0.04em]">{f.title}</p>
           <p className="mt-3 text-sm leading-[2] text-ink-soft">{f.body}</p>
         </li>
       ))}
@@ -106,8 +106,8 @@ export function BlogRows({ posts }: { posts: Column[] }) {
             <time dateTime={p.publishedAt} className="en text-sm text-ink-mute">
               {formatDot(p.publishedAt)}
             </time>
-            <span className="text-xs font-medium text-brand-deep">{p.category}</span>
-            <span className="font-medium leading-[1.9] tracking-[0.04em] transition-colors group-hover:text-brand-deep">{p.title}</span>
+            <span className="text-xs font-bold text-brand-deep">{p.category}</span>
+            <span className="font-bold leading-[1.9] tracking-[0.04em] transition-colors group-hover:text-brand-deep">{p.title}</span>
             <Arrow className="hidden text-ink-mute transition-transform duration-300 group-hover:translate-x-1 group-hover:text-brand-deep md:block" />
           </Link>
         </li>
@@ -122,8 +122,8 @@ export function Triad({ items, tone = "default" }: { items: { en?: string; title
     <ul className={`grid md:grid-cols-3 ${tone === "panel" ? "gap-px overflow-hidden rounded-2xl bg-line-soft" : "gap-12 md:gap-10"}`}>
       {items.map((it) => (
         <li key={it.title} className={tone === "panel" ? "bg-paper p-8 md:p-10" : "border-t border-ink pt-8"}>
-          {it.en && <p className="en text-sm text-brand-deep">{it.en}</p>}
-          <p className="mt-4 text-lg font-semibold tracking-[0.06em]">{it.title}</p>
+          {it.en && <p className="label-en text-[13px] text-brand-deep">{it.en}</p>}
+          <p className="mt-4 text-lg font-extrabold tracking-[0.04em]">{it.title}</p>
           <p className="mt-4 text-[15px] leading-[2.05] text-ink-soft">{it.body}</p>
         </li>
       ))}

@@ -83,7 +83,7 @@ export function ScatterScene() {
       <div className="relative group-data-[animated]/scene:sticky group-data-[animated]/scene:top-0 group-data-[animated]/scene:h-dvh group-data-[animated]/scene:overflow-hidden">
         <div className="wrap relative z-10 pt-20 group-data-[animated]/scene:absolute group-data-[animated]/scene:inset-x-0 group-data-[animated]/scene:top-[calc(88px+4vh)] group-data-[animated]/scene:pt-0">
           <div data-step1 className="max-w-2xl group-data-[animated]/scene:absolute">
-            <h2 id="scatter-title" className="text-[1.625rem] font-medium leading-[1.7] tracking-[0.08em] md:text-[2.25rem]">
+            <h2 id="scatter-title" className="text-[1.625rem] leading-[1.7] tracking-[0.05em] md:text-[2.25rem]">
               日報は紙、工程はExcel、
               <br />
               連絡はFAXと電話。
@@ -93,7 +93,7 @@ export function ScatterScene() {
             </p>
           </div>
           <div data-step2 className="mt-10 max-w-2xl group-data-[animated]/scene:mt-0">
-            <p className="text-[1.625rem] font-medium leading-[1.7] tracking-[0.08em] md:text-[2.25rem]">
+            <p className="text-[1.625rem] font-black leading-[1.6] tracking-[0.04em] md:text-[2.25rem]">
               ひとつの画面に、まとめる。
             </p>
             <p className="mt-4 text-lg leading-relaxed text-ink-soft">
@@ -175,7 +175,7 @@ function PaperNippo() {
 function PaperFax() {
   return (
     <div className="rounded-sm bg-[#f7f7f2] p-4 shadow-[0_10px_30px_-10px_rgba(27,35,43,0.4)]">
-      <p className="en text-xl font-semibold tracking-widest">FAX</p>
+      <p className="en text-xl font-extrabold tracking-widest">FAX</p>
       <p className="text-[11px]">送信票　1/2枚</p>
       <div className="mt-3 border-t border-dashed border-ink/40 pt-3">
         <Lines n={5} w={[100, 95, 60, 88, 40]} />

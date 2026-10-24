@@ -40,8 +40,8 @@ export default async function DesignPage() {
           <ul className="mt-16 grid gap-px overflow-hidden rounded-2xl bg-line-soft sm:grid-cols-2 lg:grid-cols-3">
             {items.map((i) => (
               <li key={i.title} className="bg-paper p-8 md:p-10">
-                <p className="en text-sm text-brand-deep">{i.en}</p>
-                <p className="mt-4 text-lg font-semibold tracking-[0.06em]">{i.title}</p>
+                <p className="label-en text-[13px] text-brand-deep">{i.en}</p>
+                <p className="mt-4 text-lg font-extrabold tracking-[0.04em]">{i.title}</p>
                 <p className="mt-3 text-[15px] leading-[2.05] text-ink-soft">{i.body}</p>
               </li>
             ))}
