@@ -17,44 +17,56 @@ jobs:
           python3 - <<'PY'
           import urllib.request, urllib.parse, json, re, os, hashlib
           log=[]
-          def get(u, t=20):
-              req = urllib.request.Request(u, headers={'User-Agent': 'Mozilla/5.0'})
+          def get(u, t=25):
+              req = urllib.request.Request(u, headers={'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0 Safari/537.36', 'Accept-Language': 'ja'})
               return urllib.request.urlopen(req, timeout=t).read()
-          posts=[]
-          for page in range(1,5):
-              try:
-                  data=json.loads(get(f'https://shumiofficial.com/wp-json/wp/v2/posts?per_page=100&page={page}&_embed=1', 60))
-              except Exception as e:
-                  log.append(f'posts page {page}: {e}'); break
-              if not data: break
-              posts+=data
-              if len(data)<100: break
-          cats={}
-          try:
-              for c in json.loads(get('https://shumiofficial.com/wp-json/wp/v2/categories?per_page=100',30)): cats[c['id']]=c['name']
-          except Exception as e: log.append(f'cats: {e}')
-          json.dump({'posts':posts,'categories':cats}, open('old-blog/posts.json','w',encoding='utf-8'), ensure_ascii=False)
-          log.append(f'posts: {len(posts)}')
+          os.makedirs('old-blog/html', exist_ok=True)
           urls=set()
-          for p in posts:
-              html=p.get('content',{}).get('rendered','')
-              for m in re.findall(r'(?:src|data-src)=["\'](https?://shumiofficial\.com/wp-content/uploads/[^"\']+)["\']', html): urls.add(m)
+          for sm in ['https://shumiofficial.com/sitemap.xml','https://shumiofficial.com/wp-sitemap.xml','https://shumiofficial.com/post-sitemap.xml','https://shumiofficial.com/wp-sitemap-posts-post-1.xml','https://shumiofficial.com/sitemap_index.xml']:
               try:
-                  fm=p['_embedded']['wp:featuredmedia'][0]['source_url']; urls.add(fm)
-              except Exception: pass
-          mapping={}
+                  x=get(sm).decode('utf-8','ignore'); open('old-blog/'+sm.rsplit('/',1)[1],'w').write(x)
+                  log.append(f'sitemap ok {sm}')
+                  for loc in re.findall(r'<loc>([^<]+)</loc>', x):
+                      if loc.endswith('.xml'):
+                          try:
+                              y=get(loc).decode('utf-8','ignore'); open('old-blog/'+loc.rsplit('/',1)[1],'w').write(y)
+                              urls.update(re.findall(r'<loc>([^<]+)</loc>', y))
+                          except Exception as e: log.append(f'sub NG {loc} {e}')
+                      else: urls.add(loc)
+              except Exception as e: log.append(f'sitemap NG {sm} {e}')
+          for page in ['https://shumiofficial.com/blog/','https://shumiofficial.com/blog/page/2/','https://shumiofficial.com/blog/page/3/']:
+              try:
+                  x=get(page).decode('utf-8','ignore'); open('old-blog/html/_list_'+hashlib.md5(page.encode()).hexdigest()[:6]+'.html','w').write(x)
+                  urls.update(u for u in re.findall(r'href="(https://shumiofficial\.com/[a-z0-9_\-]+/)"', x))
+              except Exception as e: log.append(f'list NG {page} {e}')
+          known=['buildingconstruction_attracting_customers','construction_industry_website_necessity_effect','contact_point_9','choosing-production-company','corporate-website-and-points-for-effective-creation','site_rinyual_point_strategy','corpolate_picture','simple_cssonly_button','2column_text_image']
+          urls.update(f'https://shumiofficial.com/{k}/' for k in known)
+          json.dump(sorted(urls), open('old-blog/urls.json','w'), indent=1)
+          imgs=set()
           for u in sorted(urls):
-              p=urllib.parse.urlsplit(u.replace('http://','https://'))
-              ext=os.path.splitext(p.path)[1].lower() or '.bin'
-              name=hashlib.md5(u.encode()).hexdigest()[:12]+ext
+              slug=u.rstrip('/').rsplit('/',1)[-1]
+              if not re.fullmatch(r'[A-Za-z0-9_\-]+', slug or ''): continue
               try:
-                  b=get(f'https://shumiofficial.com{urllib.parse.quote(urllib.parse.unquote(p.path))}', 25)
-                  open(f'old-blog/images/{name}','wb').write(b); mapping[u]=name; log.append(f'ok {name} {len(b)} {u}')
-              except Exception as e:
-                  log.append(f'NG {u} {e}')
+                  h=get(u).decode('utf-8','ignore')
+                  if '"article"' not in h and 'single' not in h and slug not in known: continue
+                  open(f'old-blog/html/{slug}.html','w').write(h); log.append(f'page ok {slug}')
+                  imgs.update(re.findall(r'(https?://shumiofficial\.com/wp-content/uploads/[^"\'\s)<>]+?\.(?:jpe?g|png|webp|gif|svg))', h))
+              except Exception as e: log.append(f'page NG {u} {e}')
+          mapping={}
+          os.makedirs('old-blog/images', exist_ok=True)
+          for u in sorted(imgs):
+              p=urllib.parse.urlsplit(u.replace('http://','https://'))
+              ext=os.path.splitext(p.path)[1].lower()
+              name=hashlib.md5(p.path.encode()).hexdigest()[:12]+ext
+              if name in mapping.values(): mapping[u]=name; continue
+              try:
+                  b=get(f'https://shumiofficial.com{urllib.parse.quote(urllib.parse.unquote(p.path))}')
+                  open(f'old-blog/images/{name}','wb').write(b); mapping[u]=name
+              except Exception as e: log.append(f'img NG {u} {e}')
           json.dump(mapping, open('old-blog/images.json','w',encoding='utf-8'), ensure_ascii=False, indent=1)
+          log.append(f'images {len(mapping)}')
           open('old-blog/log.txt','w',encoding='utf-8').write('\n'.join(log))
-          print('\n'.join(log[:50]))
+          print('\n'.join(log))
           PY
       - name: commit
         run: |
