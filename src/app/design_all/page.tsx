@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { WorksGrid } from "@/components/home/Sections";
 import { Button, ContactCta, Heading, PageHero } from "@/components/ui";
 import { PointCards } from "@/components/ui/deck";
-import { getWorks } from "@/lib/microcms";
+import { getWorks } from "@/lib/entries";
 
 export const metadata: Metadata = {
   title: "デザイン制作",

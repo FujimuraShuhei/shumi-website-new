@@ -5,14 +5,14 @@ const isDev = process.env.NODE_ENV === "development";
 /**
  * Content-Security-Policy
  * - 静的生成（高速表示）を保つため nonce は使わず、読み込み元を最小限に絞る方式。
- * - 外部は Cloudflare Turnstile（スパム対策）と microCMS の画像配信だけを許可。
+ * - 外部は Cloudflare Turnstile（スパム対策）だけを許可。画像はすべて自サイト（public/）から配信。
  * - vercel.live は Vercel のプレビュー環境のコメント用ツールバー。
  */
 const csp = [
   "default-src 'self'",
   `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""} https://challenges.cloudflare.com https://vercel.live`,
   "style-src 'self' 'unsafe-inline'",
-  "img-src 'self' blob: data: https://images.microcms-assets.io",
+  "img-src 'self' blob: data:",
   "font-src 'self' data:",
   "connect-src 'self' https://challenges.cloudflare.com https://vercel.live",
   "frame-src https://challenges.cloudflare.com https://vercel.live",
@@ -38,9 +38,6 @@ const nextConfig: NextConfig = {
   // 現サイト（WordPress）と同じく末尾スラッシュ付きのURLにそろえ、検索評価をそのまま引き継ぐ
   trailingSlash: true,
   reactStrictMode: true,
-  images: {
-    remotePatterns: [{ protocol: "https", hostname: "images.microcms-assets.io" }],
-  },
   experimental: {
     // ビルド時に JS のハッシュを付け、配信途中の改ざんを検知する（SRI）
     sri: { algorithm: "sha256" },
@@ -55,6 +52,15 @@ const nextConfig: NextConfig = {
       { source: "/category/:path*", destination: "/blog/", permanent: true },
       { source: "/feed/", destination: "/blog/", permanent: true },
       { source: "/site_homepage/", destination: "/website/", permanent: true },
+      // 現サイトにあった固定ページで、新サイトでは別のページにまとめたもの
+      { source: "/homepage/", destination: "/website/", permanent: true },
+      { source: "/shumi_sitecreative/", destination: "/website/", permanent: true },
+      { source: "/flow/", destination: "/website/", permanent: true },
+      { source: "/lp/kensetsu_lp/", destination: "/construction_industry_website/", permanent: true },
+      { source: "/design_archive/", destination: "/design_all/", permanent: true },
+      { source: "/design_works/", destination: "/design_all/", permanent: true },
+      { source: "/thanks/", destination: "/contact/", permanent: true },
+      { source: "/thanks_page/", destination: "/contact/", permanent: true },
     ];
   },
 };
