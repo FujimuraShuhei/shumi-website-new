@@ -6,11 +6,11 @@ import { BlogRows, WorksGrid } from "@/components/home/Sections";
 import { StatementBand } from "@/components/home/StatementBand";
 import { ContactCta, Heading, TextLink } from "@/components/ui";
 import { Icon } from "@/components/ui/icons";
-import { getColumns, getWorks } from "@/lib/microcms";
+import { getPosts, getWorks } from "@/lib/entries";
 import { flow } from "@/lib/site";
 
 export default async function Home() {
-  const [works, posts] = await Promise.all([getWorks({ limit: 6 }), getColumns({ limit: 3 })]);
+  const [works, posts] = await Promise.all([getWorks({ limit: 6 }), getPosts({ limit: 3 })]);
 
   return (
     <>

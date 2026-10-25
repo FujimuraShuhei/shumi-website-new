@@ -1,10 +1,14 @@
 /* ------------------------------------------------------------------
-   microCMS のスキーマ（管理画面で同じフィールドIDで作成してください）
-   README.md の「microCMS の設定」に一覧があります。
+   記事と制作実績の型（中身は content/ フォルダの MDX ファイル）
+   書き方は CLAUDE.md の「記事・制作実績の書き方」を参照
 ------------------------------------------------------------------ */
-export type CmsImage = { url: string; width?: number; height?: number };
+
+/** 画像。url は public/ からのパス（例：/blog/記事のスラッグ/cover.webp） */
+export type ImageRef = { url: string; width: number; height: number; alt?: string };
 
 export type WorkCategory = "web" | "app" | "sales" | "design";
+
+export type Heading = { id: string; text: string; level: 2 | 3 };
 
 export type Work = {
   id: string;
@@ -16,23 +20,27 @@ export type Work = {
   challenge?: string;
   solution?: string;
   result?: string;
-  thumbnail?: CmsImage;
+  thumbnail?: ImageRef;
   /** 詳細ページに並べる画像（任意・複数） */
-  gallery?: CmsImage[];
+  gallery?: ImageRef[];
   url?: string;
-  body?: string;
-  publishedAt?: string;
+  publishedAt: string;
+  /** MDX の本文（任意） */
+  source: string;
 };
 
-export type Column = {
+export type Post = {
   id: string;
   title: string;
-  category?: string;
-  excerpt?: string;
-  eyecatch?: CmsImage;
-  body: string;
-  publishedAt?: string;
-  revisedAt?: string;
+  category: string;
+  excerpt: string;
+  eyecatch?: ImageRef;
+  publishedAt: string;
+  updatedAt?: string;
+  /** MDX の本文 */
+  source: string;
+  /** 本文のおおよその読了時間（分） */
+  readingMinutes: number;
 };
 
 export const workCategoryLabel: Record<WorkCategory, string> = {
@@ -41,6 +49,9 @@ export const workCategoryLabel: Record<WorkCategory, string> = {
   sales: "営業ツール",
   design: "デザイン制作",
 };
+
+/** ブログのカテゴリ（増やすときはここに追加） */
+export const postCategories = ["建設業の集客", "Web集客", "Web制作", "デザイン", "ブランディング", "業務効率化", "採用"] as const;
 
 export function formatDate(iso?: string) {
   if (!iso) return "";

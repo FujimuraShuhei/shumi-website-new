@@ -3,7 +3,7 @@ import { FlowTimeline, IncludedGrid } from "@/components/home/Deck";
 import { WorksGrid } from "@/components/home/Sections";
 import { MockShowcase } from "@/components/mocks/MockShowcase";
 import { Button, ContactCta, Heading, PageHero, TextLink } from "@/components/ui";
-import { getWorks } from "@/lib/microcms";
+import { getWorks } from "@/lib/entries";
 import type { ServicePage } from "@/lib/service-pages";
 import { CaseTiles, IdeaTiles, PointCards, StepChips } from "@/components/ui/deck";
 import { Icon } from "@/components/ui/icons";

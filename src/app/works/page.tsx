@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { WorksFilter } from "@/components/pages/WorksFilter";
 import { ContactCta, PageHero } from "@/components/ui";
-import { getWorks } from "@/lib/microcms";
+import { getWorks } from "@/lib/entries";
 
 export const metadata: Metadata = {
   title: "HP制作実績",
@@ -20,7 +20,7 @@ export default async function WorksPage() {
       />
       <section aria-label="実績の一覧" className="bg-paper py-24 md:py-32">
         <div className="wrap">
-          <WorksFilter works={works} />
+          <WorksFilter works={works.map((w) => ({ ...w, source: "" }))} />
         </div>
       </section>
       <ContactCta />

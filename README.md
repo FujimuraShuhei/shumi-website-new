@@ -7,11 +7,11 @@
 - Tailwind CSS v4（色・文字のトークンは `src/app/globals.css` の `@theme`）
 - フォント：Noto Sans JP（本文・見出しは Black）、Inter Tight（英字見出し）、Inter（数字・日付）
 - GSAP（トップの3章スクロールと、自動で操作される3つのモック）
-- microCMS（ブログ・制作実績）
+- ブログ・制作実績は `content/` の MDX ファイル（CMSなし。コードで書いて PR → マージで公開）
 - Resend（問い合わせメール送信）→ Gmail で受信、Cloudflare Turnstile（スパム対策）
 - Vercel にデプロイ
 
-環境変数が空でも、サンプルデータで表示・ビルドできます。
+環境変数が空でも表示・ビルドできます。
 
 ```bash
 npm install
@@ -68,44 +68,18 @@ URLが変わらないので、検索の評価や外部からのリンクをそ�
 3. 環境変数を登録して Deploy
 4. Domains に `shumiofficial.com` を追加し、表示されるDNS設定をドメイン管理会社で行う（切り替えた時点で新サイトになります）
 
-### 2. microCMS
+### 2. ブログと制作実績（CMSなし・ファイルで管理）
 
-API を2つ作成します（リスト形式）。**コンテンツIDを現サイトのURLのスラッグと同じにしてください。**
+記事と実績は `content/blog/` と `content/works/` の MDX ファイルです。書き方・使える部品・文章のルールは **`CLAUDE.md`** にまとめています（Claude に「ブログ記事を書いて」と頼むと、このルールに沿って書きます）。
 
-**制作実績** — エンドポイント `works`
+```bash
+npm run new:post -- スラッグ            # 記事をテンプレートから作る（content/blog/スラッグ.mdx）
+npm run new:work -- スラッグ            # 制作実績を作る（content/works/スラッグ.mdx）
+npm run images -- 元の画像 public/blog/スラッグ   # 画像をWebP・最大1600pxに変換
+npm run build                           # 書式の誤り・画像の置き忘れがあればここで止まる
+```
 
-| フィールドID | 表示名 | 種類 |
-|---|---|---|
-| title | タイトル（例：コーポレートサイト制作） | テキストフィールド |
-| client | お客様名（例：内田工事株式会社様） | テキストフィールド |
-| industry | 業種（例：建設業） | テキストフィールド |
-| category | 種類 | セレクト・複数選択（`web` / `app` / `sales` / `design`） |
-| summary | 概要 | テキストエリア |
-| challenge | ご相談の内容 | テキストエリア |
-| solution | 行ったこと | テキストエリア |
-| result | 公開後の変化 | テキストエリア |
-| thumbnail | サムネイル（16:10推奨） | 画像 |
-| gallery | 詳細ページの画像（縦長のページ全体画像は枠内でスクロール表示） | 複数画像 |
-| url | 公開URL | テキストフィールド |
-| body | 本文 | リッチエディタ |
-
-**ブログ** — エンドポイント `blog`
-
-| フィールドID | 表示名 | 種類 |
-|---|---|---|
-| title | タイトル | テキストフィールド |
-| category | カテゴリ | テキストフィールド |
-| excerpt | 概要（検索結果の説明文） | テキストエリア |
-| eyecatch | アイキャッチ（1200×630） | 画像 |
-| body | 本文 | リッチエディタ |
-
-- **APIキー**：「GET」だけを許可したキーを `MICROCMS_API_KEY` に
-- **Webhook**：API設定 → Webhook → カスタム通知
-  - URL：`https://shumiofficial.com/api/revalidate/`（末尾のスラッシュまで入れてください）
-  - シークレット値：`MICROCMS_WEBHOOK_SECRET` と同じ文字列
-  - 公開・更新した内容がすぐサイトに反映されます
-
-お問い合わせの内容は microCMS には保存しません（個人情報をCMSに置かないため）。
+ブランチで書いて PR を作ると Vercel のプレビューURLで確認でき、main にマージすると公開されます。`draft: true` の記事は本番に出ません。
 
 ### 3. メール（Resend で送信 → いまの Gmail で受信）
 
@@ -132,6 +106,8 @@ Vercel → Storage → Marketplace から Upstash Redis を追加すると、必
 
 | やりたいこと | ファイル |
 |---|---|
+| ブログ記事・制作実績 | `content/blog/`、`content/works/`（書き方は `CLAUDE.md`） |
+| 記事で使える部品（図解・まとめ・FAQなど） | `src/components/post/mdx-components.tsx` |
 | サービス名・強み・流れなどの文章 | `src/lib/site.ts` |
 | 各サイト制作ページの文章 | `src/lib/service-pages.ts` |
 | 色・フォント | `src/app/globals.css` |
@@ -148,14 +124,13 @@ Vercel → Storage → Marketplace から Upstash Redis を追加すると、必
 
 - HTTPS強制（HSTS）、CSP、クリックジャッキング対策などのヘッダー、JSの改ざん検知（SRI）
 - フォーム：サーバー側の入力検証、ボット用の隠し欄、Turnstile、連続送信の制限、メール本文のエスケープ
-- microCMS の Webhook は署名を検証
-- 鍵類はすべて環境変数。microCMS のキーは読み取り専用
+- 鍵類はすべて環境変数。お問い合わせの内容はどこにも保存せず、メールで届くだけ
 - Vercel のプレビュー環境は検索エンジンに載せない
 
 ## 公開前チェック
 
 - [ ] 環境変数（特に `NEXT_PUBLIC_COMPANY_REPRESENTATIVE` など会社情報）
-- [ ] microCMS に制作実績とブログを移行（現サイトの実績画像は `public/works/` に移してあり、microCMS 未接続のあいだはこれを表示）
+- [ ] ブログ記事の本文と画像を確認（現サイトから移行済み）
 - [ ] プライバシーポリシー・利用規約を現サイトの内容と照合
 - [ ] 制作プランの文言とオプション料金
 - [ ] フォームから実際に送信し、Gmailの通知と自動返信を確認

@@ -1,0 +1,184 @@
+---
+title: "PCでは2カラム、スマホでは1カラムの画像とテキストの表示方法について解説"
+excerpt: "今日は、上記のような画像とテキストカラムを作成するためのHTML/CSSをお伝えしようと思います。 これはWebサイト制作では間違いなく頻出ですから、このブログを知っておくことで、今後のコーディングでも役立ちます。"
+category: "Web制作"
+publishedAt: 2023-04-11
+eyecatch: /blog/2column_text_image/cover.webp
+---
+
+<Figure src="/blog/2column_text_image/1.webp" alt="" />
+
+今日は、上記のような画像とテキストカラムを作成するためのHTML/CSSをお伝えしようと思います。
+
+これはWebサイト制作では間違いなく頻出ですから、  
+このブログを知っておくことで、今後のコーディングでも役立ちます。
+
+ぜひ今後の参考にしてくださいね。
+
+## コーディング例
+
+こちらをコピペすることで入力することが可能です。
+
+```html
+<div class="container">
+      <div class="column">
+        <img
+          src=""
+          alt="Image" />
+      </div>
+      <div class="column">
+        <p>
+          テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+        </p>
+      </div>
+    </div>
+```
+
+```css
+.container {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+.column {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  padding: 24px;
+  max-width: 50%;
+  width: 50%;
+}
+
+p {
+  margin: 0;
+}
+
+.column img {
+  width: 100%;
+  height: auto;
+}
+
+@media screen and (max-width: 767px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .column {
+    max-width: 100%;
+    width: 100%;
+    padding: 16px 0px;
+  }
+}
+```
+
+## コーディング解説
+
+まずcontainerの中に、columnを2つ入れます。
+
+```html
+<div class="container">
+ <div class="column"></div>
+ <div class="column"></div>
+</div>
+```
+
+そうすることで、containerの中に2カラムがある状態を作り出せます。
+
+<Figure src="/blog/2column_text_image/2.webp" alt="" />
+
+次にcolumnの中にimgとテキストを入れていきます。
+
+```html
+<div class="container">
+      <div class="column">
+        <img
+          src="images/d816612e-ecd0-4fae-a325-d19177347d07.jpg"
+          alt="Image" />
+      </div>
+      <div class="column">
+        <p>
+          テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト
+        </p>
+      </div>
+    </div>
+```
+
+<Figure src="/blog/2column_text_image/3.webp" alt="" />
+
+こんな形でテキストがcontainerからはみ出す。  
+画像とテキストが縦並びになる。状態となります。
+
+ですが、ここでHTMLは終了です。  
+ではCSSの編集をしていきましょう。
+
+## CSSの編集
+
+まずは、containerに90%、columnを横並びにさせましょう。
+
+```css
+.container {
+  width: 90%;
+  margin: 0 auto;
+  display: flex; //横並びするために
+  align-items: center; //横並び後に上下中央に
+}
+.column {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  padding: 24px;
+  max-width: 50%;
+  width: 50%;
+}
+```
+
+<Figure src="/blog/2column_text_image/4.webp" alt="" />
+
+画像画大きいと、テキストと重なってしまうので、ここからは、画像幅に上限を作ります。
+
+```css
+.column img {
+  width: 100%;
+  height: auto;
+}
+```
+
+<Figure src="/blog/2column_text_image/5.webp" alt="" />
+
+width: 100%を指定することで、大きさを調整しつつ画像が飛び出ない方法にすることができました。
+
+ここまでで、PC版は完了です。
+
+## レスポンシブを実装するには？
+
+<Figure src="/blog/2column_text_image/6.webp" alt="" />
+
+今のままでは、残念ながら小さい幅にしても、横並びのままになってしまいます。
+
+レスポンシブでは、画像とテキストが縦並びになるようにします。
+
+追加するCSSはこちら。
+
+```css
+@media screen and (max-width: 767px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .column {
+    max-width: 100%;
+    width: 100%;
+    padding: 16px　0;
+  }
+}
+```
+
+flex-direction: columnで縦並びにします。
+
+そこでcolumnのwidthとmax-widthを100%にし、大きく表示するようにします。  
+paddingの16pxを指定していますが、これは24pxだと画像との幅が大きすぎてやや調整したかったので、変更してあります。
+
+これで完成です。
+
+もしあなたも困っていたらこちらを参考に作成してみてくださいね。
