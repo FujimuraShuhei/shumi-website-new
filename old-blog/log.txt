@@ -1,0 +1,50 @@
+sitemap ok https://shumiofficial.com/sitemap.xml
+sitemap NG https://shumiofficial.com/wp-sitemap.xml HTTP Error 404: Not Found
+sitemap NG https://shumiofficial.com/post-sitemap.xml HTTP Error 404: Not Found
+sitemap NG https://shumiofficial.com/wp-sitemap-posts-post-1.xml HTTP Error 404: Not Found
+sitemap NG https://shumiofficial.com/sitemap_index.xml HTTP Error 404: Not Found
+page ok 2column_text_image
+page ok 3690-2
+page ok blog
+page ok branding_necessary
+page ok buildingconstruction_attracting_customers
+page ok choosing-production-company
+page ok company
+page ok construction_industry_website
+page ok construction_industry_website_necessity_effect
+page ok contact
+page ok contact_point_9
+page ok corpolate_picture
+page ok corporate-website-and-points-for-effective-creation
+page ok design_all
+page ok design_archive
+page ok design_works
+page ok document
+page ok enhance_homepage
+page ok flow
+page ok homepage
+page ok 120
+page ok kensetsu_lp
+page ok web_oyakata
+page ok plan
+page ok privacy-policy
+page ok regalpage
+page ok seikou_shumidesign
+page ok shumi_sitecreative
+page ok simple_cssonly_button
+page NG https://shumiofficial.com/site_homepage/ HTTP Error 404: Not Found
+page ok site_rinyual_point_strategy
+page ok syokusenko_natsume
+page ok thanks
+page ok thanks_page
+page ok uchida_koji_works
+page ok weboyakata_shiryodl
+page ok website
+page ok corpolate
+page ok recruit_website
+page ok service_site
+page ok wings_hamaotsu
+page ok works
+page NG https://shumiofficial.com/wp-json/ HTTP Error 403: Forbidden
+page ok yokohama-renove
+images 1063
