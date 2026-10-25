@@ -1,0 +1,65 @@
+# 一時的なワークフロー：現サイト（shumiofficial.com）のブログ記事と画像を取得してこのブランチにコミットする
+name: fetch old site content
+on:
+  push:
+    branches: [tmp/fetch-old-works-images]
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: download
+        run: |
+          mkdir -p old-blog/images
+          python3 - <<'PY'
+          import urllib.request, urllib.parse, json, re, os, hashlib
+          log=[]
+          def get(u, t=20):
+              req = urllib.request.Request(u, headers={'User-Agent': 'Mozilla/5.0'})
+              return urllib.request.urlopen(req, timeout=t).read()
+          posts=[]
+          for page in range(1,5):
+              try:
+                  data=json.loads(get(f'https://shumiofficial.com/wp-json/wp/v2/posts?per_page=100&page={page}&_embed=1', 60))
+              except Exception as e:
+                  log.append(f'posts page {page}: {e}'); break
+              if not data: break
+              posts+=data
+              if len(data)<100: break
+          cats={}
+          try:
+              for c in json.loads(get('https://shumiofficial.com/wp-json/wp/v2/categories?per_page=100',30)): cats[c['id']]=c['name']
+          except Exception as e: log.append(f'cats: {e}')
+          json.dump({'posts':posts,'categories':cats}, open('old-blog/posts.json','w',encoding='utf-8'), ensure_ascii=False)
+          log.append(f'posts: {len(posts)}')
+          urls=set()
+          for p in posts:
+              html=p.get('content',{}).get('rendered','')
+              for m in re.findall(r'(?:src|data-src)=["\'](https?://shumiofficial\.com/wp-content/uploads/[^"\']+)["\']', html): urls.add(m)
+              try:
+                  fm=p['_embedded']['wp:featuredmedia'][0]['source_url']; urls.add(fm)
+              except Exception: pass
+          mapping={}
+          for u in sorted(urls):
+              p=urllib.parse.urlsplit(u.replace('http://','https://'))
+              ext=os.path.splitext(p.path)[1].lower() or '.bin'
+              name=hashlib.md5(u.encode()).hexdigest()[:12]+ext
+              try:
+                  b=get(f'https://shumiofficial.com{urllib.parse.quote(urllib.parse.unquote(p.path))}', 25)
+                  open(f'old-blog/images/{name}','wb').write(b); mapping[u]=name; log.append(f'ok {name} {len(b)} {u}')
+              except Exception as e:
+                  log.append(f'NG {u} {e}')
+          json.dump(mapping, open('old-blog/images.json','w',encoding='utf-8'), ensure_ascii=False, indent=1)
+          open('old-blog/log.txt','w',encoding='utf-8').write('\n'.join(log))
+          print('\n'.join(log[:50]))
+          PY
+      - name: commit
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add old-blog
+          git commit -m "現サイトのブログ記事を取得" || echo nothing
+          git push
