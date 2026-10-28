@@ -49,7 +49,7 @@ export function InquiryForm({ kind, defaultTopic }: { kind: "contact" | "documen
             : "ご入力のメールアドレスに、受付のお知らせを自動でお送りしました。1営業日以内に資料をメールでお送りします。"}
         </p>
         <p className="mt-3 text-sm text-ink-mute">メールが届かない場合は、迷惑メールのフォルダもご確認ください。</p>
-        <Link href="/" className="mt-10 inline-flex h-14 items-center rounded-full border border-ink/20 bg-paper px-8 font-bold hover:border-ink">
+        <Link href="/" className="mt-10 inline-flex h-14 items-center rounded-full border border-ink/20 bg-card px-8 font-bold hover:border-ink">
           トップページに戻る
         </Link>
       </div>
@@ -79,7 +79,7 @@ export function InquiryForm({ kind, defaultTopic }: { kind: "contact" | "documen
         </p>
 
         {state.status === "error" && (
-          <div ref={summaryRef} tabIndex={-1} role="alert" className="rounded-2xl border border-alert/40 bg-[#fdf1f0] p-6">
+          <div ref={summaryRef} tabIndex={-1} role="alert" className="rounded-2xl border border-alert/40 bg-[#ecd7d4] p-6">
             <p className="font-bold text-alert">{state.message}</p>
             {Object.keys(err).length > 0 && (
               <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">
@@ -99,7 +99,7 @@ export function InquiryForm({ kind, defaultTopic }: { kind: "contact" | "documen
           <Field label="ご相談の種類" required id={`${uid}-topic`} error={err.topic} as="fieldset">
             <div className="grid gap-2 sm:grid-cols-2">
               {topics.map((t) => (
-                <label key={t} className="flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border border-line bg-paper px-5 transition-colors hover:border-ink-mute has-checked:border-brand-deep has-checked:bg-mint">
+                <label key={t} className="flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border border-line bg-card px-5 transition-colors hover:border-ink-mute has-checked:border-brand-deep has-checked:bg-mint">
                   <input type="radio" name="topic" value={t} required defaultChecked={(val("topic") ?? defaultTopic ?? topics[0]) === t} className="h-5 w-5 accent-[#0a7a83]" />
                   <span className="text-[15px] font-bold">{t}</span>
                 </label>
@@ -110,7 +110,7 @@ export function InquiryForm({ kind, defaultTopic }: { kind: "contact" | "documen
           <Field label="ご希望の資料（複数選べます）" required id={`${uid}-documents`} error={err.documents} as="fieldset">
             <div className="grid gap-2">
               {documentsList.map((d) => (
-                <label key={d} className="flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border border-line bg-paper px-5 transition-colors hover:border-ink-mute has-checked:border-brand-deep has-checked:bg-mint">
+                <label key={d} className="flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border border-line bg-card px-5 transition-colors hover:border-ink-mute has-checked:border-brand-deep has-checked:bg-mint">
                   <input
                     type="checkbox"
                     name="documents"
@@ -236,7 +236,7 @@ function Turnstile({ siteKey }: { siteKey: string }) {
 }
 
 const inputCls =
-  "block min-h-14 w-full rounded-xl border border-line bg-paper px-5 text-base transition-colors hover:border-ink-mute focus:border-brand-deep focus:outline-none focus:ring-4 focus:ring-brand-wash aria-invalid:border-alert";
+  "block min-h-14 w-full rounded-xl border border-line bg-card px-5 text-base transition-colors hover:border-ink-mute focus:border-brand-deep focus:outline-none focus:ring-4 focus:ring-brand-wash aria-invalid:border-alert";
 
 const invalid = (error: string | undefined, id: string) =>
   error ? { "aria-invalid": true as const, "aria-describedby": `${id}-error` } : {};

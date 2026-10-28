@@ -58,7 +58,7 @@ export function MapSalesDemo() {
   return (
     <AppFrame title="訪問マップ" nav={["訪問マップ", "顧客", "商談", "今日の予定", "レポート"]}>
       <div className="grid h-full lg:grid-cols-[280px_1fr]">
-        <section aria-label="顧客の一覧" className="order-2 flex min-h-0 flex-col border-r border-line bg-paper lg:order-1">
+        <section aria-label="顧客の一覧" className="order-2 flex min-h-0 flex-col border-r border-line bg-white lg:order-1">
           <div className="border-b border-line p-3">
             <p className="text-xs font-bold text-ink-soft">表示する状況</p>
             <div className="mt-2 flex flex-wrap gap-1.5">
@@ -146,12 +146,12 @@ export function MapSalesDemo() {
               </g>
             ))}
           </svg>
-          <p className="absolute left-3 top-3 rounded bg-paper/90 px-2 py-1 text-[11px] text-ink-mute">地図はデモ用のイメージです</p>
+          <p className="absolute left-3 top-3 rounded bg-white/90 px-2 py-1 text-[11px] text-ink-mute">地図はデモ用のイメージです</p>
 
           {selected && (
             <article
               aria-label={`${selected.name}の情報`}
-              className="absolute inset-x-3 bottom-3 rounded-lg border border-line bg-paper p-4 shadow-[0_12px_30px_-12px_rgba(27,35,43,0.35)] sm:left-auto sm:w-80"
+              className="absolute inset-x-3 bottom-3 rounded-lg border border-line bg-white p-4 shadow-[0_12px_30px_-12px_rgba(27,35,43,0.35)] sm:left-auto sm:w-80"
             >
               <div className="flex items-start gap-3">
                 <Pin stage={selected.stage} size={30} />

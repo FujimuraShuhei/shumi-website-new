@@ -71,7 +71,7 @@ export function ServiceChain() {
             key={it.en}
             data-r="pop"
             className={`relative flex flex-col rounded-[28px] p-8 md:p-9 ${
-              it.featured ? "bg-grad-deep text-paper shadow-[0_40px_80px_-40px_rgba(13,31,34,0.6)] lg:-translate-y-4" : "bg-paper ring-1 ring-line-soft"
+              it.featured ? "bg-grad-deep text-paper shadow-[0_40px_80px_-40px_rgba(13,31,34,0.6)] lg:-translate-y-4" : "bg-card ring-1 ring-line-soft"
             }`}
           >
             <div className="flex items-start justify-between gap-4">
@@ -110,7 +110,7 @@ export function ServiceChain() {
         ))}
       </ol>
       {/* ゴール */}
-      <div data-r="pop" className="mx-auto mt-10 flex w-fit items-center gap-4 rounded-full bg-paper px-6 py-3 ring-1 ring-line-soft">
+      <div data-r="pop" className="mx-auto mt-10 flex w-fit items-center gap-4 rounded-full bg-card px-6 py-3 ring-1 ring-line-soft">
         <span className="grid h-9 w-9 place-items-center rounded-full bg-grad-brand text-paper">
           <Icon name="up" className="h-5 w-5" strokeWidth={2} />
         </span>
@@ -146,7 +146,7 @@ export function RecruitJourney() {
             <li key={s.title} data-r="pop" className={`flex flex-col items-center text-center ${s.key ? "col-span-2 md:col-span-1" : ""}`}>
               <span
                 className={`relative grid h-[68px] w-[68px] place-items-center rounded-full ${
-                  s.key ? "bg-grad-brand text-paper shadow-[0_0_0_10px_rgba(60,195,196,0.18)]" : "bg-paper text-brand-deep ring-1 ring-line"
+                  s.key ? "bg-grad-brand text-paper shadow-[0_0_0_10px_rgba(60,195,196,0.18)]" : "bg-card text-brand-deep ring-1 ring-line"
                 }`}
               >
                 <Icon name={s.icon} className="h-7 w-7" />
@@ -168,7 +168,7 @@ export function RecruitJourney() {
 
       {/* 比べる */}
       <div className="mt-16 grid gap-4 md:mt-20 md:grid-cols-[1fr_auto_1fr] md:items-center">
-        <div data-r="pop" className="rounded-[24px] bg-paper p-7 ring-1 ring-line-soft">
+        <div data-r="pop" className="rounded-[24px] bg-card p-7 ring-1 ring-line-soft">
           <p className="text-[13px] font-bold text-ink-mute">求人媒体だけ</p>
           <ul className="mt-4 space-y-3">
             {compare.before.map((t) => (
@@ -248,7 +248,7 @@ export function MethodChain() {
       <ol className="grid items-stretch gap-4 md:grid-cols-[1fr_auto_1fr_auto_1fr]">
         {steps.map((s, i) => (
           <li key={s.en} className="contents">
-            <div data-r="pop" className="rounded-[24px] bg-paper p-7 ring-1 ring-line-soft">
+            <div data-r="pop" className="rounded-[24px] bg-card p-7 ring-1 ring-line-soft">
               <div className="flex items-center gap-4">
                 <IconBadge name={s.icon} />
                 <div>
@@ -272,7 +272,7 @@ export function MethodChain() {
         <p className="text-center text-[13px] font-bold tracking-[0.08em] text-brand-deep">すべての制作物に共通する3つの基準</p>
         <ul className="mt-6 grid gap-3 sm:grid-cols-3">
           {badges.map((b) => (
-            <li key={b.en} data-r="pop" className="flex items-center gap-4 rounded-2xl bg-paper px-5 py-4 shadow-[0_10px_30px_-20px_rgba(13,31,34,0.4)]">
+            <li key={b.en} data-r="pop" className="flex items-center gap-4 rounded-2xl bg-card px-5 py-4 shadow-[0_10px_30px_-20px_rgba(13,31,34,0.4)]">
               <IconBadge name={b.icon} tone="brand" size="sm" />
               <div>
                 <p className="label-en text-[11px] text-brand-deep">{b.en}</p>
@@ -316,12 +316,12 @@ export function IncludedGrid() {
           </li>
         ))}
       </ul>
-      <div className="rounded-[28px] bg-paper p-6 ring-1 ring-line-soft md:p-8">
+      <div className="rounded-[28px] bg-card p-6 ring-1 ring-line-soft md:p-8">
         <p className="text-[13px] font-bold tracking-[0.08em] text-ink-mute">すべてのプランに含まれる内容</p>
         <ul className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {features.map((f) => (
             <li key={f.label} data-r="pop" className="flex flex-col items-center gap-3 rounded-2xl bg-mist px-3 py-5 text-center">
-              <span className="grid h-11 w-11 place-items-center rounded-xl bg-paper text-brand-deep shadow-[0_6px_16px_-10px_rgba(13,31,34,0.5)]">
+              <span className="grid h-11 w-11 place-items-center rounded-xl bg-card text-brand-deep shadow-[0_6px_16px_-10px_rgba(13,31,34,0.5)]">
                 <Icon name={f.icon} />
               </span>
               <span className="text-[13px] font-bold leading-snug">{f.label}</span>
@@ -350,7 +350,7 @@ export function FlowTimeline({ steps }: { steps: { title: string; body: string; 
       <ol className="relative grid gap-8 md:grid-cols-5 md:gap-4">
         {steps.map((s, i) => (
           <li key={s.title} data-r="pop" className="flex items-start gap-5 md:flex-col md:items-center md:text-center">
-            <span className="relative grid h-16 w-16 shrink-0 place-items-center rounded-full bg-paper text-brand-deep shadow-[0_12px_30px_-16px_rgba(13,31,34,0.5)] ring-1 ring-line-soft">
+            <span className="relative grid h-16 w-16 shrink-0 place-items-center rounded-full bg-card text-brand-deep shadow-[0_12px_30px_-16px_rgba(13,31,34,0.5)] ring-1 ring-line-soft">
               <Icon name={icons[i] ?? "check"} className="h-7 w-7" />
               <span className="label-en absolute -right-1 -top-1 grid h-6 w-6 place-items-center rounded-full bg-grad-brand text-[11px] text-paper">{i + 1}</span>
             </span>

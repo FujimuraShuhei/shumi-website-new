@@ -8,7 +8,7 @@ export default function TermsPage() {
   return (
     <>
       <PageHero crumbs={[{ label: "利用規約" }]} en="Terms" title="利用規約" />
-      <div className="bg-paper py-20 md:py-28">
+      <div className="bg-base py-20 md:py-28">
         <div className="wrap">
           <div className="prose-shumi">
             <p>このWebサイト（以下「本サイト」）をご利用いただく際の条件を定めます。</p>

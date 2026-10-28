@@ -16,7 +16,7 @@ export default function DemoPage() {
         title="業務アプリのデモ"
         lead="画面を押すと、その場で操作できます。見た目と操作感を確かめるためのデモのため、入力した内容は保存されず、どこにも送信されません。"
       />
-      <section aria-label="デモの一覧" className="bg-paper py-24 md:py-32">
+      <section aria-label="デモの一覧" className="bg-base py-24 md:py-32">
         <div className="wrap">
           <DemoGallery />
           <div className="mt-24 grid gap-8 rounded-[28px] bg-mint p-10 md:grid-cols-[1fr_auto] md:items-center md:p-14">

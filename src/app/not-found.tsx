@@ -2,7 +2,7 @@ import { Button } from "@/components/ui";
 
 export default function NotFound() {
   return (
-    <section className="bg-paper">
+    <section className="bg-base">
       <div className="wrap py-32 md:py-48">
         <p className="display-en text-grad-brand text-[6rem] md:text-[10rem]">404</p>
         <h1 className="mt-8 text-2xl tracking-[0.05em] md:text-3xl">お探しのページが見つかりません</h1>

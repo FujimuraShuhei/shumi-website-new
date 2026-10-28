@@ -8,7 +8,7 @@ type Task = { id: number; title: string; site: string; owner: string; due: strin
 
 const statusLabel: Record<Status, string> = { todo: "未着手", doing: "進行中", done: "完了" };
 const statusStyle: Record<Status, string> = {
-  todo: "border border-line bg-paper text-ink-soft",
+  todo: "border border-line bg-white text-ink-soft",
   doing: "bg-brand-wash text-brand-dark",
   done: "bg-[#e3f2ea] text-ok",
 };
@@ -75,12 +75,12 @@ export function TasksDemo() {
     );
   }
 
-  const inputCls = "mt-1 block min-h-11 w-full rounded-md border-2 border-line bg-paper px-3 text-sm focus:border-brand-deep";
+  const inputCls = "mt-1 block min-h-11 w-full rounded-md border-2 border-line bg-white px-3 text-sm focus:border-brand-deep";
 
   return (
     <AppFrame title="業務の一覧" nav={["業務の一覧", "現場", "日報", "写真台帳", "資材"]}>
       <div className="grid gap-5 p-5 lg:grid-cols-[280px_1fr]">
-        <form onSubmit={add} aria-labelledby={`${formId}-h`} className="h-fit rounded-lg border border-line bg-paper p-4">
+        <form onSubmit={add} aria-labelledby={`${formId}-h`} className="h-fit rounded-lg border border-line bg-white p-4">
           <p id={`${formId}-h`} className="font-bold">
             業務を登録する
           </p>
@@ -119,7 +119,7 @@ export function TasksDemo() {
           </div>
         </form>
 
-        <section aria-label="業務の一覧" className="min-w-0 rounded-lg border border-line bg-paper">
+        <section aria-label="業務の一覧" className="min-w-0 rounded-lg border border-line bg-white">
           <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line p-3">
             <div role="group" aria-label="状態で絞り込む" className="flex flex-wrap gap-1">
               {(["all", "todo", "doing", "done"] as const).map((s) => (

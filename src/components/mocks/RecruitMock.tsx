@@ -94,7 +94,7 @@ export function RecruitMock({ active = true }: { active?: boolean }) {
         <BrowserChrome url="aoba-komuten.jp/recruit">
           <div data-rpage className="absolute inset-x-0 top-0">
             {/* ナビ */}
-            <div className="flex h-12 items-center justify-between bg-paper px-5">
+            <div className="flex h-12 items-center justify-between bg-white px-5">
               <p className="text-[12px] font-semibold tracking-[0.12em]">
                 青葉工務店 <span className="ml-1 text-[10px] font-medium text-brand-deep">採用サイト</span>
               </p>
@@ -153,7 +153,7 @@ export function RecruitMock({ active = true }: { active?: boolean }) {
             </div>
 
             {/* 社員インタビュー */}
-            <div className="bg-paper px-6 py-6">
+            <div className="bg-white px-6 py-6">
               <div className="flex items-end justify-between">
                 <p className="text-[14px] font-semibold tracking-[0.08em]">先輩の声</p>
                 <p className="en text-[9px] tracking-[0.2em] text-ink-mute">PEOPLE</p>
@@ -183,7 +183,7 @@ export function RecruitMock({ active = true }: { active?: boolean }) {
               <p className="text-[14px] font-semibold tracking-[0.08em]">募集中の職種</p>
               <div className="mt-3 space-y-2">
                 {jobs.map(([t, k, pay], i) => (
-                  <div key={t} data-job className="flex items-center justify-between rounded-xl bg-paper px-4 py-3">
+                  <div key={t} data-job className="flex items-center justify-between rounded-xl bg-white px-4 py-3">
                     <div>
                       <p className="text-[12px] font-semibold">{t}</p>
                       <p className="mt-0.5 text-[9px] text-ink-mute">
@@ -201,7 +201,7 @@ export function RecruitMock({ active = true }: { active?: boolean }) {
 
           {/* 応募フォーム */}
           <div data-modal className="absolute inset-0 z-10 flex items-end justify-center bg-ink/40 pb-6">
-            <div data-sheet className="relative w-[340px] rounded-2xl bg-paper p-5 shadow-2xl">
+            <div data-sheet className="relative w-[340px] rounded-2xl bg-white p-5 shadow-2xl">
               <div data-form>
                 <p className="text-[13px] font-semibold">エントリー：施工管理</p>
                 <div className="mt-3 space-y-2.5 text-[10px]">
@@ -237,7 +237,7 @@ export function RecruitMock({ active = true }: { active?: boolean }) {
                   この内容で応募する
                 </span>
               </div>
-              <div data-done className="absolute inset-0 grid place-items-center rounded-2xl bg-paper text-center">
+              <div data-done className="absolute inset-0 grid place-items-center rounded-2xl bg-white text-center">
                 <div>
                   <svg width="54" height="54" viewBox="0 0 54 54" className="mx-auto">
                     <circle cx="27" cy="27" r="25" fill="#e2f3f4" />
@@ -253,7 +253,7 @@ export function RecruitMock({ active = true }: { active?: boolean }) {
       </div>
 
       {/* 応募数のパネル */}
-      <div data-panel className="absolute bottom-6 right-0 z-20 w-[200px] rounded-2xl bg-paper p-4 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.55)]">
+      <div data-panel className="absolute bottom-6 right-0 z-20 w-[200px] rounded-2xl bg-white p-4 shadow-[0_30px_60px_-20px_rgba(0,0,0,0.55)]">
         <div className="flex items-center justify-between">
           <p className="text-[11px] font-semibold">今月の応募数</p>
           <span data-new className="en rounded-full bg-[#fdeceb] px-2 py-0.5 text-[10px] font-semibold text-[#c2362f]">New</span>

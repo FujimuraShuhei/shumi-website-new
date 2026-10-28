@@ -32,7 +32,7 @@ export async function PostArticle({ post: p }: { post: Post }) {
 
   return (
     <>
-      <article className="bg-paper">
+      <article className="bg-base">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
         <header className="hero-in wrap pb-12 pt-10 md:pb-16 md:pt-14 xl:px-24">
           <Breadcrumb crumbs={[{ href: "/blog/", label: "ブログ" }, { label: p.title }]} />
@@ -106,7 +106,7 @@ export async function PostArticle({ post: p }: { post: Post }) {
       </article>
 
       {related.length > 0 && (
-        <section aria-labelledby="related-title" className="border-t border-line-soft bg-paper py-20 md:py-28">
+        <section aria-labelledby="related-title" className="border-t border-line-soft bg-base py-20 md:py-28">
           <div className="wrap">
             <h2 id="related-title" className="text-xl md:text-2xl">
               あわせて読みたい
@@ -131,7 +131,7 @@ function TocList({ items }: { items: { id: string; text: string }[] }) {
     <ol className="mt-4 space-y-1">
       {items.map((h, i) => (
         <li key={h.id}>
-          <a href={`#${h.id}`} className="group flex gap-3 rounded-xl px-2 py-2 text-[13.5px] leading-[1.7] hover:bg-paper">
+          <a href={`#${h.id}`} className="group flex gap-3 rounded-xl px-2 py-2 text-[13.5px] leading-[1.7] hover:bg-card">
             <span className="label-en mt-[0.15em] text-[11px] text-brand-deep">{String(i + 1).padStart(2, "0")}</span>
             <span className="font-bold group-hover:text-brand-deep">{h.text}</span>
           </a>

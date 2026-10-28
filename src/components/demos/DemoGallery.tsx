@@ -69,9 +69,9 @@ export function DemoGallery({ ids, layout = "grid" }: { ids?: string[]; layout?:
       <ul className={layout === "feature" ? "grid gap-8 md:grid-cols-2" : "grid gap-x-8 gap-y-14 md:grid-cols-2 xl:grid-cols-3"}>
         {list.map((d) => (
           <li key={d.id} className="group">
-            <div className="relative overflow-hidden rounded-2xl border border-line-soft bg-paper transition-[box-shadow,transform] duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_30px_60px_-30px_rgba(13,31,34,0.35)]">
+            <div className="relative overflow-hidden rounded-2xl border border-line-soft bg-white transition-[box-shadow,transform] duration-500 group-hover:-translate-y-1 group-hover:shadow-[0_30px_60px_-30px_rgba(13,31,34,0.35)]">
               <ScaledPreview demo={d} />
-              <div className="flex items-center justify-between gap-4 border-t border-line-soft bg-paper px-6 py-5">
+              <div className="flex items-center justify-between gap-4 border-t border-line-soft bg-white px-6 py-5">
                 <div>
                   <p className="text-xs font-medium tracking-[0.08em] text-brand-deep">{d.category}</p>
                   <h3 className="mt-1 text-base font-semibold">{d.title}</h3>
@@ -105,7 +105,7 @@ export function DemoGallery({ ids, layout = "grid" }: { ids?: string[]; layout?:
           opener.current?.focus();
         }}
         onClick={(e) => e.target === dialog.current && setActive(null)}
-        className="m-auto max-h-[94dvh] w-[min(1180px,96vw)] overflow-hidden rounded-2xl bg-paper p-0 text-ink backdrop:bg-night/80 backdrop:backdrop-blur-sm"
+        className="m-auto max-h-[94dvh] w-[min(1180px,96vw)] overflow-hidden rounded-2xl bg-white p-0 text-ink backdrop:bg-night/80 backdrop:backdrop-blur-sm"
       >
         {active && ActiveDemo && (
           <div className="flex max-h-[94dvh] flex-col">
@@ -139,7 +139,7 @@ export function DemoGallery({ ids, layout = "grid" }: { ids?: string[]; layout?:
                     </li>
                   ))}
                 </ul>
-                <p className="mt-5 rounded-md bg-paper p-3 text-xs leading-relaxed text-ink-soft">
+                <p className="mt-5 rounded-md bg-white p-3 text-xs leading-relaxed text-ink-soft">
                   見た目と操作感を確かめるためのデモです。入力した内容は保存されず、どこにも送信されません。
                 </p>
               </aside>

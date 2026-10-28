@@ -17,7 +17,7 @@ export async function WorkArticle({ work: w }: { work: Work }) {
   return (
     <>
       <article>
-        <header className="bg-paper">
+        <header className="bg-base">
           <div className="hero-in wrap pb-16 pt-10 md:pb-20 md:pt-14">
             <Breadcrumb crumbs={[{ href: "/works/", label: "HP制作実績" }, { label: w.client }]} />
             <div className="mt-16 flex flex-wrap gap-x-4 gap-y-1 text-sm md:mt-20">

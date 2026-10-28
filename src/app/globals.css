@@ -7,23 +7,27 @@
 /* ------------------------------------------------------------------
    Shumi design tokens
    ブランド色は現サイトのティール（#069FA9）を継承。
-   文字に使う色はすべて白背景で 4.5:1 以上（本文は 7:1 以上）。
+   白い背景は使わない。明るい面はグレーの3段階（base：地、mist：一段暗い面、card：カード）、
+   暗い面は夜色（night）。paper（白）は暗い面の上の文字だけに使う。
 ------------------------------------------------------------------ */
 @theme {
-  --color-paper: #ffffff;
-  --color-mist: #f5f8f9;
-  --color-mint: #eef8f8;
-  --color-ink: #1d2a36;
-  --color-ink-soft: #4a5764;
-  --color-ink-mute: #6a7682;
-  --color-line: #dbe3e7;
-  --color-line-soft: #eaeff2;
+  /* 明るい面（白は使わない） */
+  --color-base: #e2e7e9;      /* ページの地 */
+  --color-mist: #d7dee1;      /* 一段暗い面（交互のセクション） */
+  --color-card: #eef1f2;      /* カード・ボタン */
+  --color-paper: #ffffff;     /* 暗い面・ブランド色の上の文字（背景には使わない） */
+  --color-mint: #d2e6e7;
+  --color-ink: #1b2832;
+  --color-ink-soft: #3f4c58;
+  --color-ink-mute: #55626d;
+  --color-line: #c1ccd1;
+  --color-line-soft: #d0d9dd;
 
   --color-brand: #069fa9;
   --color-brand-light: #3cc3c4;
-  --color-brand-deep: #0a7a83;
+  --color-brand-deep: #076770;
   --color-brand-dark: #154245;
-  --color-brand-wash: #e2f3f4;
+  --color-brand-wash: #cde6e8;
   --color-night: #0d1f22;
 
   --color-alert: #c2362f;
@@ -40,12 +44,16 @@
   --radius-xl: 24px;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* ホバーなどの変化は、パッと切り替えずにふんわり見せる */
+  --default-transition-duration: 450ms;
+  --default-transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @layer base {
   html {
     color: var(--color-ink);
-    background: var(--color-paper);
+    background: var(--color-base);
     font-family: var(--font-sans);
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
@@ -169,8 +177,8 @@
     linear-gradient(180deg, #0d1f22 0%, #0c2026 100%);
 }
 @utility bg-grad-mint {
-  background-color: #eef8f8;
-  background-image: linear-gradient(135deg, #eef8f8 0%, #e6f5f6 50%, #e5f1f8 100%);
+  background-color: #d4e7e8;
+  background-image: linear-gradient(135deg, #d6e9ea 0%, #d0e5e8 50%, #cfe0ea 100%);
 }
 @utility text-grad-brand {
   background-image: linear-gradient(100deg, #069fa9 0%, #0796a8 45%, #0b7fae 100%);
@@ -201,4 +209,32 @@
   .hero-in > *:nth-child(3) { animation-delay: 0.16s; }
   .hero-in > *:nth-child(4) { animation-delay: 0.24s; }
   .hero-in > *:nth-child(n + 5) { animation-delay: 0.32s; }
+}
+
+/* ------------------------------------------------------------------
+   押せるものには必ず指のカーソル。ホバーの変化はふんわり、少しだけ遅らせて始める
+------------------------------------------------------------------ */
+@layer base {
+  a[href], button:not(:disabled), summary, label[for], select, [role="button"], [role="tab"],
+  input[type="checkbox"], input[type="radio"], input[type="submit"], input[type="file"] {
+    cursor: pointer;
+  }
+  :disabled, [aria-disabled="true"] { cursor: not-allowed; }
+
+  /* hover: のクラスが付いた要素は、色・背景・枠・影・透明度を時間をかけて変える（transition の指定が無いものも含む） */
+  :where([class*="hover:"]) {
+    transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, opacity, box-shadow, filter, backdrop-filter;
+    transition-duration: var(--default-transition-duration);
+    transition-timing-function: var(--default-transition-timing-function);
+  }
+  /* 乗せた瞬間ではなく、ほんの少し間をおいてから変わり始める（離したときはすぐ戻り始める） */
+  :where([class*="hover:"]):hover,
+  :where(.group:hover [class*="group-hover:"]) {
+    transition-delay: 60ms;
+  }
+}
+
+@keyframes hero-fill {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
 }

@@ -15,6 +15,9 @@ export function Header() {
   const [dark, setDark] = useState(pathname === "/");
   const menuId = useId();
   const closeTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  const openTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+  // 閉じるアニメーションの間も中身を表示しておくため、最後に開いたメニューを覚えておく
+  const lastMenu = useRef<NavItem | null>(null);
 
   useEffect(() => {
     const onScroll = () => {
@@ -59,15 +62,20 @@ export function Header() {
 
   const isCurrent = (href: string) => href !== "/" && pathname.startsWith(href.replace(/#.*$/, ""));
 
+  // マウスが通り過ぎただけで開かないよう、少し待ってから開く
   const hoverOpen = (key: string) => {
     clearTimeout(closeTimer.current);
-    setOpenMenu(key);
+    clearTimeout(openTimer.current);
+    openTimer.current = setTimeout(() => setOpenMenu(key), openMenu ? 0 : 120);
   };
   const hoverClose = () => {
-    closeTimer.current = setTimeout(() => setOpenMenu(null), 160);
+    clearTimeout(openTimer.current);
+    closeTimer.current = setTimeout(() => setOpenMenu(null), 220);
   };
 
   const active = nav.find((n) => n.href === openMenu);
+  if (active?.children) lastMenu.current = active;
+  const panelOpen = Boolean(active?.children);
   // メニューを開いている間は明るい配色に戻す
   const isDark = dark && !openMenu && !mobileOpen;
 
@@ -75,7 +83,7 @@ export function Header() {
     <header
       data-dark={isDark || undefined}
       className={`group/h sticky top-0 z-50 backdrop-blur-md transition-[background-color,box-shadow,color] duration-500 ${
-        isDark ? "bg-night text-paper shadow-[0_1px_0_rgba(255,255,255,0.08)]" : "bg-paper/95 text-ink"
+        isDark ? "bg-night text-paper shadow-[0_1px_0_rgba(255,255,255,0.08)]" : "bg-base/95 text-ink"
       } ${!isDark && (scrolled || openMenu || mobileOpen) ? "shadow-[0_1px_0_var(--color-line)]" : ""}`}
       onMouseLeave={hoverClose}
     >
@@ -120,7 +128,7 @@ export function Header() {
                   </button>
                 </li>
               ) : (
-                <li key={item.href} onMouseEnter={() => setOpenMenu(null)}>
+                <li key={item.href} onMouseEnter={hoverClose}>
                   <Link
                     href={item.href}
                     aria-current={isCurrent(item.href) ? "page" : undefined}
@@ -166,15 +174,25 @@ export function Header() {
       {/* PC：サブメニュー */}
       <div
         id={`${menuId}-panel`}
-        hidden={!active?.children}
+        aria-hidden={!panelOpen}
+        inert={!panelOpen}
         onMouseEnter={() => active && hoverOpen(active.href)}
-        className="absolute inset-x-0 top-full hidden border-t border-line bg-paper shadow-[0_24px_48px_-32px_rgba(13,31,34,0.35)] xl:block"
+        className={`absolute inset-x-0 top-full hidden border-t border-line bg-card shadow-[0_24px_48px_-32px_rgba(13,31,34,0.35)] transition-[opacity,translate,visibility] duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] xl:block ${
+          panelOpen ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"
+        }`}
       >
-        {active?.children && <MegaMenu item={active} />}
+        {lastMenu.current && <MegaMenu item={lastMenu.current} />}
       </div>
 
       {/* スマホ：全画面メニュー */}
-      <div id={`${menuId}-mobile`} hidden={!mobileOpen} className="fixed inset-x-0 bottom-0 top-20 overflow-y-auto bg-paper xl:hidden">
+      <div
+        id={`${menuId}-mobile`}
+        aria-hidden={!mobileOpen}
+        inert={!mobileOpen}
+        className={`fixed inset-x-0 bottom-0 top-20 overflow-y-auto bg-card transition-[opacity,translate,visibility] duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] xl:hidden ${
+          mobileOpen ? "visible translate-y-0 opacity-100" : "invisible -translate-y-3 opacity-0"
+        }`}
+      >
         <nav aria-label="メニュー" className="wrap pb-16 pt-4">
           <ul className="divide-y divide-line-soft">
             {nav.map((item) => (

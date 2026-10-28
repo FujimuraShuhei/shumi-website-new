@@ -18,7 +18,7 @@ export default function WebsitePage() {
         title="サイト制作内容"
         lead="サービスの魅力と企業のブランド力を最大限に引き出すWebサイトを制作します。目的に合わせて、4つのサイト制作をご用意しています。"
       />
-      <section aria-labelledby="list-title" className="bg-paper py-28 md:py-40">
+      <section aria-labelledby="list-title" className="bg-base py-28 md:py-40">
         <div className="wrap">
           <Heading num="01" en="Service" id="list-title" title="目的に合わせて、4つのサイト制作。" />
           <div className="mt-16">
@@ -45,7 +45,7 @@ export default function WebsitePage() {
           </div>
         </div>
       </section>
-      <section aria-labelledby="flow-title" className="bg-paper py-28 md:py-40">
+      <section aria-labelledby="flow-title" className="bg-base py-28 md:py-40">
         <div className="wrap">
           <Heading num="03" en="Flow" id="flow-title" title="ご相談から公開まで、5ステップ。" />
           <div className="mt-20">

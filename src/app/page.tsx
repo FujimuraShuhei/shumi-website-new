@@ -19,7 +19,7 @@ export default async function Home() {
       <AppEfficiency />
 
       {/* 02 還元（夜色の上に、白い面がせり上がってくる） */}
-      <section aria-labelledby="message-title" className="relative z-10 -mt-12 rounded-t-[40px] bg-paper py-28 md:-mt-16 md:rounded-t-[72px] md:py-40">
+      <section aria-labelledby="message-title" className="relative z-10 -mt-12 rounded-t-[40px] bg-base py-28 md:-mt-16 md:rounded-t-[72px] md:py-40">
         <div className="wrap grid items-center gap-16 lg:grid-cols-[1fr_1fr] lg:gap-20">
           <div>
             <Heading
@@ -62,7 +62,7 @@ export default async function Home() {
       </section>
 
       {/* 04 採用 */}
-      <section aria-labelledby="recruit-title" className="bg-paper py-28 md:py-40">
+      <section aria-labelledby="recruit-title" className="bg-base py-28 md:py-40">
         <div className="wrap">
           <div className="grid gap-8 lg:grid-cols-[1.2fr_1fr] lg:items-end">
             <Heading num="04" en="Recruit" id="recruit-title" title="応募の前に、求職者は会社を調べる。" />
@@ -105,7 +105,7 @@ export default async function Home() {
       </section>
 
       {/* 07 ものづくり */}
-      <section aria-labelledby="about-title" className="bg-paper py-28 md:py-40">
+      <section aria-labelledby="about-title" className="bg-base py-28 md:py-40">
         <div className="wrap">
           <Heading num="07" en="Method" id="about-title" title="作る前の準備を、いちばん大切に。" />
           <div className="mt-16">
@@ -130,7 +130,7 @@ export default async function Home() {
       </section>
 
       {/* 09 流れ */}
-      <section aria-labelledby="flow-title" className="bg-paper py-28 md:py-40">
+      <section aria-labelledby="flow-title" className="bg-base py-28 md:py-40">
         <div className="wrap">
           <Heading num="09" en="Flow" id="flow-title" title="ご相談から公開まで、5ステップ。" />
           <div className="mt-20">
@@ -140,7 +140,7 @@ export default async function Home() {
       </section>
 
       {/* ブログ */}
-      <section aria-labelledby="blog-title" className="border-t border-line-soft bg-paper py-28 md:py-36">
+      <section aria-labelledby="blog-title" className="border-t border-line-soft bg-base py-28 md:py-36">
         <div className="wrap grid gap-12 lg:grid-cols-[1fr_2.2fr] lg:gap-20">
           <div>
             <Heading en="Blog" id="blog-title" title="ブログ" lead="ホームページと採用、業務改善のノウハウ。" />

@@ -24,7 +24,7 @@ export default function ContactPage() {
         title="お問い合わせ"
         lead="サイト制作やリニューアル、業務アプリのご相談、ご不明点など、お気軽にお問い合わせください。無料でお見積りいたします。"
       />
-      <div className="bg-paper py-24 md:py-32">
+      <div className="bg-base py-24 md:py-32">
         <div className="wrap grid gap-20 lg:grid-cols-[1fr_22rem] lg:gap-24">
           <section aria-label="お問い合わせフォーム" className="max-w-3xl">
             <InquiryForm kind="contact" />
