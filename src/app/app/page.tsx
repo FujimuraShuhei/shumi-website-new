@@ -40,7 +40,7 @@ function ExampleGrid({ items }: { items: typeof appExamples }) {
   return (
     <ul className="grid gap-3 sm:grid-cols-2">
       {items.map((e, i) => (
-        <li key={e.title} data-r="pop" className="rounded-[24px] bg-paper p-7 ring-1 ring-line-soft">
+        <li key={e.title} data-r="pop" className="rounded-[24px] bg-card p-7 ring-1 ring-line-soft">
           <div className="flex items-center gap-4">
             <IconBadge name={e.icon} tone={i === 0 ? "brand" : "light"} />
             <div>
@@ -76,7 +76,7 @@ export default function AppPage() {
 
       <ScatterScene />
 
-      <section aria-labelledby="app-title" className="bg-paper py-28 md:py-40">
+      <section aria-labelledby="app-title" className="bg-base py-28 md:py-40">
         <div className="wrap grid gap-14 lg:grid-cols-[1fr_1.8fr] lg:gap-20">
           <Heading num="01" en="Business app" id="app-title" title="業務効率化アプリ" lead="建設業をはじめ、現場と事務所のあいだで起きている手間を減らします。" />
           <ExampleGrid items={appExamples} />
@@ -90,7 +90,7 @@ export default function AppPage() {
         </div>
       </section>
 
-      <section aria-labelledby="demo-title" className="bg-paper py-28 md:py-40">
+      <section aria-labelledby="demo-title" className="bg-base py-28 md:py-40">
         <div className="wrap">
           <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
             <Heading num="03" en="Demo" id="demo-title" title="デモを触ってみる" lead="画面を押すと、その場で操作できます。入力した内容は保存されず、どこにも送信されません。" />
@@ -113,7 +113,7 @@ export default function AppPage() {
         </div>
       </section>
 
-      <section aria-labelledby="steps-title" className="bg-paper py-28 md:py-40">
+      <section aria-labelledby="steps-title" className="bg-base py-28 md:py-40">
         <div className="wrap">
           <Heading num="05" en="Flow" id="steps-title" title="作る前に、触って確かめる。" lead="試作で確かめるから「作ったのに使われない」が起きません。" />
           <div className="mt-20">

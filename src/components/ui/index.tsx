@@ -12,8 +12,8 @@ export function Arrow({ className = "" }: { className?: string }) {
 type Variant = "primary" | "secondary" | "light" | "ghost";
 const variants: Record<Variant, string> = {
   primary: "bg-grad-brand text-paper hover:brightness-110",
-  secondary: "border border-ink/20 bg-paper text-ink hover:border-ink",
-  light: "bg-paper text-ink hover:bg-mint",
+  secondary: "border border-ink/20 bg-card text-ink hover:border-ink",
+  light: "bg-card text-ink hover:bg-mint",
   ghost: "border border-paper/30 text-paper hover:border-paper",
 };
 
@@ -111,7 +111,7 @@ export function PageHero({
   children?: ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden border-b border-line-soft bg-paper">
+    <section className="relative overflow-hidden border-b border-line-soft bg-base">
       <Bands className="pointer-events-none absolute -right-40 -top-24 hidden h-[520px] w-[620px] opacity-90 md:block" />
       <div className="hero-in wrap relative pb-20 pt-10 md:pb-28 md:pt-14">
         <Breadcrumb crumbs={crumbs} />
@@ -167,7 +167,7 @@ export function Bands({ className = "" }: { className?: string }) {
         </linearGradient>
         <linearGradient id="band-b" x1="0" y1="1" x2="1" y2="0">
           <stop offset="0" stopColor="#e2f3f4" />
-          <stop offset="1" stopColor="#f5fbfb" />
+          <stop offset="1" stopColor="#d6e9ea" />
         </linearGradient>
       </defs>
       <g transform="rotate(-45 310 260)">
@@ -182,7 +182,7 @@ export function Bands({ className = "" }: { className?: string }) {
 /** 資料請求とお問い合わせ（現サイトの全ページ末尾の構成を継承） */
 export function ContactCta() {
   return (
-    <section aria-label="資料請求とお問い合わせ" className="bg-paper py-24 md:py-32">
+    <section aria-label="資料請求とお問い合わせ" className="bg-base py-24 md:py-32">
       <div className="wrap grid gap-6 lg:grid-cols-2">
         <Link href="/document/" data-r="up" className="group relative overflow-hidden rounded-[24px] bg-grad-mint p-10 transition-colors hover:bg-brand-wash md:p-14">
           <p className="label-en text-[13px] text-brand-deep">Document</p>
@@ -190,7 +190,7 @@ export function ContactCta() {
           <p className="mt-4 max-w-md text-[15px] leading-[2] text-ink-soft">成功事例や詳しい料金プラン、お悩みの解決方法をまとめた資料を無料でお配りしています。</p>
           <span className="mt-10 inline-flex items-center gap-3 text-[15px] font-bold text-brand-deep">
             資料をダウンロードする
-            <span className="grid h-12 w-12 place-items-center rounded-full bg-paper transition-transform duration-300 group-hover:translate-x-1">
+            <span className="grid h-12 w-12 place-items-center rounded-full bg-card transition-transform duration-300 group-hover:translate-x-1">
               <Arrow />
             </span>
           </span>

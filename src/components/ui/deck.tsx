@@ -47,8 +47,8 @@ export function PointCards({
   tone?: "light" | "panel" | "dark";
 }) {
   const card = {
-    light: "bg-paper ring-1 ring-line-soft",
-    panel: "bg-paper shadow-[0_24px_60px_-40px_rgba(13,31,34,0.45)]",
+    light: "bg-card ring-1 ring-line-soft",
+    panel: "bg-card shadow-[0_24px_60px_-40px_rgba(13,31,34,0.45)]",
     dark: "bg-paper/[0.06] ring-1 ring-paper/12",
   }[tone];
   const dark = tone === "dark";
@@ -76,7 +76,7 @@ export function CaseTiles({ items }: { items: { title: string; body: string }[] 
   return (
     <ul className={`grid gap-3 sm:grid-cols-2 ${items.length > 4 ? "lg:grid-cols-3" : "lg:grid-cols-2"}`}>
       {items.map((c) => (
-        <li key={c.title} data-r="pop" className="flex gap-5 rounded-[22px] bg-paper p-6 ring-1 ring-line-soft">
+        <li key={c.title} data-r="pop" className="flex gap-5 rounded-[22px] bg-card p-6 ring-1 ring-line-soft">
           <IconBadge name={iconFor(c.title)} size="md" />
           <div>
             <p className="text-[17px] font-black leading-snug tracking-[0.02em]">{c.title}</p>
@@ -93,7 +93,7 @@ export function ProblemSolution({ problem, solution }: { problem: string; soluti
   return (
     <div className="grid items-center gap-4 md:grid-cols-[1fr_auto_1fr]">
       <div data-r="pop" className="rounded-[24px] bg-mist p-7">
-        <span className="inline-flex h-8 items-center gap-2 rounded-full bg-paper px-3 text-[12px] font-bold text-ink-mute">
+        <span className="inline-flex h-8 items-center gap-2 rounded-full bg-card px-3 text-[12px] font-bold text-ink-mute">
           <span className="grid h-4 w-4 place-items-center rounded-full bg-ink-mute/15 text-[10px]">!</span>
           よくある状態
         </span>
@@ -119,7 +119,7 @@ export function StepChips({ steps }: { steps: string[] }) {
     <ol className="flex flex-wrap items-center gap-x-2 gap-y-3">
       {steps.map((s, i) => (
         <li key={s} className="contents">
-          <span data-r="pop" className="inline-flex h-14 items-center gap-3 rounded-full bg-paper pl-2 pr-6 ring-1 ring-line-soft">
+          <span data-r="pop" className="inline-flex h-14 items-center gap-3 rounded-full bg-card pl-2 pr-6 ring-1 ring-line-soft">
             <span className={`label-en grid h-10 w-10 place-items-center rounded-full text-[13px] ${i === steps.length - 1 ? "bg-grad-brand text-paper" : "bg-brand-wash text-brand-deep"}`}>
               {num(i)}
             </span>
@@ -145,7 +145,7 @@ export function IdeaTiles({ items, tone = "light" }: { items: string[]; tone?: "
         <li
           key={a}
           data-r="pop"
-          className={`flex flex-col gap-4 rounded-[20px] p-5 ${dark ? "bg-paper/[0.06] ring-1 ring-paper/12" : "bg-paper ring-1 ring-line-soft"}`}
+          className={`flex flex-col gap-4 rounded-[20px] p-5 ${dark ? "bg-paper/[0.06] ring-1 ring-paper/12" : "bg-card ring-1 ring-line-soft"}`}
         >
           <IconBadge name={iconFor(a)} tone={dark ? "dark" : "light"} size="sm" />
           <span className="text-[14px] font-bold leading-snug tracking-[0.03em]">{a}</span>

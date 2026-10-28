@@ -70,8 +70,8 @@ export function Lead({ children }: { children: ReactNode }) {
 
 const boxTones = {
   point: { wrap: "bg-grad-mint ring-1 ring-brand/15", badge: "bg-grad-brand text-paper", icon: "check" as IconName, label: "ポイント" },
-  note: { wrap: "bg-mist ring-1 ring-line-soft", badge: "bg-paper text-brand-deep ring-1 ring-line", icon: "chat" as IconName, label: "メモ" },
-  warn: { wrap: "bg-[#fff7ef] ring-1 ring-[#f3dcc4]", badge: "bg-[#c86a1c] text-paper", icon: "eye" as IconName, label: "注意" },
+  note: { wrap: "bg-mist ring-1 ring-line-soft", badge: "bg-card text-brand-deep ring-1 ring-line", icon: "chat" as IconName, label: "メモ" },
+  warn: { wrap: "bg-[#ecdccb] ring-1 ring-[#dcc3a8]", badge: "bg-[#c86a1c] text-paper", icon: "eye" as IconName, label: "注意" },
 };
 
 function Box({ tone, title, children }: { tone: keyof typeof boxTones; title?: string; children: ReactNode }) {
@@ -115,7 +115,7 @@ export function Steps({ children }: { children: ReactNode }) {
       <span aria-hidden="true" className="absolute bottom-6 left-[23px] top-6 w-px bg-line" />
       {items.map((child, i) => (
         <li key={i} className="relative flex gap-5">
-          <span className={`label-en relative grid h-12 w-12 shrink-0 place-items-center rounded-full text-[14px] ${i === items.length - 1 ? "bg-grad-brand text-paper" : "bg-paper text-brand-deep ring-1 ring-line"}`}>
+          <span className={`label-en relative grid h-12 w-12 shrink-0 place-items-center rounded-full text-[14px] ${i === items.length - 1 ? "bg-grad-brand text-paper" : "bg-card text-brand-deep ring-1 ring-line"}`}>
             {String(i + 1).padStart(2, "0")}
           </span>
           <div className="flex-1 rounded-[20px] bg-mist p-5">{child}</div>
@@ -147,7 +147,7 @@ export function Compare({
 }) {
   return (
     <div className="not-prose my-10 grid items-center gap-3 md:grid-cols-[1fr_auto_1fr]">
-      <div className="rounded-[22px] bg-paper p-6 ring-1 ring-line">
+      <div className="rounded-[22px] bg-card p-6 ring-1 ring-line">
         <p className="text-[13px] font-bold text-ink-mute">{beforeLabel}</p>
         <ul className="mt-4 space-y-2.5">
           {before.map((t) => (
@@ -184,7 +184,7 @@ export function Cards({ children, cols = 3 }: { children: ReactNode; cols?: 2 | 
 }
 export function Card({ icon = "check", title, children }: { icon?: IconName; title: string; children?: ReactNode }) {
   return (
-    <div className="rounded-[20px] bg-paper p-5 ring-1 ring-line-soft">
+    <div className="rounded-[20px] bg-card p-5 ring-1 ring-line-soft">
       <IconBadge name={icon} size="sm" />
       <p className="mt-4 text-[15px] font-black leading-snug">{title}</p>
       {children && <div className="mt-1.5 text-[13px] leading-[1.85] text-ink-soft">{children}</div>}
@@ -212,7 +212,7 @@ export function Stats({ items }: { items: { value: string; unit?: string; label:
 /** よくある質問。<Faq q="質問">答え</Faq> */
 export function Faq({ q, children }: { q: string; children: ReactNode }) {
   return (
-    <details className="not-prose group my-3 rounded-[18px] bg-mist px-5 py-4 open:bg-paper open:ring-1 open:ring-line-soft">
+    <details className="not-prose group my-3 rounded-[18px] bg-mist px-5 py-4 open:bg-card open:ring-1 open:ring-line-soft">
       <summary className="flex cursor-pointer list-none items-center gap-3 text-[15px] font-black [&::-webkit-details-marker]:hidden">
         <span className="label-en grid h-7 w-7 shrink-0 place-items-center rounded-full bg-grad-brand text-[12px] text-paper">Q</span>
         <span className="flex-1">{q}</span>

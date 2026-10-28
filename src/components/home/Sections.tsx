@@ -49,7 +49,7 @@ export function WorkThumb({ work, sizes = "(min-width: 1024px) 33vw, 100vw", pri
         <g transform={`translate(${shift} 0) rotate(-45 200 125)`}>
           <rect x="120" y="70" width="320" height="34" rx="17" fill="#069fa9" opacity="0.85" />
           <rect x="190" y="124" width="230" height="16" rx="8" fill="#154245" opacity="0.8" />
-          <rect x="60" y="160" width="300" height="28" rx="14" fill="#ffffff" />
+          <rect x="60" y="160" width="300" height="28" rx="14" fill="#eef1f2" />
         </g>
       </svg>
       <span className="absolute bottom-5 left-6 text-sm font-bold tracking-[0.08em] text-brand-dark">{work.client.replace(/様$/, "")}</span>
@@ -91,7 +91,7 @@ export function FlowSteps() {
     </div>
     <ol className="grid gap-px overflow-hidden rounded-2xl bg-line-soft md:grid-cols-5">
       {flow.map((f, i) => (
-        <li key={f.title} data-r="up" className="relative bg-paper p-8">
+        <li key={f.title} data-r="up" className="relative bg-card p-8">
           <p className="label-en text-[13px] text-brand-deep">Step {String(i + 1).padStart(2, "0")}</p>
           <p className="mt-6 text-lg font-extrabold tracking-[0.04em]">{f.title}</p>
           <p className="mt-3 text-sm leading-[2] text-ink-soft">{f.body}</p>
@@ -126,7 +126,7 @@ export function Triad({ items, tone = "default" }: { items: { en?: string; title
   return (
     <ul className={`grid md:grid-cols-3 ${tone === "panel" ? "gap-px overflow-hidden rounded-2xl bg-line-soft" : "gap-12 md:gap-10"}`}>
       {items.map((it) => (
-        <li key={it.title} data-r="up" className={tone === "panel" ? "bg-paper p-8 md:p-10" : "border-t border-ink pt-8"}>
+        <li key={it.title} data-r="up" className={tone === "panel" ? "bg-card p-8 md:p-10" : "border-t border-ink pt-8"}>
           {it.en && <p className="label-en text-[13px] text-brand-deep">{it.en}</p>}
           <p className="mt-4 text-lg font-extrabold tracking-[0.04em]">{it.title}</p>
           <p className="mt-4 text-[15px] leading-[2.05] text-ink-soft">{it.body}</p>

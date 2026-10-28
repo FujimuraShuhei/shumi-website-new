@@ -22,7 +22,7 @@ export default function DocumentPage() {
         title="お役立ち資料"
         lead="Shumiのサイト制作がより詳しくわかる資料を、無料でお配りしています。フォームを送信いただくと、メールで資料をお送りします。"
       />
-      <div className="bg-paper py-24 md:py-32">
+      <div className="bg-base py-24 md:py-32">
         <div className="wrap grid gap-20 lg:grid-cols-[22rem_1fr] lg:gap-24">
           <section aria-labelledby="docs-title">
             <h2 id="docs-title" className="text-base tracking-[0.06em]">

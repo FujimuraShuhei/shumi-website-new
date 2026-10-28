@@ -51,7 +51,7 @@ export function PhotoLedgerDemo() {
           {list.map((p) => {
             const on = selected.includes(p.id);
             return (
-              <li key={p.id} className={`overflow-hidden rounded-lg border-2 bg-paper ${on ? "border-brand-deep" : "border-transparent"}`}>
+              <li key={p.id} className={`overflow-hidden rounded-lg border-2 bg-white ${on ? "border-brand-deep" : "border-transparent"}`}>
                 <button type="button" onClick={() => setOpen(p.id)} className="relative block aspect-[4/3] w-full" aria-label={`${p.phase} ${p.place} の写真を大きく見る`}>
                   <PhotoThumb seed={p.seed} />
                   <span className="absolute bottom-1.5 left-1.5 rounded-sm bg-[#2e5a3e] px-1.5 py-0.5 text-left text-[10px] leading-tight text-paper">
@@ -78,7 +78,7 @@ export function PhotoLedgerDemo() {
 
       {current && (
         <div className="absolute inset-0 z-10 grid place-items-center bg-ink/70 p-6" onClick={() => setOpen(null)}>
-          <div className="w-full max-w-lg overflow-hidden rounded-lg bg-paper" onClick={(e) => e.stopPropagation()}>
+          <div className="w-full max-w-lg overflow-hidden rounded-lg bg-white" onClick={(e) => e.stopPropagation()}>
             <div className="relative aspect-[4/3]">
               <PhotoThumb seed={current.seed} />
               <dl className="absolute bottom-3 left-3 grid grid-cols-[auto_1fr] gap-x-3 rounded-sm bg-[#2e5a3e] px-3 py-2 text-xs text-paper">

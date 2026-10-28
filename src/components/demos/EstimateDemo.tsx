@@ -30,7 +30,7 @@ export function EstimateDemo() {
   const high = Math.round(mid * 1.15);
 
   return (
-    <div className="relative min-h-[560px] overflow-hidden rounded-lg border border-line bg-paper">
+    <div className="relative min-h-[560px] overflow-hidden rounded-lg border border-line bg-white">
       <div className="grid md:grid-cols-[1.1fr_1fr]">
         <div className="space-y-7 p-6 md:p-8">
           <div>
@@ -106,7 +106,7 @@ export function EstimateDemo() {
               {low}〜{high}
               <span className="ml-2 font-sans text-xl">万円</span>
             </p>
-            <div className="mt-6 h-2 overflow-hidden rounded-full bg-paper/15" aria-hidden="true">
+            <div className="mt-6 h-2 overflow-hidden rounded-full bg-white/15" aria-hidden="true">
               <div className="h-full rounded-full bg-brand-light transition-[width] duration-500" style={{ width: `${Math.min(100, (high / 400) * 100)}%` }} />
             </div>
             <p className="mt-4 text-xs leading-relaxed text-paper/70">

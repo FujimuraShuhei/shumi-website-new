@@ -15,7 +15,7 @@ export default async function BlogPage() {
   return (
     <>
       <PageHero crumbs={[{ label: "ブログ" }]} en="Blog" title="ブログ" lead="ホームページと業務改善に役立つノウハウをお届けします。" />
-      <section aria-label="記事の一覧" className="bg-paper py-24 md:py-32">
+      <section aria-label="記事の一覧" className="bg-base py-24 md:py-32">
         <div className="wrap">
           <BlogList posts={posts} categories={categories} />
         </div>

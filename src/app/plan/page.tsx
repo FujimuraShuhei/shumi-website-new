@@ -65,12 +65,12 @@ export default function PlanPage() {
         lead="新規のホームページ制作は、2つのプランをご用意しています。ご要望に合わせたオーダーメイドのプランも承ります。"
       />
 
-      <section aria-labelledby="plans-title" className="bg-paper py-28 md:py-40">
+      <section aria-labelledby="plans-title" className="bg-base py-28 md:py-40">
         <div className="wrap">
           <Heading num="01" en="Website" id="plans-title" title="ホームページ制作は、2つのプラン。" />
           <ul className="mt-16 grid gap-6 lg:grid-cols-2">
             {plans.map((p) => (
-              <li key={p.name} data-r="pop" className={`rounded-[28px] p-8 md:p-12 ${p.featured ? "bg-grad-deep text-paper" : "border border-line bg-paper"}`}>
+              <li key={p.name} data-r="pop" className={`rounded-[28px] p-8 md:p-12 ${p.featured ? "bg-grad-deep text-paper" : "border border-line bg-card"}`}>
                 <div className="flex items-center justify-between">
                   <p className={`label-en text-[13px] ${p.featured ? "text-brand-light" : "text-brand-deep"}`}>{p.en}</p>
                   {p.featured && <span className="inline-flex h-8 items-center gap-1.5 rounded-full bg-brand-light px-3 text-[12px] font-bold text-night"><Icon name="up" className="h-4 w-4" strokeWidth={2.2} />集客を徹底</span>}
@@ -105,7 +105,7 @@ export default function PlanPage() {
         </div>
       </section>
 
-      <section aria-labelledby="option-title" className="bg-paper py-28 md:py-40">
+      <section aria-labelledby="option-title" className="bg-base py-28 md:py-40">
         <div className="wrap grid gap-12 lg:grid-cols-[1fr_1.6fr] lg:gap-20">
           <Heading num="03" en="Option" id="option-title" title="オプション" lead="料金の目安です。内容に合わせてお見積りします。" />
           <dl className="grid gap-3 sm:grid-cols-2">

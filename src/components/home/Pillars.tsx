@@ -43,7 +43,7 @@ export function Pillars() {
           key={p.en}
           data-r="up"
           className={`relative flex flex-col overflow-hidden rounded-[28px] p-8 md:p-10 ${
-            p.featured ? "bg-grad-deep text-paper lg:-my-6 lg:py-16" : "bg-paper ring-1 ring-line-soft"
+            p.featured ? "bg-grad-deep text-paper lg:-my-6 lg:py-16" : "bg-card ring-1 ring-line-soft"
           }`}
         >
           {p.featured && (
@@ -62,7 +62,7 @@ export function Pillars() {
                   {l.label}
                   <span
                     className={`grid h-9 w-9 shrink-0 place-items-center rounded-full transition-colors duration-300 ${
-                      p.featured ? "bg-paper/10 group-hover:bg-paper group-hover:text-ink" : "bg-mist group-hover:bg-grad-brand group-hover:text-paper"
+                      p.featured ? "bg-paper/10 group-hover:bg-card group-hover:text-ink" : "bg-mist group-hover:bg-grad-brand group-hover:text-paper"
                     }`}
                   >
                     <Arrow />
@@ -132,7 +132,7 @@ export function ReturnCycle() {
         </g>
         {nodes.map((n) => (
           <g key={n.t} data-cycle-node>
-            <circle cx={n.x} cy={n.y} r="46" fill="#ffffff" stroke="#dbe3e7" />
+            <circle cx={n.x} cy={n.y} r="46" fill="#eef1f2" stroke="#c1ccd1" />
             <text x={n.x} y={n.y - 5} textAnchor="middle" fill="#4a5764" fontSize="10.5" fontWeight="700" letterSpacing="1">
               {n.t}
             </text>

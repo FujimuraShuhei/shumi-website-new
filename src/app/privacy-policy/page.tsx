@@ -9,7 +9,7 @@ export default function PrivacyPage() {
   return (
     <>
       <PageHero crumbs={[{ label: "プライバシーポリシー" }]} en="Privacy policy" title="プライバシーポリシー" />
-      <div className="bg-paper py-20 md:py-28">
+      <div className="bg-base py-20 md:py-28">
         <div className="wrap">
           <div className="prose-shumi">
             <p>{site.company.name}（以下「当事務所」）は、お預かりする個人情報を以下の方針に従って取り扱います。</p>

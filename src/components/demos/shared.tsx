@@ -40,7 +40,7 @@ export function AppFrame({ title, children, nav }: { title: string; children: Re
             {nav.map((n, i) => (
               <li
                 key={n}
-                className={`rounded px-3 py-2 ${i === 0 ? "bg-paper/10 font-bold text-paper" : "text-paper/70"}`}
+                className={`rounded px-3 py-2 ${i === 0 ? "bg-white/10 font-bold text-paper" : "text-paper/70"}`}
                 aria-current={i === 0 ? "page" : undefined}
               >
                 {n}
@@ -50,7 +50,7 @@ export function AppFrame({ title, children, nav }: { title: string; children: Re
         </aside>
       )}
       <div className="flex min-w-0 flex-1 flex-col">
-        <div className="flex h-14 shrink-0 items-center justify-between border-b border-line bg-paper px-5">
+        <div className="flex h-14 shrink-0 items-center justify-between border-b border-line bg-white px-5">
           <p className="font-bold">{title}</p>
           <div className="flex items-center gap-2 text-sm text-ink-soft">
             <span className="grid h-8 w-8 place-items-center rounded-full bg-brand-wash text-xs font-bold text-brand-dark">山田</span>
@@ -90,7 +90,7 @@ export function Chip({
       aria-pressed={active}
       onClick={onClick}
       className={`inline-flex min-h-10 items-center gap-1.5 rounded-full border-2 px-4 text-sm font-bold transition-colors ${
-        active ? "border-ink bg-ink text-paper" : "border-line bg-paper text-ink-soft hover:border-ink-mute"
+        active ? "border-ink bg-ink text-paper" : "border-line bg-white text-ink-soft hover:border-ink-mute"
       }`}
     >
       {children}

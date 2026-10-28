@@ -40,7 +40,7 @@ export default function CompanyPage() {
         lead="サービスの魅力を、わかりやすく、魅力的にWebで伝える。そのための設計から、日々の仕事を支える仕組みづくりまでを支援しています。"
       />
 
-      <section aria-labelledby="philosophy-title" className="bg-paper py-28 md:py-40">
+      <section aria-labelledby="philosophy-title" className="bg-base py-28 md:py-40">
         <div className="wrap">
           <Heading num="01" en="Philosophy" id="philosophy-title" title="つくって終わり、にしない。" lead="魅力が正しく伝わり、選ばれるところまで支援します。" />
           <div className="mt-14">
@@ -77,7 +77,7 @@ export default function CompanyPage() {
         </div>
       </section>
 
-      <section aria-labelledby="style-title" className="bg-paper py-28 md:py-40">
+      <section aria-labelledby="style-title" className="bg-base py-28 md:py-40">
         <div className="wrap">
           <Heading num="03" en="Style" id="style-title" title="得意なテイストは、2つ。" lead="そのほかのデザインも、ご要望に応じて。" />
           <div className="mt-16">

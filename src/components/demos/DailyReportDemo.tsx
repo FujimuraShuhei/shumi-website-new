@@ -44,7 +44,7 @@ export function DailyReportDemo() {
           <p className="mt-6 text-xl font-bold" role="status">
             日報を送信しました
           </p>
-          <dl className="mt-6 w-full space-y-2 rounded-lg bg-paper p-4 text-left text-sm">
+          <dl className="mt-6 w-full space-y-2 rounded-lg bg-white p-4 text-left text-sm">
             <div className="flex justify-between gap-4">
               <dt className="text-ink-mute">現場</dt>
               <dd className="font-bold">{site}</dd>
@@ -84,7 +84,7 @@ export function DailyReportDemo() {
             <select
               value={site}
               onChange={(e) => setSite(e.target.value)}
-              className="mt-1.5 block min-h-12 w-full rounded-lg border-2 border-line bg-paper px-3"
+              className="mt-1.5 block min-h-12 w-full rounded-lg border-2 border-line bg-white px-3"
             >
               {sites.map((s) => (
                 <option key={s}>{s}</option>
@@ -102,7 +102,7 @@ export function DailyReportDemo() {
                   aria-pressed={weather === w.id}
                   onClick={() => setWeather(w.id)}
                   className={`flex min-h-14 flex-col items-center justify-center rounded-lg border-2 text-xs font-bold ${
-                    weather === w.id ? "border-ink bg-brand-wash" : "border-line bg-paper text-ink-soft"
+                    weather === w.id ? "border-ink bg-brand-wash" : "border-line bg-white text-ink-soft"
                   }`}
                 >
                   <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
@@ -133,7 +133,7 @@ export function DailyReportDemo() {
             <p className="text-sm font-bold" id="people-label">
               作業人数
             </p>
-            <div className="mt-1.5 flex items-center justify-between rounded-lg border-2 border-line bg-paper p-1.5" role="group" aria-labelledby="people-label">
+            <div className="mt-1.5 flex items-center justify-between rounded-lg border-2 border-line bg-white p-1.5" role="group" aria-labelledby="people-label">
               <button
                 type="button"
                 onClick={() => setPeople((n) => Math.max(1, n - 1))}
@@ -177,7 +177,7 @@ export function DailyReportDemo() {
             </div>
           </div>
         </div>
-        <div className="border-t border-line bg-paper p-4">
+        <div className="border-t border-line bg-white p-4">
           <button
             type="button"
             onClick={() => setSent(true)}

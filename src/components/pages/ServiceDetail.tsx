@@ -34,14 +34,14 @@ export async function ServiceDetail({ page }: { page: ServicePage }) {
       {page.mock && <MockShowcase kind={page.mock.kind} caption={page.mock.caption} />}
 
       {page.intro && (
-        <section aria-labelledby="intro-title" className="bg-paper py-28 md:py-40">
+        <section aria-labelledby="intro-title" className="bg-base py-28 md:py-40">
           <div className="wrap grid items-center gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-20">
             <Heading num={next()} en="Why" id="intro-title" title={page.intro.title} />
             <ol className="relative grid gap-4">
               <span aria-hidden="true" className="absolute bottom-10 left-[39px] top-10 w-px bg-line" />
               {page.intro.body.map((b, i) => (
                 <li key={b} data-r="pop" className="relative flex items-start gap-5 rounded-[24px] bg-mist p-6">
-                  <span className={`label-en grid h-8 w-8 shrink-0 place-items-center rounded-full text-[12px] ${i === page.intro!.body.length - 1 ? "bg-grad-brand text-paper" : "bg-paper text-brand-deep ring-1 ring-line"}`}>
+                  <span className={`label-en grid h-8 w-8 shrink-0 place-items-center rounded-full text-[12px] ${i === page.intro!.body.length - 1 ? "bg-grad-brand text-paper" : "bg-card text-brand-deep ring-1 ring-line"}`}>
                     {i === page.intro!.body.length - 1 ? <Icon name="check" className="h-4 w-4" strokeWidth={2.4} /> : String(i + 1).padStart(2, "0")}
                   </span>
                   <p className="text-[15px] font-bold leading-[1.95]">{b}</p>
@@ -52,7 +52,7 @@ export async function ServiceDetail({ page }: { page: ServicePage }) {
         </section>
       )}
 
-      <section aria-labelledby="points-title" className={`${page.intro ? "bg-mist" : "bg-paper"} py-28 md:py-40`}>
+      <section aria-labelledby="points-title" className={`${page.intro ? "bg-mist" : "bg-base"} py-28 md:py-40`}>
         <div className="wrap">
           <Heading num={next()} en="Strength" id="points-title" title={page.pointsTitle} />
           <div className="mt-16">
@@ -62,7 +62,7 @@ export async function ServiceDetail({ page }: { page: ServicePage }) {
       </section>
 
       {page.cases && (
-        <section aria-labelledby="cases-title" className={`${page.intro ? "bg-paper" : "bg-mist"} py-28 md:py-40`}>
+        <section aria-labelledby="cases-title" className={`${page.intro ? "bg-base" : "bg-mist"} py-28 md:py-40`}>
           <div className="wrap">
             <Heading num={next()} en="Case" id="cases-title" title={page.casesTitle} />
             <div className="mt-16">
@@ -81,7 +81,7 @@ export async function ServiceDetail({ page }: { page: ServicePage }) {
         </section>
       )}
 
-      <section aria-labelledby="flow-title" className="bg-paper py-28 md:py-40">
+      <section aria-labelledby="flow-title" className="bg-base py-28 md:py-40">
         <div className="wrap">
           <Heading num={next()} en="Flow" id="flow-title" title={page.flow ? `公開まで、${page.flow.length}ステップ。` : "ご相談から公開まで、5ステップ。"} />
           <div className="mt-16">{page.flow ? <StepChips steps={page.flow} /> : <FlowTimeline steps={flow} />}
@@ -124,7 +124,7 @@ export async function ServiceDetail({ page }: { page: ServicePage }) {
       )}
 
       {works.length > 0 && (
-        <section aria-labelledby="works-title" className="bg-paper py-28 md:py-40">
+        <section aria-labelledby="works-title" className="bg-base py-28 md:py-40">
           <div className="wrap">
             <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
               <Heading num={next()} en="Works" id="works-title" title="制作実績" />

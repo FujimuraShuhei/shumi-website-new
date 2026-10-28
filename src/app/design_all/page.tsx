@@ -35,7 +35,7 @@ export default async function DesignPage() {
         </div>
       </PageHero>
 
-      <section aria-labelledby="items-title" className="bg-paper py-28 md:py-40">
+      <section aria-labelledby="items-title" className="bg-base py-28 md:py-40">
         <div className="wrap">
           <Heading num="01" en="Lineup" id="items-title" title="Webも紙も、一貫したデザインで。" />
           <div className="mt-16">

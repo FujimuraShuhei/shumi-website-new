@@ -12,7 +12,7 @@ export function PostCard({ post: p }: { post: Post }) {
         ) : (
           // アイキャッチが無い記事は、タイトルを図案にして代わりに表示する
           <div aria-hidden="true" className="absolute inset-0 flex flex-col justify-between bg-grad-mint p-6">
-            <span className="label-en inline-flex h-7 w-fit items-center rounded-full bg-paper px-3 text-[11px] text-brand-deep">{p.category}</span>
+            <span className="label-en inline-flex h-7 w-fit items-center rounded-full bg-card px-3 text-[11px] text-brand-deep">{p.category}</span>
             <span className="line-clamp-3 text-[15px] font-black leading-[1.7] tracking-[0.03em] text-brand-dark">{p.title}</span>
             <span className="h-1 w-10 rounded-full bg-grad-brand" />
           </div>
