@@ -132,7 +132,7 @@ export function ReturnCycle() {
         </g>
         {nodes.map((n) => (
           <g key={n.t} data-cycle-node>
-            <circle cx={n.x} cy={n.y} r="46" fill="#eef1f2" stroke="#c1ccd1" />
+            <circle cx={n.x} cy={n.y} r="46" fill="#dbe1e3" stroke="#a9b6bc" />
             <text x={n.x} y={n.y - 5} textAnchor="middle" fill="#4a5764" fontSize="10.5" fontWeight="700" letterSpacing="1">
               {n.t}
             </text>

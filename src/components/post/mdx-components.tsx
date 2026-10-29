@@ -31,7 +31,7 @@ export async function Figure({ src, alt, caption, wide = false }: { src: string;
   return (
     <figure className={`not-prose my-10 ${wide ? "md:-mx-16" : ""}`}>
       <div className="overflow-hidden rounded-[20px] bg-mist ring-1 ring-line-soft">
-        <Image src={src} alt={alt} width={size.width} height={size.height} sizes="(min-width: 900px) 768px, 100vw" className="h-auto w-full" />
+        <Image src={src} alt={alt} width={size.width} height={size.height} sizes="(min-width: 900px) 768px, 100vw" className="h-auto w-full brightness-[0.94]" />
       </div>
       {caption && <figcaption className="mt-3 text-center text-[13px] text-ink-mute">{caption}</figcaption>}
     </figure>
@@ -71,7 +71,7 @@ export function Lead({ children }: { children: ReactNode }) {
 const boxTones = {
   point: { wrap: "bg-grad-mint ring-1 ring-brand/15", badge: "bg-grad-brand text-paper", icon: "check" as IconName, label: "ポイント" },
   note: { wrap: "bg-mist ring-1 ring-line-soft", badge: "bg-card text-brand-deep ring-1 ring-line", icon: "chat" as IconName, label: "メモ" },
-  warn: { wrap: "bg-[#ecdccb] ring-1 ring-[#dcc3a8]", badge: "bg-[#c86a1c] text-paper", icon: "eye" as IconName, label: "注意" },
+  warn: { wrap: "bg-[#dccab6] ring-1 ring-[#c8ad8f]", badge: "bg-[#c86a1c] text-paper", icon: "eye" as IconName, label: "注意" },
 };
 
 function Box({ tone, title, children }: { tone: keyof typeof boxTones; title?: string; children: ReactNode }) {

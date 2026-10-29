@@ -79,7 +79,7 @@ export function InquiryForm({ kind, defaultTopic }: { kind: "contact" | "documen
         </p>
 
         {state.status === "error" && (
-          <div ref={summaryRef} tabIndex={-1} role="alert" className="rounded-2xl border border-alert/40 bg-[#ecd7d4] p-6">
+          <div ref={summaryRef} tabIndex={-1} role="alert" className="rounded-2xl border border-alert/40 bg-[#dcc4c0] p-6">
             <p className="font-bold text-alert">{state.message}</p>
             {Object.keys(err).length > 0 && (
               <ul className="mt-2 list-disc space-y-1 pl-5 text-sm">

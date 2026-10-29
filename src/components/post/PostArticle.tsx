@@ -58,7 +58,7 @@ export async function PostArticle({ post: p }: { post: Post }) {
           <div className="min-w-0">
             {p.eyecatch && (
               <div className="mb-14 overflow-hidden rounded-[24px] bg-mist">
-                <Image src={p.eyecatch.url} alt={p.eyecatch.alt ?? ""} width={p.eyecatch.width} height={p.eyecatch.height} priority sizes="(min-width: 1100px) 760px, 100vw" className="h-auto w-full" />
+                <Image src={p.eyecatch.url} alt={p.eyecatch.alt ?? ""} width={p.eyecatch.width} height={p.eyecatch.height} priority sizes="(min-width: 1100px) 760px, 100vw" className="h-auto w-full brightness-[0.94]" />
               </div>
             )}
             {toc.length > 2 && (

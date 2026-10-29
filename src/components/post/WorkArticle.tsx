@@ -70,7 +70,7 @@ export async function WorkArticle({ work: w }: { work: Work }) {
                           width={g.width}
                           height={g.height}
                           sizes="(min-width: 768px) 50vw, 100vw"
-                          className="absolute inset-x-0 top-0 h-auto w-full transition-transform duration-[6000ms] ease-in-out group-hover:translate-y-[calc(-100%+100cqh)]"
+                          className="absolute inset-x-0 top-0 h-auto w-full brightness-[0.94] transition-transform duration-[6000ms] ease-in-out group-hover:translate-y-[calc(-100%+100cqh)]"
                         />
                         <span className="pointer-events-none absolute bottom-4 right-4 rounded-full bg-night/80 px-3 py-1.5 text-[12px] font-bold text-paper transition-opacity group-hover:opacity-0">
                           カーソルを乗せるとスクロール
@@ -78,7 +78,7 @@ export async function WorkArticle({ work: w }: { work: Work }) {
                       </div>
                     ) : (
                       <div className="overflow-hidden rounded-[24px] bg-mist ring-1 ring-line-soft">
-                        <Image src={g.url} alt={`${w.client}のサイト`} width={g.width} height={g.height} sizes="(min-width: 1280px) 1152px, 100vw" className="h-auto w-full" />
+                        <Image src={g.url} alt={`${w.client}のサイト`} width={g.width} height={g.height} sizes="(min-width: 1280px) 1152px, 100vw" className="h-auto w-full brightness-[0.94]" />
                       </div>
                     )}
                   </li>

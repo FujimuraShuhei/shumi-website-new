@@ -58,7 +58,7 @@ export function MapSalesDemo() {
   return (
     <AppFrame title="訪問マップ" nav={["訪問マップ", "顧客", "商談", "今日の予定", "レポート"]}>
       <div className="grid h-full lg:grid-cols-[280px_1fr]">
-        <section aria-label="顧客の一覧" className="order-2 flex min-h-0 flex-col border-r border-line bg-white lg:order-1">
+        <section aria-label="顧客の一覧" className="order-2 flex min-h-0 flex-col border-r border-line bg[#ccd1d3] lg:order-1">
           <div className="border-b border-line p-3">
             <p className="text-xs font-bold text-ink-soft">表示する状況</p>
             <div className="mt-2 flex flex-wrap gap-1.5">
@@ -100,13 +100,13 @@ export function MapSalesDemo() {
           </p>
         </section>
 
-        <div className="relative order-1 min-h-[380px] bg-[#eef1f3] lg:order-2">
+        <div className="relative order-1 min-h-[380px] bg[#d6d9db] lg:order-2">
           <svg viewBox="0 0 480 440" className="absolute inset-0 h-full w-full" role="img" aria-label="顧客の位置を示した地図（デモ用のイメージ）" preserveAspectRatio="xMidYMid slice">
             {/* 海 */}
-            <path d="M480 60 C 440 140 470 220 420 300 C 390 350 420 400 400 440 L480 440Z" fill="#d6e4f5" />
+            <path d="M480 60 C 440 140 470 220 420 300 C 390 350 420 400 400 440 L480 440Z" fill="#c1cddc" />
             {/* 公園 */}
-            <rect x="170" y="70" width="60" height="40" rx="6" fill="#dbe9de" />
-            <rect x="40" y="290" width="70" height="50" rx="6" fill="#dbe9de" />
+            <rect x="170" y="70" width="60" height="40" rx="6" fill="#c5d2c8" />
+            <rect x="40" y="290" width="70" height="50" rx="6" fill="#c5d2c8" />
             {/* 川 */}
             <path d="M0 190 C 90 170 150 210 220 200 S 340 170 430 210" fill="none" stroke="#c9dbf0" strokeWidth="9" />
             {/* 幹線道路 */}
@@ -146,12 +146,12 @@ export function MapSalesDemo() {
               </g>
             ))}
           </svg>
-          <p className="absolute left-3 top-3 rounded bg-white/90 px-2 py-1 text-[11px] text-ink-mute">地図はデモ用のイメージです</p>
+          <p className="absolute left-3 top-3 rounded bg[#ccd1d3]/90 px-2 py-1 text-[11px] text-ink-mute">地図はデモ用のイメージです</p>
 
           {selected && (
             <article
               aria-label={`${selected.name}の情報`}
-              className="absolute inset-x-3 bottom-3 rounded-lg border border-line bg-white p-4 shadow-[0_12px_30px_-12px_rgba(27,35,43,0.35)] sm:left-auto sm:w-80"
+              className="absolute inset-x-3 bottom-3 rounded-lg border border-line bg[#ccd1d3] p-4 shadow-[0_12px_30px_-12px_rgba(27,35,43,0.35)] sm:left-auto sm:w-80"
             >
               <div className="flex items-start gap-3">
                 <Pin stage={selected.stage} size={30} />

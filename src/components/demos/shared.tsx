@@ -31,7 +31,7 @@ export function useToast() {
 /** PCアプリ風の枠 */
 export function AppFrame({ title, children, nav }: { title: string; children: ReactNode; nav?: string[] }) {
   return (
-    <div className="relative flex h-full min-h-[560px] overflow-hidden rounded-xl border border-line bg-[#f5f7f9] text-ink">
+    <div className="relative flex h-full min-h-[560px] overflow-hidden rounded-xl border border-line bg[#dcdee0] text-ink">
       {nav && (
         <aside className="hidden w-48 shrink-0 flex-col bg-night p-4 text-paper md:flex" aria-label="アプリのメニュー">
           <p className="en text-lg font-bold">Genba</p>
@@ -40,7 +40,7 @@ export function AppFrame({ title, children, nav }: { title: string; children: Re
             {nav.map((n, i) => (
               <li
                 key={n}
-                className={`rounded px-3 py-2 ${i === 0 ? "bg-white/10 font-bold text-paper" : "text-paper/70"}`}
+                className={`rounded px-3 py-2 ${i === 0 ? "bg[#ccd1d3]/10 font-bold text-paper" : "text-paper/70"}`}
                 aria-current={i === 0 ? "page" : undefined}
               >
                 {n}
@@ -50,7 +50,7 @@ export function AppFrame({ title, children, nav }: { title: string; children: Re
         </aside>
       )}
       <div className="flex min-w-0 flex-1 flex-col">
-        <div className="flex h-14 shrink-0 items-center justify-between border-b border-line bg-white px-5">
+        <div className="flex h-14 shrink-0 items-center justify-between border-b border-line bg[#ccd1d3] px-5">
           <p className="font-bold">{title}</p>
           <div className="flex items-center gap-2 text-sm text-ink-soft">
             <span className="grid h-8 w-8 place-items-center rounded-full bg-brand-wash text-xs font-bold text-brand-dark">山田</span>
@@ -67,7 +67,7 @@ export function AppFrame({ title, children, nav }: { title: string; children: Re
 export function PhoneFrame({ children }: { children: ReactNode }) {
   return (
     <div className="mx-auto w-full max-w-[380px] rounded-[44px] border-[10px] border-ink bg-ink shadow-[0_30px_60px_-30px_rgba(27,35,43,0.5)]">
-      <div className="relative h-[680px] overflow-hidden rounded-[34px] bg-[#f5f7f9]">
+      <div className="relative h-[680px] overflow-hidden rounded-[34px] bg[#dcdee0]">
         <div aria-hidden="true" className="absolute left-1/2 top-2 z-10 h-6 w-24 -translate-x-1/2 rounded-full bg-ink" />
         {children}
       </div>
@@ -90,7 +90,7 @@ export function Chip({
       aria-pressed={active}
       onClick={onClick}
       className={`inline-flex min-h-10 items-center gap-1.5 rounded-full border-2 px-4 text-sm font-bold transition-colors ${
-        active ? "border-ink bg-ink text-paper" : "border-line bg-white text-ink-soft hover:border-ink-mute"
+        active ? "border-ink bg-ink text-paper" : "border-line bg[#ccd1d3] text-ink-soft hover:border-ink-mute"
       }`}
     >
       {children}

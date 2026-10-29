@@ -8,7 +8,7 @@ const weathers = [
   {
     id: "cloud",
     label: "くもり",
-    icon: <path d="M5 14h10a3.5 3.5 0 0 0-1-6.9A4.5 4.5 0 0 0 5.3 9 2.6 2.6 0 0 0 5 14z" fill="#d9dee2" stroke="#1b232b" strokeWidth="1.5" />,
+    icon: <path d="M5 14h10a3.5 3.5 0 0 0-1-6.9A4.5 4.5 0 0 0 5.3 9 2.6 2.6 0 0 0 5 14z" fill="#c3c8cb" stroke="#1b232b" strokeWidth="1.5" />,
   },
   {
     id: "rain",
@@ -44,7 +44,7 @@ export function DailyReportDemo() {
           <p className="mt-6 text-xl font-bold" role="status">
             日報を送信しました
           </p>
-          <dl className="mt-6 w-full space-y-2 rounded-lg bg-white p-4 text-left text-sm">
+          <dl className="mt-6 w-full space-y-2 rounded-lg bg[#ccd1d3] p-4 text-left text-sm">
             <div className="flex justify-between gap-4">
               <dt className="text-ink-mute">現場</dt>
               <dd className="font-bold">{site}</dd>
@@ -84,7 +84,7 @@ export function DailyReportDemo() {
             <select
               value={site}
               onChange={(e) => setSite(e.target.value)}
-              className="mt-1.5 block min-h-12 w-full rounded-lg border-2 border-line bg-white px-3"
+              className="mt-1.5 block min-h-12 w-full rounded-lg border-2 border-line bg[#ccd1d3] px-3"
             >
               {sites.map((s) => (
                 <option key={s}>{s}</option>
@@ -102,7 +102,7 @@ export function DailyReportDemo() {
                   aria-pressed={weather === w.id}
                   onClick={() => setWeather(w.id)}
                   className={`flex min-h-14 flex-col items-center justify-center rounded-lg border-2 text-xs font-bold ${
-                    weather === w.id ? "border-ink bg-brand-wash" : "border-line bg-white text-ink-soft"
+                    weather === w.id ? "border-ink bg-brand-wash" : "border-line bg[#ccd1d3] text-ink-soft"
                   }`}
                 >
                   <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
@@ -133,7 +133,7 @@ export function DailyReportDemo() {
             <p className="text-sm font-bold" id="people-label">
               作業人数
             </p>
-            <div className="mt-1.5 flex items-center justify-between rounded-lg border-2 border-line bg-white p-1.5" role="group" aria-labelledby="people-label">
+            <div className="mt-1.5 flex items-center justify-between rounded-lg border-2 border-line bg[#ccd1d3] p-1.5" role="group" aria-labelledby="people-label">
               <button
                 type="button"
                 onClick={() => setPeople((n) => Math.max(1, n - 1))}
@@ -177,7 +177,7 @@ export function DailyReportDemo() {
             </div>
           </div>
         </div>
-        <div className="border-t border-line bg-white p-4">
+        <div className="border-t border-line bg[#ccd1d3] p-4">
           <button
             type="button"
             onClick={() => setSent(true)}
@@ -216,7 +216,7 @@ export function PhotoThumb({ seed }: { seed: number }) {
           <rect x="0" y="28" width="60" height="5" />
         </g>
       )}
-      {v === 3 && <rect x="10" y="12" width="40" height="36" fill="#e9ecee" stroke="#7d8790" strokeWidth="2" />}
+      {v === 3 && <rect x="10" y="12" width="40" height="36" fill="#d2d4d6" stroke="#7d8790" strokeWidth="2" />}
       <rect x="4" y="44" width="22" height="12" fill="#2e5a3e" />
     </svg>
   );

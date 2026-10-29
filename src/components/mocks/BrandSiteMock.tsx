@@ -82,7 +82,7 @@ export function BrandSiteMock({ active = true }: { active?: boolean }) {
       <BrowserChrome url="aoba-komuten.jp">
         <div data-page className="absolute inset-x-0 top-0">
           {/* ナビ */}
-          <div data-nav className="flex h-14 items-center justify-between border-b border-line-soft bg-white px-6">
+          <div data-nav className="flex h-14 items-center justify-between border-b border-line-soft bg[#ccd1d3] px-6">
             <div className="flex items-center gap-2.5">
               <svg width="26" height="26" viewBox="0 0 26 26">
                 <path d="M3 12L13 4l10 8v10H3z" fill="#154245" />
@@ -156,7 +156,7 @@ export function BrandSiteMock({ active = true }: { active?: boolean }) {
           </div>
 
           {/* サービス */}
-          <div className="bg-white px-8 py-7">
+          <div className="bg[#ccd1d3] px-8 py-7">
             <p className="en text-[10px] tracking-[0.2em] text-brand-deep">SERVICE</p>
             <div className="mt-3 grid grid-cols-3 gap-4">
               {[
@@ -195,7 +195,7 @@ export function BrandSiteMock({ active = true }: { active?: boolean }) {
                 ["都筑区 M様邸", "新築注文住宅", ["#d6e0e8", "#9fb4c7"]],
                 ["緑区 T様邸", "外構工事", ["#d9e6d6", "#a5c09f"]],
               ].map(([name, kind, [a, b]], i) => (
-                <div key={name as string} data-tile={i} className="overflow-hidden rounded-xl bg-white">
+                <div key={name as string} data-tile={i} className="overflow-hidden rounded-xl bg[#ccd1d3]">
                   <div className="relative h-[92px] overflow-hidden">
                     <svg data-tile-img viewBox="0 0 160 92" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 h-full w-full">
                       <defs>
@@ -205,9 +205,9 @@ export function BrandSiteMock({ active = true }: { active?: boolean }) {
                         </linearGradient>
                       </defs>
                       <rect width="160" height="92" fill={`url(#tile-${i})`} />
-                      <path d={i % 2 ? "M30 92V50l45-30 45 30v42z" : "M20 92V44h70V30l40 18v44z"} fill="#ffffff" opacity="0.85" />
+                      <path d={i % 2 ? "M30 92V50l45-30 45 30v42z" : "M20 92V44h70V30l40 18v44z"} fill="#e3e8ea" opacity="0.85" />
                       <path d={i % 2 ? "M62 92V68h26v24" : "M40 60h22v16H40zM96 58h20v34H96z"} fill={b as string} opacity="0.7" />
-                      <rect x="0" y="84" width="160" height="8" fill="#ffffff" opacity="0.4" />
+                      <rect x="0" y="84" width="160" height="8" fill="#e3e8ea" opacity="0.4" />
                     </svg>
                     <span data-tile-more className="absolute inset-x-2 bottom-2 rounded-md bg-ink/80 py-1 text-center text-[9px] text-paper">
                       詳しく見る
@@ -224,7 +224,7 @@ export function BrandSiteMock({ active = true }: { active?: boolean }) {
         </div>
 
         {/* お問い合わせの通知 */}
-        <div data-toast className="absolute bottom-5 right-5 z-20 flex w-[230px] items-center gap-3 rounded-xl bg-white p-3.5 shadow-[0_20px_40px_-12px_rgba(13,31,34,0.4)] ring-1 ring-line-soft">
+        <div data-toast className="absolute bottom-5 right-5 z-20 flex w-[230px] items-center gap-3 rounded-xl bg[#ccd1d3] p-3.5 shadow-[0_20px_40px_-12px_rgba(13,31,34,0.4)] ring-1 ring-line-soft">
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand-deep">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#fff" strokeWidth="1.5">
               <rect x="2" y="3.5" width="12" height="9" rx="1.5" />
