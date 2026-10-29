@@ -12,8 +12,9 @@ export function Arrow({ className = "" }: { className?: string }) {
 type Variant = "primary" | "secondary" | "light" | "ghost";
 const variants: Record<Variant, string> = {
   primary: "bg-grad-brand text-paper hover:brightness-110",
-  secondary: "border border-ink/20 bg-card text-ink hover:border-ink",
-  light: "bg-card text-ink hover:bg-mint",
+  // グレーの上：背景を塗らず枠線だけ。夜色・ティールの上：明るいボタン（白系の背景はここだけ）
+  secondary: "border border-ink/35 text-ink hover:border-ink hover:bg-ink/[0.06]",
+  light: "bg-card text-ink hover:bg-paper",
   ghost: "border border-paper/30 text-paper hover:border-paper",
 };
 
@@ -32,7 +33,7 @@ export function Button({ href, children, variant = "primary", className = "" }: 
             ? "bg-paper/15"
             : variant === "light"
               ? "bg-brand-wash text-brand-deep"
-              : "bg-mist transition-colors group-hover:bg-grad-brand group-hover:text-paper"
+              : "bg-ink/[0.08] transition-colors group-hover:bg-grad-brand group-hover:text-paper"
         }`}
       >
         <Arrow />
@@ -184,13 +185,13 @@ export function ContactCta() {
   return (
     <section aria-label="資料請求とお問い合わせ" className="bg-base py-24 md:py-32">
       <div className="wrap grid gap-6 lg:grid-cols-2">
-        <Link href="/document/" data-r="up" className="group relative overflow-hidden rounded-[24px] bg-grad-mint p-10 transition-colors hover:bg-brand-wash md:p-14">
-          <p className="label-en text-[13px] text-brand-deep">Document</p>
+        <Link href="/document/" data-r="up" className="group relative overflow-hidden rounded-[24px] bg-grad-brand p-10 text-paper transition-[filter] hover:brightness-110 md:p-14">
+          <p className="label-en text-[13px] text-paper/85">Document</p>
           <p className="mt-4 text-[1.75rem] font-black leading-relaxed tracking-[0.06em]">お役立ち資料</p>
-          <p className="mt-4 max-w-md text-[15px] leading-[2] text-ink-soft">成功事例や詳しい料金プラン、お悩みの解決方法をまとめた資料を無料でお配りしています。</p>
-          <span className="mt-10 inline-flex items-center gap-3 text-[15px] font-bold text-brand-deep">
+          <p className="mt-4 max-w-md text-[15px] leading-[2] text-paper/80">成功事例や詳しい料金プラン、お悩みの解決方法をまとめた資料を無料でお配りしています。</p>
+          <span className="mt-10 inline-flex items-center gap-3 text-[15px] font-bold">
             資料をダウンロードする
-            <span className="grid h-12 w-12 place-items-center rounded-full bg-card transition-transform duration-300 group-hover:translate-x-1">
+            <span className="grid h-12 w-12 place-items-center rounded-full bg-paper/15 transition-transform duration-300 group-hover:translate-x-1">
               <Arrow />
             </span>
           </span>
@@ -218,7 +219,7 @@ export function Pill({ children, tone = "line" }: { children: ReactNode; tone?: 
   return (
     <span
       className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-bold tracking-[0.06em] ${
-        tone === "brand" ? "bg-brand-wash text-brand-deep" : "border border-line text-ink-soft"
+        tone === "brand" ? "bg-brand-deep text-paper" : "border border-ink/25 text-ink-soft"
       }`}
     >
       {children}

@@ -41,7 +41,7 @@ export async function ServiceDetail({ page }: { page: ServicePage }) {
               <span aria-hidden="true" className="absolute bottom-10 left-[39px] top-10 w-px bg-line" />
               {page.intro.body.map((b, i) => (
                 <li key={b} data-r="pop" className="relative flex items-start gap-5 rounded-[24px] bg-mist p-6">
-                  <span className={`label-en grid h-8 w-8 shrink-0 place-items-center rounded-full text-[12px] ${i === page.intro!.body.length - 1 ? "bg-grad-brand text-paper" : "bg-card text-brand-deep ring-1 ring-line"}`}>
+                  <span className={`label-en grid h-8 w-8 shrink-0 place-items-center rounded-full text-[12px] ${i === page.intro!.body.length - 1 ? "bg-grad-brand text-paper" : "bg-panel text-brand-light"}`}>
                     {i === page.intro!.body.length - 1 ? <Icon name="check" className="h-4 w-4" strokeWidth={2.4} /> : String(i + 1).padStart(2, "0")}
                   </span>
                   <p className="text-[15px] font-bold leading-[1.95]">{b}</p>

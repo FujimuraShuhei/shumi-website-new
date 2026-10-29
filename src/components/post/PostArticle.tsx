@@ -38,7 +38,7 @@ export async function PostArticle({ post: p }: { post: Post }) {
           <Breadcrumb crumbs={[{ href: "/blog/", label: "ブログ" }, { label: p.title }]} />
           <div className="mt-14 max-w-[52rem] md:mt-20">
             <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-[13px]">
-              <Link href={`/blog/?category=${encodeURIComponent(p.category)}`} className="inline-flex h-8 items-center rounded-full bg-brand-wash px-3 font-bold text-brand-deep hover:bg-brand hover:text-paper">
+              <Link href={`/blog/?category=${encodeURIComponent(p.category)}`} className="inline-flex h-8 items-center rounded-full bg-brand-deep px-3 font-bold text-paper hover:bg-brand">
                 {p.category}
               </Link>
               <time dateTime={p.publishedAt} className="en text-ink-mute">
@@ -131,7 +131,7 @@ function TocList({ items }: { items: { id: string; text: string }[] }) {
     <ol className="mt-4 space-y-1">
       {items.map((h, i) => (
         <li key={h.id}>
-          <a href={`#${h.id}`} className="group flex gap-3 rounded-xl px-2 py-2 text-[13.5px] leading-[1.7] hover:bg-card">
+          <a href={`#${h.id}`} className="group flex gap-3 rounded-xl px-2 py-2 text-[13.5px] leading-[1.7] hover:bg-sunk">
             <span className="label-en mt-[0.15em] text-[11px] text-brand-deep">{String(i + 1).padStart(2, "0")}</span>
             <span className="font-bold group-hover:text-brand-deep">{h.text}</span>
           </a>

@@ -177,7 +177,7 @@ export function Header() {
         aria-hidden={!panelOpen}
         inert={!panelOpen}
         onMouseEnter={() => active && hoverOpen(active.href)}
-        className={`absolute inset-x-0 top-full hidden border-t border-line bg-card shadow-[0_24px_48px_-32px_rgba(13,31,34,0.35)] transition-[opacity,translate,visibility] duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] xl:block ${
+        className={`absolute inset-x-0 top-full hidden border-t border-line bg-base shadow-[0_24px_48px_-32px_rgba(13,31,34,0.35)] transition-[opacity,translate,visibility] duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] xl:block ${
           panelOpen ? "visible translate-y-0 opacity-100" : "invisible -translate-y-2 opacity-0"
         }`}
       >
@@ -189,7 +189,7 @@ export function Header() {
         id={`${menuId}-mobile`}
         aria-hidden={!mobileOpen}
         inert={!mobileOpen}
-        className={`fixed inset-x-0 bottom-0 top-20 overflow-y-auto bg-card transition-[opacity,translate,visibility] duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] xl:hidden ${
+        className={`fixed inset-x-0 bottom-0 top-20 overflow-y-auto bg-base transition-[opacity,translate,visibility] duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] xl:hidden ${
           mobileOpen ? "visible translate-y-0 opacity-100" : "invisible -translate-y-3 opacity-0"
         }`}
       >

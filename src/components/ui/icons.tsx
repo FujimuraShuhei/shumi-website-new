@@ -173,7 +173,7 @@ export function IconBadge({ name, tone = "light", size = "md" }: { name: IconNam
   const box = size === "lg" ? "h-16 w-16" : size === "sm" ? "h-10 w-10" : "h-12 w-12";
   const ic = size === "lg" ? "h-8 w-8" : size === "sm" ? "h-5 w-5" : "h-6 w-6";
   const tones = {
-    light: "bg-brand-wash text-brand-deep",
+    light: "bg-brand-deep text-paper",
     brand: "bg-grad-brand text-paper shadow-[0_10px_24px_-10px_rgba(10,122,131,0.7)]",
     dark: "bg-paper/10 text-brand-light ring-1 ring-paper/15",
   };

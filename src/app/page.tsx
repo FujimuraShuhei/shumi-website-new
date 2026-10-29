@@ -18,7 +18,7 @@ export default async function Home() {
       <StatementBand />
       <AppEfficiency />
 
-      {/* 02 還元（夜色の上に、白い面がせり上がってくる） */}
+      {/* 02 還元（夜色の上に、グレーの面がせり上がってくる） */}
       <section aria-labelledby="message-title" className="relative z-10 -mt-12 rounded-t-[40px] bg-base py-28 md:-mt-16 md:rounded-t-[72px] md:py-40">
         <div className="wrap grid items-center gap-16 lg:grid-cols-[1fr_1fr] lg:gap-20">
           <div>
@@ -37,8 +37,8 @@ export default async function Home() {
             />
             <ul className="mt-10 flex flex-wrap gap-2">
               {["ブランドで選ばれる", "採用で人が集まる", "アプリで力を発揮する"].map((t) => (
-                <li key={t} data-r="pop" className="inline-flex h-10 items-center gap-2 rounded-full bg-mist px-4 text-[13px] font-bold">
-                  <Icon name="check" className="h-4 w-4 text-brand-deep" strokeWidth={2.4} />
+                <li key={t} data-r="pop" className="inline-flex h-10 items-center gap-2 rounded-full bg-panel px-4 text-[13px] font-bold text-paper">
+                  <Icon name="check" className="h-4 w-4 text-brand-light" strokeWidth={2.4} />
                   {t}
                 </li>
               ))}

@@ -10,7 +10,7 @@ export function ServiceRows({ items }: { items: { href: string; label: string; e
     <ul className="border-t border-line">
       {items.map((s) => (
         <li key={s.href} data-r="up" className="border-b border-line">
-          <Link href={s.href} className="group grid items-center gap-3 px-2 py-8 transition-colors duration-300 hover:bg-mint md:grid-cols-[12rem_1fr_auto] md:gap-10 md:px-6 md:py-10">
+          <Link href={s.href} className="group grid items-center gap-3 px-2 py-8 transition-colors duration-300 hover:bg-ink/[0.05] md:grid-cols-[12rem_1fr_auto] md:gap-10 md:px-6 md:py-10">
             <span className="label-en text-[13px] text-brand-deep">{s.en}</span>
             <span>
               <span className="block text-lg font-extrabold tracking-[0.04em] md:text-xl">{s.label}</span>
@@ -91,7 +91,7 @@ export function FlowSteps() {
     </div>
     <ol className="grid gap-px overflow-hidden rounded-2xl bg-line-soft md:grid-cols-5">
       {flow.map((f, i) => (
-        <li key={f.title} data-r="up" className="relative bg-card p-8">
+        <li key={f.title} data-r="up" className="relative bg-panel p-8 text-paper">
           <p className="label-en text-[13px] text-brand-deep">Step {String(i + 1).padStart(2, "0")}</p>
           <p className="mt-6 text-lg font-extrabold tracking-[0.04em]">{f.title}</p>
           <p className="mt-3 text-sm leading-[2] text-ink-soft">{f.body}</p>
@@ -126,7 +126,7 @@ export function Triad({ items, tone = "default" }: { items: { en?: string; title
   return (
     <ul className={`grid md:grid-cols-3 ${tone === "panel" ? "gap-px overflow-hidden rounded-2xl bg-line-soft" : "gap-12 md:gap-10"}`}>
       {items.map((it) => (
-        <li key={it.title} data-r="up" className={tone === "panel" ? "bg-card p-8 md:p-10" : "border-t border-ink pt-8"}>
+        <li key={it.title} data-r="up" className={tone === "panel" ? "bg-panel p-8 text-paper md:p-10" : "border-t border-ink pt-8"}>
           {it.en && <p className="label-en text-[13px] text-brand-deep">{it.en}</p>}
           <p className="mt-4 text-lg font-extrabold tracking-[0.04em]">{it.title}</p>
           <p className="mt-4 text-[15px] leading-[2.05] text-ink-soft">{it.body}</p>

@@ -43,7 +43,7 @@ export function Pillars() {
           key={p.en}
           data-r="up"
           className={`relative flex flex-col overflow-hidden rounded-[28px] p-8 md:p-10 ${
-            p.featured ? "bg-grad-deep text-paper lg:-my-6 lg:py-16" : "bg-card ring-1 ring-line-soft"
+            p.featured ? "bg-grad-brand text-paper lg:-my-6 lg:py-16" : "bg-panel text-paper"
           }`}
         >
           {p.featured && (
@@ -51,18 +51,18 @@ export function Pillars() {
               特に効果を実感いただいています
             </span>
           )}
-          <p className={`label-en text-[13px] ${p.featured ? "text-brand-light" : "text-brand-deep"}`}>{p.en}</p>
+          <p className={`label-en text-[13px] text-brand-light`}>{p.en}</p>
           <h3 className="mt-4 text-[13px] font-bold tracking-[0.08em] opacity-70">{p.title}</h3>
           <p className="phrase mt-3 text-[1.375rem] font-black leading-[1.6] tracking-[0.03em] xl:text-[1.5rem]">{p.catch}</p>
-          <p className={`mt-5 text-[15px] leading-[2.05] ${p.featured ? "text-paper/75" : "text-ink-soft"}`}>{p.body}</p>
-          <ul className={`mt-auto divide-y pt-10 ${p.featured ? "divide-paper/15" : "divide-line-soft"}`}>
+          <p className={`mt-5 text-[15px] leading-[2.05] text-paper/75`}>{p.body}</p>
+          <ul className={`mt-auto divide-y pt-10 divide-paper/15`}>
             {p.links.map((l) => (
               <li key={l.href}>
                 <Link href={l.href} className="group flex min-h-14 items-center justify-between gap-4 text-[15px] font-bold">
                   {l.label}
                   <span
                     className={`grid h-9 w-9 shrink-0 place-items-center rounded-full transition-colors duration-300 ${
-                      p.featured ? "bg-paper/10 group-hover:bg-card group-hover:text-ink" : "bg-mist group-hover:bg-grad-brand group-hover:text-paper"
+                      "bg-paper/10 group-hover:bg-card group-hover:text-ink"
                     }`}
                   >
                     <Arrow />
@@ -110,10 +110,10 @@ export function ReturnCycle() {
             <stop offset="1" stopColor="#3cc3c4" stopOpacity="0.9" />
           </linearGradient>
           <marker id="cycle-arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-            <path d="M0 0 L10 5 L0 10z" fill="#0a7a83" />
+            <path d="M0 0 L10 5 L0 10z" fill="#055a62" />
           </marker>
         </defs>
-        <circle cx="200" cy="200" r="152" fill="none" stroke="#e2f3f4" strokeWidth="18" />
+        <circle cx="200" cy="200" r="152" fill="none" stroke="#b5cfd2" strokeWidth="18" />
         {/* リングを回る光 */}
         <g data-cycle-spin opacity="0">
           <path d="M200 48 A152 152 0 0 1 352 200" fill="none" stroke="url(#cycle-spin)" strokeWidth="18" strokeLinecap="round" opacity="0.55" />
@@ -132,11 +132,11 @@ export function ReturnCycle() {
         </g>
         {nodes.map((n) => (
           <g key={n.t} data-cycle-node>
-            <circle cx={n.x} cy={n.y} r="46" fill="#dbe1e3" stroke="#a9b6bc" />
-            <text x={n.x} y={n.y - 5} textAnchor="middle" fill="#4a5764" fontSize="10.5" fontWeight="700" letterSpacing="1">
+            <circle cx={n.x} cy={n.y} r="46" fill="#1f4e54" />
+            <text x={n.x} y={n.y - 5} textAnchor="middle" fill="#3cc3c4" fontSize="10.5" fontWeight="700" letterSpacing="1">
               {n.t}
             </text>
-            <text x={n.x} y={n.y + 13} textAnchor="middle" fill="#1d2a36" fontSize={n.s.length > 6 ? 10 : 12.5} fontWeight="900" letterSpacing="0.5">
+            <text x={n.x} y={n.y + 13} textAnchor="middle" fill="#ffffff" fontSize={n.s.length > 6 ? 10 : 12.5} fontWeight="900" letterSpacing="0.5">
               {n.s}
             </text>
           </g>
