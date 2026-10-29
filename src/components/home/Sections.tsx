@@ -39,7 +39,7 @@ export function WorkThumb({ work, sizes = "(min-width: 1024px) 33vw, 100vw", pri
         fill
         sizes={sizes}
         priority={priority}
-        className="object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+        className="object-cover brightness-[0.92] transition-[scale,filter] duration-700 group-hover:scale-[1.03] group-hover:brightness-100"
       />
     );
   }
@@ -49,7 +49,7 @@ export function WorkThumb({ work, sizes = "(min-width: 1024px) 33vw, 100vw", pri
         <g transform={`translate(${shift} 0) rotate(-45 200 125)`}>
           <rect x="120" y="70" width="320" height="34" rx="17" fill="#069fa9" opacity="0.85" />
           <rect x="190" y="124" width="230" height="16" rx="8" fill="#154245" opacity="0.8" />
-          <rect x="60" y="160" width="300" height="28" rx="14" fill="#eef1f2" />
+          <rect x="60" y="160" width="300" height="28" rx="14" fill="#dbe1e3" />
         </g>
       </svg>
       <span className="absolute bottom-5 left-6 text-sm font-bold tracking-[0.08em] text-brand-dark">{work.client.replace(/様$/, "")}</span>

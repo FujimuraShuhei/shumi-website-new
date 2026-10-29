@@ -128,7 +128,7 @@ function FlowDiagram({ layout }: { layout: Layout }) {
         const y = p.y - 24;
         return (
           <g key={outputs[i]} data-fd-out>
-            <rect x={x} y={y} width={H ? 200 : chipW} height="48" rx="12" fill="#eef1f2" />
+            <rect x={x} y={y} width={H ? 200 : chipW} height="48" rx="12" fill="#dbe1e3" />
             <circle cx={x + 24} cy={y + 24} r="9" fill="#e2f3f4" />
             <path d={`M${x + 19.5} ${y + 24.5} l3 3 6-6.5`} fill="none" stroke="#0a7a83" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             <text x={x + 42} y={y + 29.5} fill="#1d2a36" fontSize="14" fontWeight="800" letterSpacing="1">

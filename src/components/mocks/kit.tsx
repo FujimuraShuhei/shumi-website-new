@@ -104,16 +104,16 @@ export function BrowserChrome({ url, children, tone = "light" }: { url: string; 
   return (
     <div
       className={`relative flex h-full w-full flex-col overflow-hidden rounded-[14px] shadow-[0_50px_120px_-40px_rgba(0,0,0,0.75),0_0_0_1px_rgba(255,255,255,0.06)] ${
-        tone === "dark" ? "bg-[#0b1a1d]" : "bg-white"
+        tone === "dark" ? "bg-[#0b1a1d]" : "bg[#ccd1d3]"
       }`}
     >
-      <div className={`relative flex h-10 shrink-0 items-center gap-3 px-4 ${tone === "dark" ? "bg-[#10272b]" : "bg-[#eef2f4]"}`}>
+      <div className={`relative flex h-10 shrink-0 items-center gap-3 px-4 ${tone === "dark" ? "bg-[#10272b]" : "bg[#d6dadc]"}`}>
         <div className="flex gap-1.5">
           <span className="h-2.5 w-2.5 rounded-full bg-[#ff6159]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#28c941]" />
         </div>
-        <div className="mx-auto flex h-6 w-[340px] items-center gap-2 rounded-md bg-white px-3 text-[11px] text-ink-mute">
+        <div className="mx-auto flex h-6 w-[340px] items-center gap-2 rounded-md bg[#ccd1d3] px-3 text-[11px] text-ink-mute">
           <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
             <rect x="1.5" y="4.5" width="7" height="5" rx="1" fill="#6a7682" />
             <path d="M3 4.5V3a2 2 0 0 1 4 0v1.5" fill="none" stroke="#6a7682" />
@@ -135,7 +135,7 @@ export function Cursor() {
     <div data-cursor className="pointer-events-none absolute left-0 top-0 z-50 opacity-0">
       <span data-ripple className="absolute -left-4 -top-4 h-8 w-8 rounded-full border-2 border-brand-light opacity-0" />
       <svg width="22" height="26" viewBox="0 0 22 26" className="drop-shadow-[0_3px_6px_rgba(0,0,0,0.35)]">
-        <path d="M2 2l16 11.5-7 1.2 4.2 8.3-3 1.5-4.2-8.4L2 21z" fill="#ffffff" stroke="#0d1f22" strokeWidth="1.5" strokeLinejoin="round" />
+        <path d="M2 2l16 11.5-7 1.2 4.2 8.3-3 1.5-4.2-8.4L2 21z" fill="#e3e8ea" stroke="#0d1f22" strokeWidth="1.5" strokeLinejoin="round" />
       </svg>
     </div>
   );

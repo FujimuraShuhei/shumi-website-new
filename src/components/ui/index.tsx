@@ -167,7 +167,7 @@ export function Bands({ className = "" }: { className?: string }) {
         </linearGradient>
         <linearGradient id="band-b" x1="0" y1="1" x2="1" y2="0">
           <stop offset="0" stopColor="#e2f3f4" />
-          <stop offset="1" stopColor="#d6e9ea" />
+          <stop offset="1" stopColor="#c4dcdd" />
         </linearGradient>
       </defs>
       <g transform="rotate(-45 310 260)">

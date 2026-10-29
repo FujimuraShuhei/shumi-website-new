@@ -12,22 +12,22 @@
 ------------------------------------------------------------------ */
 @theme {
   /* 明るい面（白は使わない） */
-  --color-base: #e2e7e9;      /* ページの地 */
-  --color-mist: #d7dee1;      /* 一段暗い面（交互のセクション） */
-  --color-card: #eef1f2;      /* カード・ボタン */
+  --color-base: #cfd6d9;      /* ページの地 */
+  --color-mist: #c4cdd1;      /* 一段暗い面（交互のセクション） */
+  --color-card: #dbe1e3;      /* カード・ボタン */
   --color-paper: #ffffff;     /* 暗い面・ブランド色の上の文字（背景には使わない） */
-  --color-mint: #d2e6e7;
-  --color-ink: #1b2832;
-  --color-ink-soft: #3f4c58;
-  --color-ink-mute: #55626d;
-  --color-line: #c1ccd1;
-  --color-line-soft: #d0d9dd;
+  --color-mint: #bfd9da;
+  --color-ink: #16232c;
+  --color-ink-soft: #33404b;
+  --color-ink-mute: #46525c;
+  --color-line: #a9b6bc;
+  --color-line-soft: #b9c4c9;
 
   --color-brand: #069fa9;
   --color-brand-light: #3cc3c4;
-  --color-brand-deep: #076770;
+  --color-brand-deep: #055a62;
   --color-brand-dark: #154245;
-  --color-brand-wash: #cde6e8;
+  --color-brand-wash: #bcdcde;
   --color-night: #0d1f22;
 
   --color-alert: #c2362f;
@@ -177,8 +177,8 @@
     linear-gradient(180deg, #0d1f22 0%, #0c2026 100%);
 }
 @utility bg-grad-mint {
-  background-color: #d4e7e8;
-  background-image: linear-gradient(135deg, #d6e9ea 0%, #d0e5e8 50%, #cfe0ea 100%);
+  background-color: #c1dadb;
+  background-image: linear-gradient(135deg, #c4dcdd 0%, #bed8db 50%, #bdd3de 100%);
 }
 @utility text-grad-brand {
   background-image: linear-gradient(100deg, #069fa9 0%, #0796a8 45%, #0b7fae 100%);

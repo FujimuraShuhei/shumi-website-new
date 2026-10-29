@@ -8,7 +8,7 @@ export function PostCard({ post: p }: { post: Post }) {
     <Link href={`/${p.id}/`} className="group block">
       <div className="relative aspect-[1200/630] overflow-hidden rounded-2xl bg-mint">
         {p.eyecatch ? (
-          <Image src={p.eyecatch.url} alt="" fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
+          <Image src={p.eyecatch.url} alt="" fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover brightness-[0.92] transition-[scale,filter] duration-700 group-hover:scale-[1.03] group-hover:brightness-100" />
         ) : (
           // アイキャッチが無い記事は、タイトルを図案にして代わりに表示する
           <div aria-hidden="true" className="absolute inset-0 flex flex-col justify-between bg-grad-mint p-6">
