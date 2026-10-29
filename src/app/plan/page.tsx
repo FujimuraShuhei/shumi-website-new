@@ -70,18 +70,18 @@ export default function PlanPage() {
           <Heading num="01" en="Website" id="plans-title" title="ホームページ制作は、2つのプラン。" />
           <ul className="mt-16 grid gap-6 lg:grid-cols-2">
             {plans.map((p) => (
-              <li key={p.name} data-r="pop" className={`rounded-[28px] p-8 md:p-12 ${p.featured ? "bg-grad-deep text-paper" : "border border-line bg-card"}`}>
+              <li key={p.name} data-r="pop" className={`rounded-[28px] p-8 md:p-12 ${p.featured ? "bg-grad-brand text-paper" : "bg-panel text-paper"}`}>
                 <div className="flex items-center justify-between">
-                  <p className={`label-en text-[13px] ${p.featured ? "text-brand-light" : "text-brand-deep"}`}>{p.en}</p>
-                  {p.featured && <span className="inline-flex h-8 items-center gap-1.5 rounded-full bg-brand-light px-3 text-[12px] font-bold text-night"><Icon name="up" className="h-4 w-4" strokeWidth={2.2} />集客を徹底</span>}
+                  <p className={`label-en text-[13px] ${p.featured ? "text-paper" : "text-brand-light"}`}>{p.en}</p>
+                  {p.featured && <span className="inline-flex h-8 items-center gap-1.5 rounded-full bg-night px-3 text-[12px] font-bold text-paper"><Icon name="up" className="h-4 w-4" strokeWidth={2.2} />集客を徹底</span>}
                 </div>
                 <h3 className="mt-3 text-2xl tracking-[0.05em]">{p.name}</h3>
-                <p className={`mt-3 text-[15px] ${p.featured ? "text-paper/75" : "text-ink-soft"}`}>{p.target}</p>
-                <p className={`mt-8 text-sm ${p.featured ? "text-paper/75" : "text-ink-soft"}`}>共通の内容（下記）に加えて</p>
-                <dl className={`mt-3 divide-y border-y ${p.featured ? "divide-paper/15 border-paper/15" : "divide-line border-line"}`}>
+                <p className={`mt-3 text-[15px] text-paper/80`}>{p.target}</p>
+                <p className={`mt-8 text-sm text-paper/80`}>共通の内容（下記）に加えて</p>
+                <dl className={`mt-3 divide-y border-y divide-paper/15 border-paper/15`}>
                   {p.items.map(([k, v]) => (
                     <div key={k} className="grid gap-1 py-4 sm:grid-cols-[8rem_1fr] sm:gap-6">
-                      <dt className={`text-sm ${p.featured ? "text-paper/70" : "text-ink-mute"}`}>{k}</dt>
+                      <dt className={`text-sm text-paper/75`}>{k}</dt>
                       <dd className="font-bold">{v}</dd>
                     </div>
                   ))}
@@ -110,11 +110,11 @@ export default function PlanPage() {
           <Heading num="03" en="Option" id="option-title" title="オプション" lead="料金の目安です。内容に合わせてお見積りします。" />
           <dl className="grid gap-3 sm:grid-cols-2">
             {options.map(([k, v, icon]) => (
-              <div key={k} data-r="pop" className="flex items-center gap-4 rounded-[20px] bg-mist p-5">
-                <IconBadge name={icon as IconName} size="sm" />
+              <div key={k} data-r="pop" className="flex items-center gap-4 rounded-[20px] bg-panel p-5 text-paper">
+                <IconBadge name={icon as IconName} tone="dark" size="sm" />
                 <div>
                   <dt className="text-[14px] font-bold leading-snug">{k}</dt>
-                  <dd className="label-en mt-1 text-[13px] text-brand-deep">{v}</dd>
+                  <dd className="label-en mt-1 text-[13px] text-brand-light">{v}</dd>
                 </div>
               </div>
             ))}

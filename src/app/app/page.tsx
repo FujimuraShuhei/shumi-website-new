@@ -40,15 +40,15 @@ function ExampleGrid({ items }: { items: typeof appExamples }) {
   return (
     <ul className="grid gap-3 sm:grid-cols-2">
       {items.map((e, i) => (
-        <li key={e.title} data-r="pop" className="rounded-[24px] bg-card p-7 ring-1 ring-line-soft">
+        <li key={e.title} data-r="pop" className="rounded-[24px] bg-panel p-7 text-paper">
           <div className="flex items-center gap-4">
-            <IconBadge name={e.icon} tone={i === 0 ? "brand" : "light"} />
+            <IconBadge name={e.icon} tone={i === 0 ? "brand" : "dark"} />
             <div>
-              <p className="label-en text-[12px] text-brand-deep">{e.en}</p>
+              <p className="label-en text-[12px] text-brand-light">{e.en}</p>
               <p className="text-[1.125rem] font-black tracking-[0.02em]">{e.title}</p>
             </div>
           </div>
-          <p className="mt-5 text-[14px] leading-[1.9] text-ink-soft">{e.body}</p>
+          <p className="mt-5 text-[14px] leading-[1.9] text-paper/75">{e.body}</p>
         </li>
       ))}
     </ul>
@@ -119,8 +119,8 @@ export default function AppPage() {
           <div className="mt-20">
             <FlowTimeline steps={steps} />
           </div>
-          <div data-r="pop" className="mt-16 flex flex-col gap-4 rounded-[24px] bg-mist p-6 sm:flex-row sm:items-center">
-            <IconBadge name="chart" />
+          <div data-r="pop" className="mt-16 flex flex-col gap-4 rounded-[24px] bg-panel p-6 text-paper sm:flex-row sm:items-center">
+            <IconBadge name="chart" tone="dark" />
             <p className="text-[14px] font-bold leading-[1.9]">費用は「画面と機能の数・使う人数・連携するサービス」で決まります。内容を伺ってから、無料でお見積りします。</p>
           </div>
         </div>

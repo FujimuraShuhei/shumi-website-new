@@ -35,21 +35,21 @@ export function InquiryForm({ kind, defaultTopic }: { kind: "contact" | "documen
 
   if (state.status === "success") {
     return (
-      <div className="rounded-[28px] bg-mint p-10 md:p-16" role="status">
+      <div className="rounded-[28px] bg-panel p-10 text-paper md:p-16" role="status">
         <svg width="56" height="56" viewBox="0 0 72 72" aria-hidden="true">
-          <circle cx="36" cy="36" r="34" fill="var(--color-brand-deep)" />
+          <circle cx="36" cy="36" r="34" fill="var(--color-brand)" />
           <path d="M22 37l9 9 19-19" fill="none" stroke="#ffffff" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
         </svg>
         <h2 ref={doneRef} tabIndex={-1} className="mt-8 text-2xl tracking-[0.06em] md:text-[1.75rem]">
           {kind === "contact" ? "お問い合わせを受け付けました" : "資料請求を受け付けました"}
         </h2>
-        <p className="mt-4 max-w-xl leading-relaxed text-ink-soft">
+        <p className="mt-4 max-w-xl leading-relaxed text-paper/80">
           {kind === "contact"
             ? "ご入力のメールアドレスに、受付のお知らせを自動でお送りしました。内容を確認のうえ、2営業日以内に担当よりご連絡します。"
             : "ご入力のメールアドレスに、受付のお知らせを自動でお送りしました。1営業日以内に資料をメールでお送りします。"}
         </p>
-        <p className="mt-3 text-sm text-ink-mute">メールが届かない場合は、迷惑メールのフォルダもご確認ください。</p>
-        <Link href="/" className="mt-10 inline-flex h-14 items-center rounded-full border border-ink/20 bg-card px-8 font-bold hover:border-ink">
+        <p className="mt-3 text-sm text-paper/65">メールが届かない場合は、迷惑メールのフォルダもご確認ください。</p>
+        <Link href="/" className="mt-10 inline-flex h-14 items-center rounded-full bg-card px-8 font-bold text-ink hover:bg-paper">
           トップページに戻る
         </Link>
       </div>
@@ -99,7 +99,7 @@ export function InquiryForm({ kind, defaultTopic }: { kind: "contact" | "documen
           <Field label="ご相談の種類" required id={`${uid}-topic`} error={err.topic} as="fieldset">
             <div className="grid gap-2 sm:grid-cols-2">
               {topics.map((t) => (
-                <label key={t} className="flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border border-line bg-card px-5 transition-colors hover:border-ink-mute has-checked:border-brand-deep has-checked:bg-mint">
+                <label key={t} className="flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border border-ink/20 bg-sunk px-5 transition-colors hover:border-ink-mute has-checked:border-brand-deep has-checked:bg-brand-deep has-checked:text-paper">
                   <input type="radio" name="topic" value={t} required defaultChecked={(val("topic") ?? defaultTopic ?? topics[0]) === t} className="h-5 w-5 accent-[#0a7a83]" />
                   <span className="text-[15px] font-bold">{t}</span>
                 </label>
@@ -110,7 +110,7 @@ export function InquiryForm({ kind, defaultTopic }: { kind: "contact" | "documen
           <Field label="ご希望の資料（複数選べます）" required id={`${uid}-documents`} error={err.documents} as="fieldset">
             <div className="grid gap-2">
               {documentsList.map((d) => (
-                <label key={d} className="flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border border-line bg-card px-5 transition-colors hover:border-ink-mute has-checked:border-brand-deep has-checked:bg-mint">
+                <label key={d} className="flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border border-ink/20 bg-sunk px-5 transition-colors hover:border-ink-mute has-checked:border-brand-deep has-checked:bg-brand-deep has-checked:text-paper">
                   <input
                     type="checkbox"
                     name="documents"
@@ -236,13 +236,13 @@ function Turnstile({ siteKey }: { siteKey: string }) {
 }
 
 const inputCls =
-  "block min-h-14 w-full rounded-xl border border-line bg-card px-5 text-base transition-colors hover:border-ink-mute focus:border-brand-deep focus:outline-none focus:ring-4 focus:ring-brand-wash aria-invalid:border-alert";
+  "block min-h-14 w-full rounded-xl border border-ink/20 bg-sunk px-5 placeholder:text-ink-mute text-base transition-colors hover:border-ink-mute focus:border-brand-deep focus:outline-none focus:ring-4 focus:ring-brand-wash aria-invalid:border-alert";
 
 const invalid = (error: string | undefined, id: string) =>
   error ? { "aria-invalid": true as const, "aria-describedby": `${id}-error` } : {};
 
 function Required() {
-  return <span className="ml-2 rounded-full bg-brand-wash px-2 py-0.5 align-middle text-[11px] font-bold text-brand-deep">必須</span>;
+  return <span className="ml-2 rounded-full bg-brand-deep px-2 py-0.5 align-middle text-[11px] font-bold text-paper">必須</span>;
 }
 
 function Field({

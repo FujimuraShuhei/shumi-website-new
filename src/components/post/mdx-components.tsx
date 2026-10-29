@@ -69,9 +69,10 @@ export function Lead({ children }: { children: ReactNode }) {
 }
 
 const boxTones = {
-  point: { wrap: "bg-grad-mint ring-1 ring-brand/15", badge: "bg-grad-brand text-paper", icon: "check" as IconName, label: "ポイント" },
-  note: { wrap: "bg-mist ring-1 ring-line-soft", badge: "bg-card text-brand-deep ring-1 ring-line", icon: "chat" as IconName, label: "メモ" },
-  warn: { wrap: "bg-[#dccab6] ring-1 ring-[#c8ad8f]", badge: "bg-[#c86a1c] text-paper", icon: "eye" as IconName, label: "注意" },
+  // グレーの地の上なので、明るい箱は使わない（要点はブランド色、補足は一段沈んだグレー）
+  point: { wrap: "bg-panel text-paper", text: "text-paper [&_strong]:text-brand-light", badge: "bg-grad-brand text-paper", icon: "check" as IconName, label: "ポイント" },
+  note: { wrap: "bg-sunk", text: "text-ink [&_strong]:text-brand-deep", badge: "bg-brand-deep text-paper", icon: "chat" as IconName, label: "メモ" },
+  warn: { wrap: "bg-[#dccab6] ring-1 ring-[#c8ad8f]", text: "text-ink [&_strong]:text-[#7a3d0c]", badge: "bg-[#a85712] text-paper", icon: "eye" as IconName, label: "注意" },
 };
 
 function Box({ tone, title, children }: { tone: keyof typeof boxTones; title?: string; children: ReactNode }) {
@@ -84,7 +85,7 @@ function Box({ tone, title, children }: { tone: keyof typeof boxTones; title?: s
         </span>
         {title ?? t.label}
       </p>
-      <div className="mt-3 text-[15px] leading-[2] text-ink [&_li]:mt-1 [&_p+p]:mt-3 [&_strong]:text-brand-deep [&_ul]:list-disc [&_ul]:pl-5">{children}</div>
+      <div className={`mt-3 text-[15px] leading-[2] [&_li]:mt-1 [&_p+p]:mt-3 [&_ul]:list-disc [&_ul]:pl-5 ${t.text}`}>{children}</div>
     </aside>
   );
 }
@@ -115,7 +116,7 @@ export function Steps({ children }: { children: ReactNode }) {
       <span aria-hidden="true" className="absolute bottom-6 left-[23px] top-6 w-px bg-line" />
       {items.map((child, i) => (
         <li key={i} className="relative flex gap-5">
-          <span className={`label-en relative grid h-12 w-12 shrink-0 place-items-center rounded-full text-[14px] ${i === items.length - 1 ? "bg-grad-brand text-paper" : "bg-card text-brand-deep ring-1 ring-line"}`}>
+          <span className={`label-en relative grid h-12 w-12 shrink-0 place-items-center rounded-full text-[14px] ${i === items.length - 1 ? "bg-grad-brand text-paper" : "bg-panel text-brand-light"}`}>
             {String(i + 1).padStart(2, "0")}
           </span>
           <div className="flex-1 rounded-[20px] bg-mist p-5">{child}</div>
@@ -147,12 +148,12 @@ export function Compare({
 }) {
   return (
     <div className="not-prose my-10 grid items-center gap-3 md:grid-cols-[1fr_auto_1fr]">
-      <div className="rounded-[22px] bg-card p-6 ring-1 ring-line">
+      <div className="rounded-[22px] bg-sunk p-6">
         <p className="text-[13px] font-bold text-ink-mute">{beforeLabel}</p>
         <ul className="mt-4 space-y-2.5">
           {before.map((t) => (
             <li key={t} className="flex items-start gap-3 text-[14px] leading-[1.8]">
-              <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-mist text-[11px] text-ink-mute">✕</span>
+              <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-ink/10 text-[11px] text-ink-soft">✕</span>
               {t}
             </li>
           ))}
@@ -184,10 +185,10 @@ export function Cards({ children, cols = 3 }: { children: ReactNode; cols?: 2 | 
 }
 export function Card({ icon = "check", title, children }: { icon?: IconName; title: string; children?: ReactNode }) {
   return (
-    <div className="rounded-[20px] bg-card p-5 ring-1 ring-line-soft">
-      <IconBadge name={icon} size="sm" />
+    <div className="rounded-[20px] bg-panel p-5 text-paper">
+      <IconBadge name={icon} tone="dark" size="sm" />
       <p className="mt-4 text-[15px] font-black leading-snug">{title}</p>
-      {children && <div className="mt-1.5 text-[13px] leading-[1.85] text-ink-soft">{children}</div>}
+      {children && <div className="mt-1.5 text-[13px] leading-[1.85] text-paper/75">{children}</div>}
     </div>
   );
 }
@@ -212,7 +213,7 @@ export function Stats({ items }: { items: { value: string; unit?: string; label:
 /** よくある質問。<Faq q="質問">答え</Faq> */
 export function Faq({ q, children }: { q: string; children: ReactNode }) {
   return (
-    <details className="not-prose group my-3 rounded-[18px] bg-mist px-5 py-4 open:bg-card open:ring-1 open:ring-line-soft">
+    <details className="not-prose group my-3 rounded-[18px] bg-mist px-5 py-4 open:bg-sunk">
       <summary className="flex cursor-pointer list-none items-center gap-3 text-[15px] font-black [&::-webkit-details-marker]:hidden">
         <span className="label-en grid h-7 w-7 shrink-0 place-items-center rounded-full bg-grad-brand text-[12px] text-paper">Q</span>
         <span className="flex-1">{q}</span>

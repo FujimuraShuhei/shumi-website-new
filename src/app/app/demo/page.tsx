@@ -19,14 +19,14 @@ export default function DemoPage() {
       <section aria-label="デモの一覧" className="bg-base py-24 md:py-32">
         <div className="wrap">
           <DemoGallery />
-          <div className="mt-24 grid gap-8 rounded-[28px] bg-mint p-10 md:grid-cols-[1fr_auto] md:items-center md:p-14">
+          <div className="mt-24 grid gap-8 rounded-[28px] bg-panel p-10 text-paper md:grid-cols-[1fr_auto] md:items-center md:p-14">
             <div>
               <h2 className="text-xl tracking-[0.06em] md:text-2xl">御社の業務に合わせた試作もお作りします</h2>
-              <p className="mt-4 max-w-2xl text-[15px] leading-[2.05] text-ink-soft">
+              <p className="mt-4 max-w-2xl text-[15px] leading-[2.05] text-paper/75">
                 ご相談の段階で、実際の項目名や流れに合わせた試作画面をお見せします。現場の方に触っていただいてから、作るかどうかを決められます。
               </p>
             </div>
-            <Button href="/contact/">試作について相談する</Button>
+            <Button href="/contact/" variant="light">試作について相談する</Button>
           </div>
         </div>
       </section>

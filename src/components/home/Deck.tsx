@@ -70,13 +70,13 @@ export function ServiceChain() {
           <li
             key={it.en}
             data-r="pop"
-            className={`relative flex flex-col rounded-[28px] p-8 md:p-9 ${
-              it.featured ? "bg-grad-deep text-paper shadow-[0_40px_80px_-40px_rgba(13,31,34,0.6)] lg:-translate-y-4" : "bg-card ring-1 ring-line-soft"
+            className={`relative flex flex-col rounded-[28px] p-8 text-paper md:p-9 ${
+              it.featured ? "bg-grad-brand shadow-[0_40px_80px_-40px_rgba(13,31,34,0.7)] lg:-translate-y-4" : "bg-panel"
             }`}
           >
             <div className="flex items-start justify-between gap-4">
-              <IconBadge name={it.icon} tone={it.featured ? "brand" : "light"} size="lg" />
-              <span className={`display-en text-[3rem] leading-none ${it.featured ? "text-paper/15" : "text-ink/[0.07]"}`}>{String(i + 1).padStart(2, "0")}</span>
+              <IconBadge name={it.icon} tone="dark" size="lg" />
+              <span className="display-en text-[3rem] leading-none text-paper/15">{String(i + 1).padStart(2, "0")}</span>
             </div>
             {it.featured && (
               <span className="mt-6 inline-flex w-fit items-center gap-1.5 rounded-full bg-brand-light px-3 py-1 text-[11px] font-bold text-night">
@@ -84,8 +84,8 @@ export function ServiceChain() {
                 特に効果を実感いただいています
               </span>
             )}
-            <p className={`label-en mt-6 text-[13px] ${it.featured ? "text-brand-light" : "text-brand-deep"}`}>{it.en}</p>
-            <h3 className={`mt-1 text-[13px] font-bold tracking-[0.06em] ${it.featured ? "text-paper/70" : "text-ink-mute"}`}>{it.name}</h3>
+            <p className={`label-en mt-6 text-[13px] ${it.featured ? "text-paper" : "text-brand-light"}`}>{it.en}</p>
+            <h3 className="mt-1 text-[13px] font-bold tracking-[0.06em] text-paper/75">{it.name}</h3>
             <p className="mt-3 text-[1.75rem] font-black leading-[1.4] tracking-[0.02em]">{it.catch}</p>
             <ul className="mt-6 flex flex-wrap gap-2">
               {it.tags.map((t) => (
@@ -93,7 +93,7 @@ export function ServiceChain() {
                   <Link
                     href={t.href}
                     className={`inline-flex h-9 items-center rounded-full px-3.5 text-[12px] font-bold transition-colors ${
-                      it.featured ? "bg-paper/10 text-paper hover:bg-paper/20" : "bg-mist text-ink-soft hover:bg-brand-wash hover:text-brand-deep"
+                      "bg-paper/12 text-paper hover:bg-paper/25"
                     }`}
                   >
                     {t.label}
@@ -102,7 +102,7 @@ export function ServiceChain() {
               ))}
             </ul>
             <div className="mt-auto pt-8">
-              <Button href={it.href} variant={it.featured ? "light" : "secondary"} className="!h-14 w-full !pl-6 [&>span]:!h-10 [&>span]:!w-10">
+              <Button href={it.href} variant="light" className="!h-14 w-full !pl-6 [&>span]:!h-10 [&>span]:!w-10">
                 詳しく見る
               </Button>
             </div>
@@ -110,7 +110,7 @@ export function ServiceChain() {
         ))}
       </ol>
       {/* ゴール */}
-      <div data-r="pop" className="mx-auto mt-10 flex w-fit items-center gap-4 rounded-full bg-card px-6 py-3 ring-1 ring-line-soft">
+      <div data-r="pop" className="mx-auto mt-10 flex w-fit items-center gap-4 rounded-full bg-panel px-6 py-3 text-paper">
         <span className="grid h-9 w-9 place-items-center rounded-full bg-grad-brand text-paper">
           <Icon name="up" className="h-5 w-5" strokeWidth={2} />
         </span>
@@ -146,11 +146,11 @@ export function RecruitJourney() {
             <li key={s.title} data-r="pop" className={`flex flex-col items-center text-center ${s.key ? "col-span-2 md:col-span-1" : ""}`}>
               <span
                 className={`relative grid h-[68px] w-[68px] place-items-center rounded-full ${
-                  s.key ? "bg-grad-brand text-paper shadow-[0_0_0_10px_rgba(60,195,196,0.18)]" : "bg-card text-brand-deep ring-1 ring-line"
+                  s.key ? "bg-grad-brand text-paper shadow-[0_0_0_10px_rgba(60,195,196,0.18)]" : "bg-panel text-brand-light"
                 }`}
               >
                 <Icon name={s.icon} className="h-7 w-7" />
-                <span className={`label-en absolute -right-1 -top-1 grid h-6 w-6 place-items-center rounded-full text-[11px] ${s.key ? "bg-night text-paper" : "bg-mist text-ink-soft"}`}>
+                <span className={`label-en absolute -right-1 -top-1 grid h-6 w-6 place-items-center rounded-full text-[11px] ${s.key ? "bg-night text-paper" : "bg-sunk text-ink"}`}>
                   {i + 1}
                 </span>
               </span>
@@ -168,12 +168,12 @@ export function RecruitJourney() {
 
       {/* 比べる */}
       <div className="mt-16 grid gap-4 md:mt-20 md:grid-cols-[1fr_auto_1fr] md:items-center">
-        <div data-r="pop" className="rounded-[24px] bg-card p-7 ring-1 ring-line-soft">
-          <p className="text-[13px] font-bold text-ink-mute">求人媒体だけ</p>
+        <div data-r="pop" className="rounded-[24px] bg-sunk p-7">
+          <p className="text-[13px] font-bold text-ink-soft">求人媒体だけ</p>
           <ul className="mt-4 space-y-3">
             {compare.before.map((t) => (
               <li key={t} className="flex items-center gap-3 text-[15px] text-ink-soft">
-                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-mist text-ink-mute">
+                <span className="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-ink/10 text-ink-soft">
                   <svg viewBox="0 0 12 12" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
                     <path d="M3 3l6 6M9 3l-6 6" />
                   </svg>
@@ -248,19 +248,19 @@ export function MethodChain() {
       <ol className="grid items-stretch gap-4 md:grid-cols-[1fr_auto_1fr_auto_1fr]">
         {steps.map((s, i) => (
           <li key={s.en} className="contents">
-            <div data-r="pop" className="rounded-[24px] bg-card p-7 ring-1 ring-line-soft">
+            <div data-r="pop" className="rounded-[24px] bg-panel p-7 text-paper">
               <div className="flex items-center gap-4">
-                <IconBadge name={s.icon} />
+                <IconBadge name={s.icon} tone="dark" />
                 <div>
-                  <p className="label-en text-[12px] text-brand-deep">Step {String(i + 1).padStart(2, "0")}</p>
+                  <p className="label-en text-[12px] text-brand-light">Step {String(i + 1).padStart(2, "0")}</p>
                   <p className="label-en text-[1.25rem] leading-tight">{s.en}</p>
                 </div>
               </div>
               <p className="mt-6 text-lg font-black tracking-[0.03em]">{s.title}</p>
-              <p className="mt-1 text-[14px] text-ink-soft">{s.body}</p>
+              <p className="mt-1 text-[14px] text-paper/75">{s.body}</p>
             </div>
             {i < steps.length - 1 && (
-              <span data-r="pop" aria-hidden="true" className="mx-auto grid h-10 w-10 rotate-90 place-items-center self-center rounded-full bg-brand-wash text-brand-deep md:rotate-0">
+              <span data-r="pop" aria-hidden="true" className="mx-auto grid h-10 w-10 rotate-90 place-items-center self-center rounded-full bg-brand-deep text-paper md:rotate-0">
                 <Arrow />
               </span>
             )}
@@ -268,14 +268,14 @@ export function MethodChain() {
         ))}
       </ol>
 
-      <div className="mt-10 rounded-[28px] bg-grad-mint p-6 md:p-8">
+      <div className="mt-10 rounded-[28px] bg-sunk p-6 md:p-8">
         <p className="text-center text-[13px] font-bold tracking-[0.08em] text-brand-deep">すべての制作物に共通する3つの基準</p>
         <ul className="mt-6 grid gap-3 sm:grid-cols-3">
           {badges.map((b) => (
-            <li key={b.en} data-r="pop" className="flex items-center gap-4 rounded-2xl bg-card px-5 py-4 shadow-[0_10px_30px_-20px_rgba(13,31,34,0.4)]">
+            <li key={b.en} data-r="pop" className="flex items-center gap-4 rounded-2xl bg-panel px-5 py-4 text-paper">
               <IconBadge name={b.icon} tone="brand" size="sm" />
               <div>
-                <p className="label-en text-[11px] text-brand-deep">{b.en}</p>
+                <p className="label-en text-[11px] text-brand-light">{b.en}</p>
                 <p className="text-[15px] font-black">{b.title}</p>
               </div>
             </li>
@@ -316,12 +316,12 @@ export function IncludedGrid() {
           </li>
         ))}
       </ul>
-      <div className="rounded-[28px] bg-card p-6 ring-1 ring-line-soft md:p-8">
-        <p className="text-[13px] font-bold tracking-[0.08em] text-ink-mute">すべてのプランに含まれる内容</p>
+      <div className="rounded-[28px] bg-panel p-6 text-paper md:p-8">
+        <p className="text-[13px] font-bold tracking-[0.08em] text-paper/75">すべてのプランに含まれる内容</p>
         <ul className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {features.map((f) => (
-            <li key={f.label} data-r="pop" className="flex flex-col items-center gap-3 rounded-2xl bg-mist px-3 py-5 text-center">
-              <span className="grid h-11 w-11 place-items-center rounded-xl bg-card text-brand-deep shadow-[0_6px_16px_-10px_rgba(13,31,34,0.5)]">
+            <li key={f.label} data-r="pop" className="flex flex-col items-center gap-3 rounded-2xl bg-paper/[0.07] px-3 py-5 text-center">
+              <span className="grid h-11 w-11 place-items-center rounded-xl bg-paper/10 text-brand-light">
                 <Icon name={f.icon} />
               </span>
               <span className="text-[13px] font-bold leading-snug">{f.label}</span>
@@ -350,7 +350,7 @@ export function FlowTimeline({ steps }: { steps: { title: string; body: string; 
       <ol className="relative grid gap-8 md:grid-cols-5 md:gap-4">
         {steps.map((s, i) => (
           <li key={s.title} data-r="pop" className="flex items-start gap-5 md:flex-col md:items-center md:text-center">
-            <span className="relative grid h-16 w-16 shrink-0 place-items-center rounded-full bg-card text-brand-deep shadow-[0_12px_30px_-16px_rgba(13,31,34,0.5)] ring-1 ring-line-soft">
+            <span className="relative grid h-16 w-16 shrink-0 place-items-center rounded-full bg-panel text-brand-light shadow-[0_12px_30px_-16px_rgba(13,31,34,0.5)]">
               <Icon name={icons[i] ?? "check"} className="h-7 w-7" />
               <span className="label-en absolute -right-1 -top-1 grid h-6 w-6 place-items-center rounded-full bg-grad-brand text-[11px] text-paper">{i + 1}</span>
             </span>
