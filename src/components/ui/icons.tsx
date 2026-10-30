@@ -154,6 +154,41 @@ const paths: Record<string, ReactNode> = {
       <path d="M9.5 8.5l3.5 3.5" />
     </>
   ),
+  bell: (
+    <>
+      <path d="M6 16.5V11a6 6 0 0 1 12 0v5.5l1.5 2h-15z" />
+      <path d="M10 20.5a2 2 0 0 0 4 0" />
+    </>
+  ),
+  plus: <path d="M12 5v14M5 12h14" />,
+  pin: (
+    <>
+      <path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0C18.5 15.4 12 21 12 21z" />
+      <circle cx="12" cy="10" r="2.4" />
+    </>
+  ),
+  box: (
+    <>
+      <path d="M3.5 7.5L12 3.5l8.5 4v9L12 20.5l-8.5-4z" />
+      <path d="M3.5 7.5L12 11.5l8.5-4M12 11.5v9" />
+    </>
+  ),
+  list: (
+    <>
+      <path d="M9 6.5h11M9 12h11M9 17.5h11" />
+      <circle cx="4.5" cy="6.5" r="1" />
+      <circle cx="4.5" cy="12" r="1" />
+      <circle cx="4.5" cy="17.5" r="1" />
+    </>
+  ),
+  route: (
+    <>
+      <circle cx="6" cy="18" r="2.2" />
+      <circle cx="18" cy="6" r="2.2" />
+      <path d="M8 18h7.5a3.5 3.5 0 0 0 0-7h-7a3.5 3.5 0 0 1 0-7H16" />
+    </>
+  ),
+  x: <path d="M6 6l12 12M18 6L6 18" />,
   check: <path d="M5 12.5l4.5 4.5L19 7" />,
   arrow: <path d="M4 12h15M14 6l6 6-6 6" />,
 };

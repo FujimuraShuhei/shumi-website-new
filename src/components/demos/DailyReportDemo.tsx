@@ -1,22 +1,32 @@
 "use client";
 
-import { useState } from "react";
+import { useState, type ReactNode } from "react";
+import { Icon } from "@/components/ui/icons";
 import { Chip, PhoneFrame } from "./shared";
 
 const weathers = [
-  { id: "sun", label: "晴れ", icon: <circle cx="10" cy="10" r="5" fill="#3cc3c4" stroke="#1b232b" strokeWidth="1.5" /> },
+  {
+    id: "sun",
+    label: "晴れ",
+    icon: (
+      <g stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" fill="none">
+        <circle cx="12" cy="12" r="4" />
+        <path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4L7 17M17 7l1.4-1.4" />
+      </g>
+    ),
+  },
   {
     id: "cloud",
     label: "くもり",
-    icon: <path d="M5 14h10a3.5 3.5 0 0 0-1-6.9A4.5 4.5 0 0 0 5.3 9 2.6 2.6 0 0 0 5 14z" fill="#c3c8cb" stroke="#1b232b" strokeWidth="1.5" />,
+    icon: <path d="M7 18h10a4 4 0 0 0-.6-8 5.5 5.5 0 0 0-10.4 1.7A3.2 3.2 0 0 0 7 18z" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />,
   },
   {
     id: "rain",
     label: "雨",
     icon: (
-      <g stroke="#1b232b" strokeWidth="1.5">
-        <path d="M5 11h10a3.5 3.5 0 0 0-1-6.9A4.5 4.5 0 0 0 5.3 6 2.6 2.6 0 0 0 5 11z" fill="#c9dbf0" />
-        <path d="M7 13.5l-1 3M11 13.5l-1 3M15 13.5l-1 3" fill="none" />
+      <g fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M7 14h10a4 4 0 0 0-.6-8 5.5 5.5 0 0 0-10.4 1.7A3.2 3.2 0 0 0 7 14z" />
+        <path d="M8 17l-1 3M12 17l-1 3M16 17l-1 3" />
       </g>
     ),
   },
@@ -25,45 +35,51 @@ const weathers = [
 const works = ["足場", "基礎", "配筋", "型枠", "内装", "塗装", "清掃", "搬入"];
 const sites = ["港北 集合住宅新築", "戸塚 外壁改修", "青葉 戸建てリフォーム"];
 
+function Group({ title, children }: { title: string; children: ReactNode }) {
+  return (
+    <section>
+      <p className="px-1 text-[12px] font-semibold text-slate-500">{title}</p>
+      <div className="mt-1.5 rounded-2xl bg-white p-3.5 shadow-[0_1px_2px_rgba(15,23,42,0.06)]">{children}</div>
+    </section>
+  );
+}
+
 export function DailyReportDemo() {
   const [weather, setWeather] = useState("sun");
   const [picked, setPicked] = useState<string[]>(["配筋"]);
   const [people, setPeople] = useState(4);
-  const [photos, setPhotos] = useState(1);
+  const [photos, setPhotos] = useState(2);
   const [site, setSite] = useState(sites[0]);
   const [sent, setSent] = useState(false);
 
   if (sent) {
     return (
       <PhoneFrame>
-        <div className="flex h-full flex-col items-center justify-center px-8 text-center">
-          <svg width="72" height="72" viewBox="0 0 72 72" aria-hidden="true">
-            <circle cx="36" cy="36" r="34" fill="#3cc3c4" />
-            <path d="M22 37l9 9 19-19" fill="none" stroke="#1b232b" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          <p className="mt-6 text-xl font-bold" role="status">
-            日報を送信しました
-          </p>
-          <dl className="mt-6 w-full space-y-2 rounded-lg bg[#ccd1d3] p-4 text-left text-sm">
-            <div className="flex justify-between gap-4">
-              <dt className="text-ink-mute">現場</dt>
-              <dd className="font-bold">{site}</dd>
-            </div>
-            <div className="flex justify-between gap-4">
-              <dt className="text-ink-mute">作業</dt>
-              <dd className="font-bold">{picked.join("・") || "—"}</dd>
-            </div>
-            <div className="flex justify-between gap-4">
-              <dt className="text-ink-mute">人数</dt>
-              <dd className="font-bold">{people}人</dd>
-            </div>
-            <div className="flex justify-between gap-4">
-              <dt className="text-ink-mute">写真</dt>
-              <dd className="font-bold">{photos}枚</dd>
-            </div>
-          </dl>
-          <p className="mt-4 text-sm text-ink-soft">事務所の一覧にすぐ反映されます。</p>
-          <button type="button" onClick={() => setSent(false)} className="mt-8 min-h-12 w-full rounded-lg border-2 border-ink font-bold">
+        <div className="flex h-full flex-col px-6 pb-8 pt-20">
+          <div className="flex flex-1 flex-col items-center text-center">
+            <span className="grid h-20 w-20 place-items-center rounded-full bg-emerald-500 text-white shadow-[0_12px_30px_-10px_rgba(16,185,129,0.6)]">
+              <Icon name="check" className="h-10 w-10" strokeWidth={2.4} />
+            </span>
+            <p className="mt-6 text-[22px] font-bold" role="status">
+              日報を送信しました
+            </p>
+            <p className="mt-2 text-[13px] text-slate-500">事務所の一覧にすぐ反映されます</p>
+            <dl className="mt-8 w-full divide-y divide-slate-100 rounded-2xl bg-white px-4 text-left text-[14px] shadow-[0_1px_2px_rgba(15,23,42,0.06)]">
+              {[
+                ["現場", site],
+                ["天気", weathers.find((w) => w.id === weather)?.label],
+                ["作業", picked.join("・") || "—"],
+                ["人数", `${people}人`],
+                ["写真", `${photos}枚`],
+              ].map(([k, v]) => (
+                <div key={k} className="flex justify-between gap-4 py-3">
+                  <dt className="text-slate-500">{k}</dt>
+                  <dd className="text-right font-semibold">{v}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+          <button type="button" onClick={() => setSent(false)} className="h-[52px] w-full rounded-2xl bg-white text-[15px] font-semibold text-[#0a7a83] shadow-[0_1px_2px_rgba(15,23,42,0.06)]">
             もう1件書く
           </button>
         </div>
@@ -74,94 +90,78 @@ export function DailyReportDemo() {
   return (
     <PhoneFrame>
       <div className="flex h-full flex-col">
-        <div className="bg-ink px-5 pb-4 pt-12 text-paper">
-          <p className="text-xs text-paper/70">10月26日（月）</p>
-          <p className="text-lg font-bold">今日の日報</p>
-        </div>
-        <div className="flex-1 space-y-5 overflow-auto px-5 py-5">
-          <label className="block">
-            <span className="text-sm font-bold">現場</span>
-            <select
-              value={site}
-              onChange={(e) => setSite(e.target.value)}
-              className="mt-1.5 block min-h-12 w-full rounded-lg border-2 border-line bg[#ccd1d3] px-3"
-            >
-              {sites.map((s) => (
-                <option key={s}>{s}</option>
-              ))}
-            </select>
-          </label>
+        <header className="bg-white px-5 pb-3 pt-12">
+          <p className="text-[12px] font-semibold text-[#0a7a83]">10月26日（月）</p>
+          <p className="text-[26px] font-bold leading-tight">今日の日報</p>
+        </header>
+        <div className="flex-1 space-y-5 overflow-auto px-4 pb-6 pt-4">
+          <Group title="現場">
+            <label className="flex items-center gap-3">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-[#0a7a83]/10 text-[#0a7a83]">
+                <Icon name="pin" className="h-5 w-5" />
+              </span>
+              <span className="sr-only">現場を選ぶ</span>
+              <select value={site} onChange={(e) => setSite(e.target.value)} className="h-10 min-w-0 flex-1 appearance-none bg-transparent text-[15px] font-semibold focus:outline-none">
+                {sites.map((s) => (
+                  <option key={s}>{s}</option>
+                ))}
+              </select>
+              <span aria-hidden="true" className="text-slate-400">
+                ⌄
+              </span>
+            </label>
+          </Group>
 
-          <fieldset>
-            <legend className="text-sm font-bold">天気</legend>
-            <div className="mt-1.5 grid grid-cols-3 gap-2">
+          <Group title="天気">
+            <div role="group" aria-label="天気" className="grid grid-cols-3 gap-2">
               {weathers.map((w) => (
                 <button
                   key={w.id}
                   type="button"
                   aria-pressed={weather === w.id}
                   onClick={() => setWeather(w.id)}
-                  className={`flex min-h-14 flex-col items-center justify-center rounded-lg border-2 text-xs font-bold ${
-                    weather === w.id ? "border-ink bg-brand-wash" : "border-line bg[#ccd1d3] text-ink-soft"
+                  className={`flex h-[68px] flex-col items-center justify-center gap-1 rounded-xl text-[12px] font-semibold transition-colors ${
+                    weather === w.id ? "bg-[#0a7a83] text-white" : "bg-slate-50 text-slate-600 ring-1 ring-slate-200"
                   }`}
                 >
-                  <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true">
+                  <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
                     {w.icon}
                   </svg>
                   {w.label}
                 </button>
               ))}
             </div>
-          </fieldset>
+          </Group>
 
-          <fieldset>
-            <legend className="text-sm font-bold">作業内容（複数選べます）</legend>
-            <div className="mt-1.5 flex flex-wrap gap-2">
+          <Group title="作業内容（複数選べます）">
+            <div className="flex flex-wrap gap-2">
               {works.map((w) => (
-                <Chip
-                  key={w}
-                  active={picked.includes(w)}
-                  onClick={() => setPicked((p) => (p.includes(w) ? p.filter((x) => x !== w) : [...p, w]))}
-                >
+                <Chip key={w} active={picked.includes(w)} onClick={() => setPicked((p) => (p.includes(w) ? p.filter((x) => x !== w) : [...p, w]))}>
                   {w}
                 </Chip>
               ))}
             </div>
-          </fieldset>
+          </Group>
 
-          <div>
-            <p className="text-sm font-bold" id="people-label">
-              作業人数
-            </p>
-            <div className="mt-1.5 flex items-center justify-between rounded-lg border-2 border-line bg[#ccd1d3] p-1.5" role="group" aria-labelledby="people-label">
-              <button
-                type="button"
-                onClick={() => setPeople((n) => Math.max(1, n - 1))}
-                className="grid h-12 w-12 place-items-center rounded-md bg-mist text-2xl font-bold"
-                aria-label="1人減らす"
-              >
+          <Group title="作業人数">
+            <div className="flex items-center justify-between" role="group" aria-label="作業人数">
+              <button type="button" onClick={() => setPeople((n) => Math.max(1, n - 1))} className="grid h-12 w-12 place-items-center rounded-xl bg-slate-100 text-2xl font-semibold text-slate-700" aria-label="1人減らす">
                 −
               </button>
-              <p className="en text-3xl font-bold tabular-nums" aria-live="polite">
+              <p className="text-[34px] font-bold tabular-nums" aria-live="polite">
                 {people}
-                <span className="ml-1 font-sans text-sm">人</span>
+                <span className="ml-1 text-[14px] font-semibold text-slate-500">人</span>
               </p>
-              <button
-                type="button"
-                onClick={() => setPeople((n) => n + 1)}
-                className="grid h-12 w-12 place-items-center rounded-md bg-mist text-2xl font-bold"
-                aria-label="1人増やす"
-              >
+              <button type="button" onClick={() => setPeople((n) => n + 1)} className="grid h-12 w-12 place-items-center rounded-xl bg-[#0a7a83] text-2xl font-semibold text-white" aria-label="1人増やす">
                 ＋
               </button>
             </div>
-          </div>
+          </Group>
 
-          <div>
-            <p className="text-sm font-bold">写真</p>
-            <div className="mt-1.5 grid grid-cols-4 gap-2">
+          <Group title={`写真（${photos}枚）`}>
+            <div className="grid grid-cols-4 gap-2">
               {Array.from({ length: photos }).map((_, i) => (
-                <div key={i} className="aspect-square overflow-hidden rounded-md">
+                <div key={i} className="aspect-square overflow-hidden rounded-lg">
                   <PhotoThumb seed={i} />
                 </div>
               ))}
@@ -169,20 +169,17 @@ export function DailyReportDemo() {
                 <button
                   type="button"
                   onClick={() => setPhotos((n) => n + 1)}
-                  className="grid aspect-square place-items-center rounded-md border-2 border-dashed border-ink-mute text-xs font-bold text-ink-soft"
+                  className="grid aspect-square place-items-center rounded-lg border-2 border-dashed border-slate-300 text-slate-500"
+                  aria-label="写真を追加"
                 >
-                  ＋追加
+                  <Icon name="camera" className="h-6 w-6" />
                 </button>
               )}
             </div>
-          </div>
+          </Group>
         </div>
-        <div className="border-t border-line bg[#ccd1d3] p-4">
-          <button
-            type="button"
-            onClick={() => setSent(true)}
-            className="min-h-14 w-full rounded-lg bg-brand-deep text-lg font-bold text-paper hover:bg-brand-dark"
-          >
+        <div className="border-t border-slate-200 bg-white p-4 pb-6">
+          <button type="button" onClick={() => setSent(true)} className="h-[54px] w-full rounded-2xl bg-[#0a7a83] text-[16px] font-bold text-white shadow-[0_10px_24px_-10px_rgba(10,122,131,0.8)] transition-colors hover:bg-[#086a72]">
             日報を送信する
           </button>
         </div>
@@ -195,10 +192,16 @@ export function DailyReportDemo() {
 export function PhotoThumb({ seed }: { seed: number }) {
   const v = seed % 4;
   return (
-    <svg viewBox="0 0 60 60" className="h-full w-full" aria-hidden="true">
-      <rect width="60" height="60" fill={["#b9c3cc", "#c9b79c", "#a9b7c6", "#c2c8bd"][v]} />
+    <svg viewBox="0 0 60 60" className="h-full w-full" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <linearGradient id={`sky-${v}`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor={["#cfdce6", "#e3d7c4", "#cbd6e2", "#d6dccf"][v]} />
+          <stop offset="1" stopColor={["#a9b8c5", "#c4ad8c", "#a3b3c4", "#b8c1ae"][v]} />
+        </linearGradient>
+      </defs>
+      <rect width="60" height="60" fill={`url(#sky-${v})`} />
       {v === 0 && (
-        <g stroke="#6c7884" strokeWidth="2">
+        <g stroke="#5f6f7d" strokeWidth="1.6">
           {[10, 22, 34, 46].map((p) => (
             <g key={p}>
               <line x1={p} y1="0" x2={p} y2="60" />
@@ -207,17 +210,16 @@ export function PhotoThumb({ seed }: { seed: number }) {
           ))}
         </g>
       )}
-      {v === 1 && <path d="M0 40 L20 25 L35 35 L60 18 L60 60 L0 60Z" fill="#9c8a6e" />}
+      {v === 1 && <path d="M0 40 L20 25 L35 35 L60 18 L60 60 L0 60Z" fill="#94805f" />}
       {v === 2 && (
-        <g fill="#7f8fa0">
-          <rect x="8" y="10" width="8" height="50" />
-          <rect x="26" y="20" width="8" height="40" />
-          <rect x="44" y="5" width="8" height="55" />
-          <rect x="0" y="28" width="60" height="5" />
+        <g fill="#6f8296">
+          <rect x="8" y="10" width="7" height="50" />
+          <rect x="26" y="20" width="7" height="40" />
+          <rect x="44" y="5" width="7" height="55" />
+          <rect x="0" y="28" width="60" height="4" />
         </g>
       )}
-      {v === 3 && <rect x="10" y="12" width="40" height="36" fill="#d2d4d6" stroke="#7d8790" strokeWidth="2" />}
-      <rect x="4" y="44" width="22" height="12" fill="#2e5a3e" />
+      {v === 3 && <rect x="10" y="12" width="40" height="36" rx="2" fill="#eef0ec" stroke="#7d8790" strokeWidth="1.6" />}
     </svg>
   );
 }

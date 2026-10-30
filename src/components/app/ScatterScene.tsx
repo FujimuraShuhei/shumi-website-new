@@ -113,7 +113,7 @@ export function ScatterScene() {
 
         {/* まとまった後のアプリ画面 */}
         <div className="wrap relative pb-20 pt-10 group-data-[animated]/scene:absolute group-data-[animated]/scene:inset-x-0 group-data-[animated]/scene:top-[36vh] group-data-[animated]/scene:pb-0 group-data-[animated]/scene:pt-0">
-          <div data-window className="mx-auto max-w-[880px] overflow-hidden rounded-2xl border border-line-soft bg[#ccd1d3] shadow-[0_40px_80px_-40px_rgba(27,35,43,0.45)]">
+          <div data-window className="mx-auto max-w-[880px] overflow-hidden rounded-2xl border border-line-soft bg-[#ccd1d3] shadow-[0_40px_80px_-40px_rgba(27,35,43,0.45)]">
             <div className="flex items-center justify-between border-b border-line px-5 py-3">
               <p className="font-semibold">受付トレイ</p>
               <p className="text-sm text-ink-mute">すべての連絡がここに届きます</p>
@@ -128,7 +128,7 @@ export function ScatterScene() {
                   </span>
                   <span
                     className={`rounded-full px-3 py-1 text-xs font-semibold ${
-                      r.tag === "今日" ? "bg[#e2d2d1] text-alert" : r.tag === "完了" ? "bg[#ccdad3] text-ok" : "bg-brand-wash text-brand-deep"
+                      r.tag === "今日" ? "bg-[#e2d2d1] text-alert" : r.tag === "完了" ? "bg-[#ccdad3] text-ok" : "bg-brand-wash text-brand-deep"
                     }`}
                   >
                     {r.tag}
@@ -157,7 +157,7 @@ function Lines({ n = 5, w = [90, 70, 85, 60, 75] }: { n?: number; w?: number[] }
 
 function PaperNippo() {
   return (
-    <div className="rounded-sm bg[#ccd1d3] p-4 shadow-[0_10px_30px_-10px_rgba(27,35,43,0.4)]">
+    <div className="rounded-sm bg-[#ccd1d3] p-4 shadow-[0_10px_30px_-10px_rgba(27,35,43,0.4)]">
       <p className="border-b-2 border-ink pb-1 text-center text-sm font-semibold">作業日報</p>
       <div className="mt-2 grid grid-cols-[3rem_1fr] gap-x-2 gap-y-1.5 text-[11px]">
         <span>現場</span>
@@ -174,7 +174,7 @@ function PaperNippo() {
 
 function PaperFax() {
   return (
-    <div className="rounded-sm bg[#dededa] p-4 shadow-[0_10px_30px_-10px_rgba(27,35,43,0.4)]">
+    <div className="rounded-sm bg-[#dededa] p-4 shadow-[0_10px_30px_-10px_rgba(27,35,43,0.4)]">
       <p className="en text-xl font-extrabold tracking-widest">FAX</p>
       <p className="text-[11px]">送信票　1/2枚</p>
       <div className="mt-3 border-t border-dashed border-ink/40 pt-3">
@@ -186,11 +186,11 @@ function PaperFax() {
 
 function PaperExcel() {
   return (
-    <div className="overflow-hidden rounded-sm bg[#ccd1d3] shadow-[0_10px_30px_-10px_rgba(27,35,43,0.4)]">
+    <div className="overflow-hidden rounded-sm bg-[#ccd1d3] shadow-[0_10px_30px_-10px_rgba(27,35,43,0.4)]">
       <div className="bg-[#1d6b42] px-3 py-1.5 text-[11px] font-semibold text-paper">工程表_最新(2)_修正.xlsx</div>
       <div className="grid grid-cols-6 gap-px bg-line p-px">
         {Array.from({ length: 36 }).map((_, i) => (
-          <div key={i} className={`h-4 ${[8, 9, 10, 15, 16, 22, 23, 24, 25].includes(i) ? "bg-[#9ec4ad]" : "bg[#ccd1d3]"}`} />
+          <div key={i} className={`h-4 ${[8, 9, 10, 15, 16, 22, 23, 24, 25].includes(i) ? "bg-[#9ec4ad]" : "bg-[#ccd1d3]"}`} />
         ))}
       </div>
     </div>
@@ -199,7 +199,7 @@ function PaperExcel() {
 
 function Sticky() {
   return (
-    <div className="w-[160px] bg[#e6ddb5] p-4 shadow-[0_10px_24px_-10px_rgba(27,35,43,0.45)]">
+    <div className="w-[160px] bg-[#e6ddb5] p-4 shadow-[0_10px_24px_-10px_rgba(27,35,43,0.45)]">
       <p className="text-sm font-semibold leading-snug">青葉様に折り返し！</p>
       <p className="mt-2 text-xs">午後イチで</p>
     </div>
@@ -208,7 +208,7 @@ function Sticky() {
 
 function PhoneMemo() {
   return (
-    <div className="rounded-sm bg[#ccd1d3] p-4 shadow-[0_10px_30px_-10px_rgba(27,35,43,0.4)]">
+    <div className="rounded-sm bg-[#ccd1d3] p-4 shadow-[0_10px_30px_-10px_rgba(27,35,43,0.4)]">
       <p className="text-xs font-semibold">電話メモ　14:20</p>
       <p className="mt-1 text-[11px]">キッチン資材 納期変更の件</p>
       <div className="mt-3">
@@ -220,7 +220,7 @@ function PhoneMemo() {
 
 function Polaroid() {
   return (
-    <div className="w-[170px] bg[#ccd1d3] p-2.5 pb-6 shadow-[0_10px_30px_-10px_rgba(27,35,43,0.4)]">
+    <div className="w-[170px] bg-[#ccd1d3] p-2.5 pb-6 shadow-[0_10px_30px_-10px_rgba(27,35,43,0.4)]">
       <svg viewBox="0 0 60 44" className="w-full" aria-hidden="true">
         <rect width="60" height="44" fill="#b9c3cc" />
         <g stroke="#6c7884" strokeWidth="1.5">

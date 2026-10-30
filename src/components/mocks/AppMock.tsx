@@ -112,11 +112,11 @@ export function AppMock({ active = true }: { active?: boolean }) {
   return (
     <div ref={root} className="relative select-none font-sans text-ink" style={{ width: MOCK_W, height: MOCK_H }} aria-hidden="true">
       {/* ダッシュボード */}
-      <div data-win className="absolute right-0 top-2 flex h-[452px] w-[600px] overflow-hidden rounded-[14px] bg[#dcdedf] shadow-[0_50px_120px_-40px_rgba(0,0,0,0.75),0_0_0_1px_rgba(255,255,255,0.06)]">
+      <div data-win className="absolute right-0 top-2 flex h-[452px] w-[600px] overflow-hidden rounded-[14px] bg-[#dcdedf] shadow-[0_50px_120px_-40px_rgba(0,0,0,0.75),0_0_0_1px_rgba(255,255,255,0.06)]">
         <div data-side className="flex w-[54px] shrink-0 flex-col items-center gap-3 bg-night py-4">
           <span className="mb-2 grid h-8 w-8 place-items-center rounded-lg bg-brand text-[11px] font-bold text-paper">G</span>
           {[0, 1, 2, 3, 4].map((i) => (
-            <span key={i} className={`grid h-8 w-8 place-items-center rounded-lg ${i === 0 ? "bg[#ccd1d3]/12" : ""}`}>
+            <span key={i} className={`grid h-8 w-8 place-items-center rounded-lg ${i === 0 ? "bg-[#ccd1d3]/12" : ""}`}>
               <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke={i === 0 ? "#3cc3c4" : "rgba(255,255,255,0.45)"} strokeWidth="1.5">
                 {i === 0 && <path d="M2 2h5v5H2zM9 2h5v5H9zM2 9h5v5H2zM9 9h5v5H9z" />}
                 {i === 1 && <path d="M3 3h10v10H3zM3 7h10M7 7v6" />}
@@ -134,7 +134,7 @@ export function AppMock({ active = true }: { active?: boolean }) {
               <p className="text-[9px] text-ink-mute">10月26日（月）　青葉工務店</p>
             </div>
             <div className="flex items-center gap-2">
-              <span className="h-7 w-36 rounded-lg bg[#ccd1d3] px-2.5 text-[9px] leading-7 text-ink-mute ring-1 ring-line-soft">現場・担当で検索</span>
+              <span className="h-7 w-36 rounded-lg bg-[#ccd1d3] px-2.5 text-[9px] leading-7 text-ink-mute ring-1 ring-line-soft">現場・担当で検索</span>
               <span className="grid h-7 w-7 place-items-center rounded-full bg-brand-wash text-[9px] font-semibold text-brand-deep">山田</span>
             </div>
           </div>
@@ -145,7 +145,7 @@ export function AppMock({ active = true }: { active?: boolean }) {
               ["今週の日報", "39", "件", "+1"],
               ["期日が近い作業", "2", "件", ""],
             ].map(([l, n, u], i) => (
-              <div key={l} data-kpi className="rounded-xl bg[#ccd1d3] p-3 ring-1 ring-line-soft">
+              <div key={l} data-kpi className="rounded-xl bg-[#ccd1d3] p-3 ring-1 ring-line-soft">
                 <p className="text-[9px] text-ink-mute">{l}</p>
                 <p className={`en mt-1 text-[24px] font-light leading-none ${i === 2 ? "text-[#c2362f]" : ""}`}>
                   <span data-k>{n}</span>
@@ -157,7 +157,7 @@ export function AppMock({ active = true }: { active?: boolean }) {
 
           <div className="mt-2.5 grid grid-cols-[1fr_1.12fr] gap-2.5">
             {/* グラフ */}
-            <div className="rounded-xl bg[#ccd1d3] p-3 ring-1 ring-line-soft">
+            <div className="rounded-xl bg-[#ccd1d3] p-3 ring-1 ring-line-soft">
               <div className="flex items-center justify-between">
                 <p className="text-[10px] font-semibold">今週の作業時間</p>
                 <p className="en text-[8px] text-ink-mute">hours</p>
@@ -200,7 +200,7 @@ export function AppMock({ active = true }: { active?: boolean }) {
             </div>
 
             {/* 最新の報告 */}
-            <div className="rounded-xl bg[#ccd1d3] p-3 ring-1 ring-line-soft">
+            <div className="rounded-xl bg-[#ccd1d3] p-3 ring-1 ring-line-soft">
               <div className="flex items-center justify-between">
                 <p className="text-[10px] font-semibold">最新の報告</p>
                 <p className="text-[8px] text-ink-mute">すべて見る</p>
@@ -209,7 +209,7 @@ export function AppMock({ active = true }: { active?: boolean }) {
                 <div data-newrow className="relative overflow-hidden">
                   <div data-newrow-bg className="absolute inset-0 rounded-lg bg-brand-wash" />
                   <div className="relative flex h-[46px] items-center gap-2 px-1.5">
-                    <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg[#dcc3b0] text-[9px] font-semibold">佐</span>
+                    <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-[#dcc3b0] text-[9px] font-semibold">佐</span>
                     <div className="min-w-0 flex-1">
                       <p className="truncate text-[10px] font-semibold">港北 集合住宅　配筋・4人</p>
                       <p className="text-[8px] text-ink-mute">日報　写真3枚　たった今</p>
@@ -227,11 +227,11 @@ export function AppMock({ active = true }: { active?: boolean }) {
                       <p className="text-[8px] text-ink-mute">担当 {r.who}</p>
                     </div>
                     <span className="relative">
-                      <span className={`block rounded-full px-2 py-0.5 text-[8px] font-semibold ${r.status === "完了" ? "bg[#ccdad3] text-ok" : "bg-brand-wash text-brand-deep"}`}>
+                      <span className={`block rounded-full px-2 py-0.5 text-[8px] font-semibold ${r.status === "完了" ? "bg-[#ccdad3] text-ok" : "bg-brand-wash text-brand-deep"}`}>
                         {r.status}
                       </span>
                       {r.flip && (
-                        <span data-done-pill className="absolute inset-0 flex items-center justify-center gap-0.5 rounded-full bg[#ccdad3] text-[8px] font-semibold text-ok">
+                        <span data-done-pill className="absolute inset-0 flex items-center justify-center gap-0.5 rounded-full bg-[#ccdad3] text-[8px] font-semibold text-ok">
                           <svg width="8" height="8" viewBox="0 0 8 8">
                             <path data-done-check d="M1 4.2l2 2 4-4.4" fill="none" stroke="currentColor" strokeWidth="1.4" strokeDasharray="20" />
                           </svg>
@@ -263,7 +263,7 @@ export function AppMock({ active = true }: { active?: boolean }) {
 
       {/* スマホ */}
       <div data-phone className="absolute bottom-0 left-0 z-20 h-[420px] w-[200px] rounded-[34px] bg-[#0b1214] p-[7px] shadow-[0_40px_80px_-24px_rgba(0,0,0,0.8),0_0_0_1px_rgba(255,255,255,0.08)]">
-        <div className="relative h-full overflow-hidden rounded-[28px] bg[#dcdedf]">
+        <div className="relative h-full overflow-hidden rounded-[28px] bg-[#dcdedf]">
           <div className="absolute left-1/2 top-2 z-10 h-[18px] w-[64px] -translate-x-1/2 rounded-full bg-[#0b1214]" />
           <div className="flex items-center justify-between px-5 pt-2.5 text-[8px] font-semibold">
             <span className="en">9:41</span>
@@ -279,13 +279,13 @@ export function AppMock({ active = true }: { active?: boolean }) {
           <div className="space-y-2 px-3 py-2.5 text-[9px]">
             <div>
               <p className="font-semibold text-ink-soft">現場</p>
-              <p className="mt-1 rounded-lg bg[#ccd1d3] px-2.5 py-1.5 ring-1 ring-line-soft">港北 集合住宅新築</p>
+              <p className="mt-1 rounded-lg bg-[#ccd1d3] px-2.5 py-1.5 ring-1 ring-line-soft">港北 集合住宅新築</p>
             </div>
             <div>
               <p className="font-semibold text-ink-soft">作業内容</p>
               <div className="mt-1 flex flex-wrap gap-1">
                 {["足場", "配筋", "型枠", "清掃"].map((c) => (
-                  <span key={c} data-chip={c} className="relative rounded-full bg[#ccd1d3] px-2 py-0.5 text-[8.5px] ring-1 ring-line">
+                  <span key={c} data-chip={c} className="relative rounded-full bg-[#ccd1d3] px-2 py-0.5 text-[8.5px] ring-1 ring-line">
                     {c}
                     {c === "配筋" && <span data-chip-on className="absolute inset-0 grid place-items-center rounded-full bg-brand-deep text-paper">配筋</span>}
                   </span>
@@ -294,7 +294,7 @@ export function AppMock({ active = true }: { active?: boolean }) {
             </div>
             <div>
               <p className="font-semibold text-ink-soft">作業人数</p>
-              <div className="mt-1 flex items-center justify-between rounded-lg bg[#ccd1d3] p-1 ring-1 ring-line-soft">
+              <div className="mt-1 flex items-center justify-between rounded-lg bg-[#ccd1d3] p-1 ring-1 ring-line-soft">
                 <span className="grid h-6 w-6 place-items-center rounded-md bg-mist text-[12px]">−</span>
                 <span className="en relative h-[18px] w-6 overflow-hidden text-center text-[15px] leading-[18px]">
                   <span data-n3 className="absolute inset-0">3</span>

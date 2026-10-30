@@ -241,3 +241,9 @@
   from { transform: scaleX(0); }
   to { transform: scaleX(1); }
 }
+
+/* 業務アプリのデモ：通知のポップ */
+@keyframes demo-toast {
+  from { opacity: 0; transform: translateY(8px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
