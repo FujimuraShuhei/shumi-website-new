@@ -104,16 +104,16 @@ export function BrowserChrome({ url, children, tone = "light" }: { url: string; 
   return (
     <div
       className={`relative flex h-full w-full flex-col overflow-hidden rounded-[14px] shadow-[0_50px_120px_-40px_rgba(0,0,0,0.75),0_0_0_1px_rgba(255,255,255,0.06)] ${
-        tone === "dark" ? "bg-[#0b1a1d]" : "bg[#ccd1d3]"
+        tone === "dark" ? "bg-[#0b1a1d]" : "bg-[#ccd1d3]"
       }`}
     >
-      <div className={`relative flex h-10 shrink-0 items-center gap-3 px-4 ${tone === "dark" ? "bg-[#10272b]" : "bg[#d6dadc]"}`}>
+      <div className={`relative flex h-10 shrink-0 items-center gap-3 px-4 ${tone === "dark" ? "bg-[#10272b]" : "bg-[#d6dadc]"}`}>
         <div className="flex gap-1.5">
           <span className="h-2.5 w-2.5 rounded-full bg-[#ff6159]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#ffbd2e]" />
           <span className="h-2.5 w-2.5 rounded-full bg-[#28c941]" />
         </div>
-        <div className="mx-auto flex h-6 w-[340px] items-center gap-2 rounded-md bg[#ccd1d3] px-3 text-[11px] text-ink-mute">
+        <div className="mx-auto flex h-6 w-[340px] items-center gap-2 rounded-md bg-[#ccd1d3] px-3 text-[11px] text-ink-mute">
           <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
             <rect x="1.5" y="4.5" width="7" height="5" rx="1" fill="#6a7682" />
             <path d="M3 4.5V3a2 2 0 0 1 4 0v1.5" fill="none" stroke="#6a7682" />

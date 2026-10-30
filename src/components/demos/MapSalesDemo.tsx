@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { AppFrame, Chip, useToast } from "./shared";
+import { Icon } from "@/components/ui/icons";
+import { AppFrame, ui, useToast } from "./shared";
 
 type Stage = "lead" | "talk" | "won" | "sleep";
 type Customer = {
@@ -17,11 +18,12 @@ type Customer = {
   visits: number;
 };
 
-const stageMeta: Record<Stage, { label: string; mark: string; fill: string; text: string }> = {
-  lead: { label: "見込み", mark: "見", fill: "#ffffff", text: "#0a7a83" },
-  talk: { label: "商談中", mark: "商", fill: "#0a7a83", text: "#ffffff" },
-  won: { label: "契約", mark: "契", fill: "#1b232b", text: "#3cc3c4" },
-  sleep: { label: "休眠", mark: "休", fill: "#d9dee2", text: "#46525e" },
+/** 状況は色だけでなく文字（見・商・契・休）でも区別する */
+const stageMeta: Record<Stage, { label: string; mark: string; color: string; pill: string }> = {
+  lead: { label: "見込み", mark: "見", color: "#0ea5e9", pill: "bg-sky-50 text-sky-800 ring-sky-200" },
+  talk: { label: "商談中", mark: "商", color: "#0a7a83", pill: "bg-teal-50 text-teal-800 ring-teal-200" },
+  won: { label: "契約", mark: "契", color: "#16a34a", pill: "bg-emerald-50 text-emerald-800 ring-emerald-200" },
+  sleep: { label: "休眠", mark: "休", color: "#94a3b8", pill: "bg-slate-100 text-slate-600 ring-slate-200" },
 };
 
 const initial: Customer[] = [
@@ -39,11 +41,12 @@ const initial: Customer[] = [
 export function MapSalesDemo() {
   const [customers, setCustomers] = useState(initial);
   const [shown, setShown] = useState<Record<Stage, boolean>>({ lead: true, talk: true, won: true, sleep: false });
+  const [query, setQuery] = useState("");
   const [selectedId, setSelectedId] = useState<number>(5);
   const [route, setRoute] = useState<number[]>([5, 9]);
   const toast = useToast();
 
-  const visible = useMemo(() => customers.filter((c) => shown[c.stage]), [customers, shown]);
+  const visible = useMemo(() => customers.filter((c) => shown[c.stage] && (!query || `${c.name}${c.area}${c.kind}`.includes(query))), [customers, shown, query]);
   const selected = customers.find((c) => c.id === selectedId);
   const routePoints = route.map((id) => customers.find((c) => c.id === id)!).filter(Boolean);
 
@@ -56,128 +59,173 @@ export function MapSalesDemo() {
   }
 
   return (
-    <AppFrame title="訪問マップ" nav={["訪問マップ", "顧客", "商談", "今日の予定", "レポート"]}>
-      <div className="grid h-full lg:grid-cols-[280px_1fr]">
-        <section aria-label="顧客の一覧" className="order-2 flex min-h-0 flex-col border-r border-line bg[#ccd1d3] lg:order-1">
-          <div className="border-b border-line p-3">
-            <p className="text-xs font-bold text-ink-soft">表示する状況</p>
-            <div className="mt-2 flex flex-wrap gap-1.5">
+    <AppFrame
+      title="訪問マップ"
+      subtitle="横浜市・顧客 9件"
+      nav={[
+        { label: "訪問マップ", icon: "pin" },
+        { label: "顧客", icon: "people" },
+        { label: "商談", icon: "handshake" },
+        { label: "今日の予定", icon: "clock" },
+        { label: "レポート", icon: "chart" },
+      ]}
+      actions={
+        <span className="hidden items-center gap-2 rounded-lg bg-[#0a7a83]/[0.08] px-3 py-2 text-[12px] font-semibold text-[#0a7a83] sm:inline-flex">
+          <Icon name="route" className="h-4 w-4" />
+          今日のルート {route.length}件
+        </span>
+      }
+    >
+      <div className="grid h-full lg:grid-cols-[290px_1fr]">
+        <section aria-label="顧客の一覧" className="order-2 flex min-h-0 flex-col border-r border-slate-200 bg-white lg:order-1">
+          <div className="space-y-3 border-b border-slate-200 p-3.5">
+            <label className="relative block">
+              <span className="sr-only">顧客を探す</span>
+              <Icon name="search" className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+              <input type="search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder="会社名・地域で探す" className={`${ui.input} h-9 pl-9`} />
+            </label>
+            <div role="group" aria-label="表示する状況" className="flex flex-wrap gap-1.5">
               {(Object.keys(stageMeta) as Stage[]).map((s) => (
-                <Chip key={s} active={shown[s]} onClick={() => setShown((v) => ({ ...v, [s]: !v[s] }))}>
-                  <Pin stage={s} size={16} />
+                <button
+                  key={s}
+                  type="button"
+                  aria-pressed={shown[s]}
+                  onClick={() => setShown((v) => ({ ...v, [s]: !v[s] }))}
+                  className={`inline-flex h-8 items-center gap-1.5 rounded-full px-3 text-[12px] font-semibold ring-1 ring-inset transition-colors ${
+                    shown[s] ? stageMeta[s].pill : "bg-white text-slate-400 ring-slate-200 line-through"
+                  }`}
+                >
+                  <span className="h-2 w-2 rounded-full" style={{ background: stageMeta[s].color }} />
                   {stageMeta[s].label}
-                </Chip>
+                </button>
               ))}
             </div>
           </div>
-          <ul className="min-h-0 flex-1 divide-y divide-line-soft overflow-auto">
+          <ul className="min-h-0 flex-1 overflow-auto p-1.5">
             {visible.map((c) => (
               <li key={c.id}>
                 <button
                   type="button"
                   onClick={() => setSelectedId(c.id)}
                   aria-current={c.id === selectedId ? "true" : undefined}
-                  className={`flex w-full items-center gap-3 px-3 py-2.5 text-left hover:bg-mist aria-[current=true]:bg-brand-wash`}
+                  className="flex w-full items-center gap-3 rounded-lg px-2.5 py-2.5 text-left transition-colors hover:bg-slate-50 aria-[current=true]:bg-[#0a7a83]/[0.07]"
                 >
-                  <Pin stage={c.stage} size={26} />
+                  <Badge stage={c.stage} />
                   <span className="min-w-0 flex-1">
-                    <span className="block truncate text-sm font-bold">{c.name}</span>
-                    <span className="block truncate text-xs text-ink-mute">
-                      {c.area}　最終訪問 {c.lastVisit}
+                    <span className="block truncate text-[13px] font-semibold">{c.name}</span>
+                    <span className="block truncate text-[11px] text-slate-500">
+                      {c.area}・最終訪問 {c.lastVisit}
                     </span>
                   </span>
                   {route.includes(c.id) && (
-                    <span className="rounded bg-brand-light px-1.5 text-[11px] font-bold">
+                    <span className="grid h-5 min-w-5 place-items-center rounded-full bg-[#0a7a83] px-1 text-[10px] font-bold text-white" aria-label={`ルートの${route.indexOf(c.id) + 1}番目`}>
                       {route.indexOf(c.id) + 1}
                     </span>
                   )}
                 </button>
               </li>
             ))}
+            {visible.length === 0 && <li className="px-3 py-10 text-center text-[12px] text-slate-500">条件に合う顧客はいません</li>}
           </ul>
-          <p className="border-t border-line px-3 py-2 text-xs text-ink-mute">
-            今日のルート：{route.length}件
-          </p>
         </section>
 
-        <div className="relative order-1 min-h-[380px] bg[#d6d9db] lg:order-2">
+        <div className="relative order-1 min-h-[400px] overflow-hidden bg-[#eef1ec] lg:order-2">
           <svg viewBox="0 0 480 440" className="absolute inset-0 h-full w-full" role="img" aria-label="顧客の位置を示した地図（デモ用のイメージ）" preserveAspectRatio="xMidYMid slice">
-            {/* 海 */}
-            <path d="M480 60 C 440 140 470 220 420 300 C 390 350 420 400 400 440 L480 440Z" fill="#c1cddc" />
-            {/* 公園 */}
-            <rect x="170" y="70" width="60" height="40" rx="6" fill="#c5d2c8" />
-            <rect x="40" y="290" width="70" height="50" rx="6" fill="#c5d2c8" />
-            {/* 川 */}
-            <path d="M0 190 C 90 170 150 210 220 200 S 340 170 430 210" fill="none" stroke="#c9dbf0" strokeWidth="9" />
-            {/* 幹線道路 */}
-            <g fill="none" stroke="#ffffff" strokeLinecap="round">
-              <path d="M20 60 L 460 420" strokeWidth="10" />
-              <path d="M0 270 C 120 260 280 280 470 250" strokeWidth="8" />
-              <path d="M200 0 C 210 120 190 300 230 440" strokeWidth="8" />
-              <path d="M330 0 L 300 440" strokeWidth="6" />
-              <path d="M0 120 L 480 150" strokeWidth="5" />
+            {/* 街区 */}
+            <g fill="#e6eae3">
+              {Array.from({ length: 48 }).map((_, i) => (
+                <rect key={i} x={(i % 8) * 62 + 4} y={Math.floor(i / 8) * 76 + 6} width="52" height="62" rx="5" />
+              ))}
             </g>
-            {/* 鉄道 */}
-            <path d="M40 0 C 120 160 280 180 380 440" fill="none" stroke="#9aa6b2" strokeWidth="3" strokeDasharray="10 6" />
-            {/* ルート */}
+            {/* 海・公園・川 */}
+            <path d="M480 60 C 440 140 470 220 420 300 C 390 350 420 400 400 440 L480 440Z" fill="#cfe3ee" />
+            <rect x="170" y="70" width="60" height="40" rx="8" fill="#d5e8cf" />
+            <rect x="40" y="290" width="70" height="50" rx="8" fill="#d5e8cf" />
+            <path d="M0 190 C 90 170 150 210 220 200 S 340 170 430 210" fill="none" stroke="#cfe3ee" strokeWidth="10" />
+            {/* 道路（縁取り＋白） */}
+            <g fill="none" strokeLinecap="round">
+              {[
+                ["M20 60 L 460 420", 12],
+                ["M0 270 C 120 260 280 280 470 250", 10],
+                ["M200 0 C 210 120 190 300 230 440", 10],
+                ["M330 0 L 300 440", 8],
+                ["M0 120 L 480 150", 7],
+              ].map(([d, w]) => (
+                <g key={d as string}>
+                  <path d={d as string} stroke="#d9ddd6" strokeWidth={(w as number) + 3} />
+                  <path d={d as string} stroke="#ffffff" strokeWidth={w as number} />
+                </g>
+              ))}
+            </g>
+            <path d="M40 0 C 120 160 280 180 380 440" fill="none" stroke="#b9c0c7" strokeWidth="3" strokeDasharray="10 6" />
+            {/* 今日のルート */}
             {routePoints.length > 1 && (
-              <polyline
-                points={routePoints.map((p) => `${p.x},${p.y}`).join(" ")}
-                fill="none"
-                stroke="#3cc3c4"
-                strokeWidth="5"
-                strokeLinejoin="round"
-                strokeLinecap="round"
-              />
+              <polyline points={routePoints.map((p) => `${p.x},${p.y - 16}`).join(" ")} fill="none" stroke="#0a7a83" strokeWidth="3.5" strokeDasharray="2 7" strokeLinecap="round" strokeLinejoin="round" />
             )}
-            {visible.map((c) => (
-              <g
-                key={c.id}
-                transform={`translate(${c.x} ${c.y})`}
-                onClick={() => setSelectedId(c.id)}
-                className="cursor-pointer"
-                aria-hidden="true"
-              >
-                {c.id === selectedId && <circle r="22" fill="#0a7a83" opacity="0.15" />}
-                <path d="M0 0 L -9 -14 A 13 13 0 1 1 9 -14 Z" fill={stageMeta[c.stage].fill} stroke="#1b232b" strokeWidth="2" transform="translate(0 4)" />
-                <text y="-14" textAnchor="middle" fontSize="11" fontWeight="700" fill={stageMeta[c.stage].text}>
-                  {stageMeta[c.stage].mark}
-                </text>
-              </g>
-            ))}
+            {visible.map((c) => {
+              const m = stageMeta[c.stage];
+              const sel = c.id === selectedId;
+              return (
+                <g key={c.id} transform={`translate(${c.x} ${c.y}) scale(${sel ? 1.25 : 1})`} onClick={() => setSelectedId(c.id)} className="cursor-pointer" aria-hidden="true">
+                  {sel && <circle r="20" cy="-2" fill={m.color} opacity="0.18" />}
+                  <ellipse cy="2" rx="6" ry="2.2" fill="#0f172a" opacity="0.18" />
+                  <path d="M0 0 C -4 -6 -12 -11 -12 -20 A 12 12 0 1 1 12 -20 C 12 -11 4 -6 0 0Z" fill={m.color} stroke="#ffffff" strokeWidth="2" />
+                  <text y="-16" textAnchor="middle" fontSize="11" fontWeight="700" fill="#ffffff">
+                    {m.mark}
+                  </text>
+                  {route.includes(c.id) && (
+                    <g transform="translate(10 -30)">
+                      <circle r="7" fill="#0f172a" />
+                      <text y="3.5" textAnchor="middle" fontSize="9" fontWeight="700" fill="#ffffff">
+                        {route.indexOf(c.id) + 1}
+                      </text>
+                    </g>
+                  )}
+                </g>
+              );
+            })}
           </svg>
-          <p className="absolute left-3 top-3 rounded bg[#ccd1d3]/90 px-2 py-1 text-[11px] text-ink-mute">地図はデモ用のイメージです</p>
+
+          {/* 地図の操作（見た目だけ） */}
+          <div aria-hidden="true" className="absolute right-3 top-3 overflow-hidden rounded-lg bg-white text-slate-600 shadow-[0_2px_8px_rgba(15,23,42,0.15)]">
+            <span className="grid h-8 w-8 place-items-center border-b border-slate-200 text-lg">＋</span>
+            <span className="grid h-8 w-8 place-items-center text-lg">−</span>
+          </div>
+          <p className="absolute left-3 top-3 rounded-md bg-white/90 px-2 py-1 text-[11px] text-slate-500 shadow-sm">地図はデモ用のイメージです</p>
 
           {selected && (
-            <article
-              aria-label={`${selected.name}の情報`}
-              className="absolute inset-x-3 bottom-3 rounded-lg border border-line bg[#ccd1d3] p-4 shadow-[0_12px_30px_-12px_rgba(27,35,43,0.35)] sm:left-auto sm:w-80"
-            >
+            <article aria-label={`${selected.name}の情報`} className="absolute inset-x-3 bottom-3 rounded-xl bg-white p-4 shadow-[0_20px_40px_-16px_rgba(15,23,42,0.4)] ring-1 ring-slate-200 sm:left-auto sm:w-[320px]">
               <div className="flex items-start gap-3">
-                <Pin stage={selected.stage} size={30} />
-                <div className="min-w-0">
-                  <p className="font-bold">{selected.name}</p>
-                  <p className="text-xs text-ink-mute">
-                    {selected.kind}　{selected.area}　訪問 {selected.visits}回
+                <Badge stage={selected.stage} large />
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-[15px] font-bold">{selected.name}</p>
+                  <p className="text-[12px] text-slate-500">
+                    {selected.kind}・{selected.area}
                   </p>
                 </div>
+                <span className={`inline-flex h-6 shrink-0 items-center rounded-full px-2 text-[11px] font-semibold ring-1 ring-inset ${stageMeta[selected.stage].pill}`}>
+                  {stageMeta[selected.stage].label}
+                </span>
               </div>
-              <p className="mt-3 rounded bg-mist px-3 py-2 text-sm leading-relaxed">{selected.memo}</p>
-              <p className="mt-2 text-xs text-ink-mute">最終訪問 {selected.lastVisit}</p>
-              <div className="mt-3 grid grid-cols-2 gap-2">
-                <button
-                  type="button"
-                  onClick={() => recordVisit(selected.id)}
-                  className="min-h-11 rounded-md bg-brand-deep text-sm font-bold text-paper hover:bg-brand-dark"
-                >
+              <dl className="mt-3 grid grid-cols-2 gap-2">
+                <div className="rounded-lg bg-slate-50 px-3 py-2">
+                  <dt className="text-[11px] text-slate-500">訪問回数</dt>
+                  <dd className="text-[16px] font-bold tabular-nums">{selected.visits}回</dd>
+                </div>
+                <div className="rounded-lg bg-slate-50 px-3 py-2">
+                  <dt className="text-[11px] text-slate-500">最終訪問</dt>
+                  <dd className="text-[16px] font-bold tabular-nums">{selected.lastVisit}</dd>
+                </div>
+              </dl>
+              <p className="mt-3 border-l-2 border-[#0a7a83] pl-3 text-[12.5px] leading-relaxed text-slate-700">{selected.memo}</p>
+              <div className="mt-4 grid grid-cols-2 gap-2">
+                <button type="button" onClick={() => recordVisit(selected.id)} className={ui.btn}>
+                  <Icon name="check" className="h-4 w-4" strokeWidth={2.4} />
                   訪問を記録
                 </button>
-                <button
-                  type="button"
-                  onClick={() => toggleRoute(selected.id)}
-                  className="min-h-11 rounded-md border-2 border-ink text-sm font-bold hover:bg-mist"
-                >
-                  {route.includes(selected.id) ? "ルートから外す" : "ルートに追加"}
+                <button type="button" onClick={() => toggleRoute(selected.id)} className={ui.btnGhost}>
+                  <Icon name="route" className="h-4 w-4" />
+                  {route.includes(selected.id) ? "ルート解除" : "ルートに追加"}
                 </button>
               </div>
             </article>
@@ -189,14 +237,15 @@ export function MapSalesDemo() {
   );
 }
 
-function Pin({ stage, size }: { stage: Stage; size: number }) {
+function Badge({ stage, large = false }: { stage: Stage; large?: boolean }) {
   const m = stageMeta[stage];
   return (
-    <svg width={size} height={size} viewBox="0 0 30 30" aria-hidden="true" className="shrink-0">
-      <circle cx="15" cy="15" r="13" fill={m.fill} stroke="#1b232b" strokeWidth="2" />
-      <text x="15" y="19.5" textAnchor="middle" fontSize="13" fontWeight="700" fill={m.text}>
-        {m.mark}
-      </text>
-    </svg>
+    <span
+      aria-hidden="true"
+      className={`grid shrink-0 place-items-center rounded-full font-bold text-white ${large ? "h-10 w-10 text-[14px]" : "h-8 w-8 text-[12px]"}`}
+      style={{ background: m.color }}
+    >
+      {m.mark}
+    </span>
   );
 }
